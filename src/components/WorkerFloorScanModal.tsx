@@ -42,6 +42,9 @@ export const WorkerFloorScanModal: React.FC<WorkerFloorScanModalProps> = ({
 
   if (!isOpen) return null;
 
+  const [isLoading, setIsLoading] = useState(false);
+  const [errorMsg, setErrorMsg] = useState('');
+
   const sampleMachines = [
     { code: 'EXT-PPR-01', name: 'خط بثق أنابيب PPR رقم 1', dept: 'قسم البثق PPR' },
     { code: 'EXT-UPVC-02', name: 'خط بثق أنابيب UPVC 110mm', dept: 'قسم البثق UPVC' },
@@ -55,8 +58,11 @@ export const WorkerFloorScanModal: React.FC<WorkerFloorScanModalProps> = ({
     setStep('form');
   };
 
-  const handleSubmitReport = (e: React.FormEvent) => {
+  const handleSubmitReport = async (e: React.FormEvent) => {
     e.preventDefault();
+    setErrorMsg('');
+    setIsLoading(true);
+
     const newId = `NCR-2026-${Math.floor(Math.random() * 899 + 100)}`;
     setSubmittedCapaNo(newId);
 
@@ -68,6 +74,8 @@ export const WorkerFloorScanModal: React.FC<WorkerFloorScanModalProps> = ({
 
     const months = ['يناير', 'فبراير', 'مارس', 'أبريل', 'مايو', 'يونيو', 'يوليو', 'أغسطس', 'سبتمبر', 'أكتوبر', 'نوفمبر', 'ديسمبر'];
     const currentMonthName = months[new Date().getMonth()];
+
+    const machineCodeVal = scannedLine.split(' - ')[0] || scannedLine;
 
     const newCapa: CAPARequest = {
       id: `capa-${Date.now()}`,
@@ -86,6 +94,7 @@ export const WorkerFloorScanModal: React.FC<WorkerFloorScanModalProps> = ({
       targetDate: new Date(Date.now() + 86400000 * 3).toISOString().split('T')[0],
       delayDays: 0,
       productName: productName,
+      machineCode: machineCodeVal,
       lotNumber: lotNumber,
       fiveWhys: {
         why1: `حدوث عيب (${defectType}) بمنتج ${productName} باللوط ${lotNumber}.`,
@@ -99,8 +108,38 @@ export const WorkerFloorScanModal: React.FC<WorkerFloorScanModalProps> = ({
       effectivenessEval: 'قيد التقييم (Pending)'
     };
 
-    onAddCapa(newCapa);
-    setStep('success');
+    try {
+      const scriptUrl = import.meta.env.VITE_GOOGLE_APPS_SCRIPT_URL;
+      
+      if (!scriptUrl) {
+        throw new Error('لم يتم إعداد رابط Web App (VITE_GOOGLE_APPS_SCRIPT_URL) في متغيرات البيئة.');
+      }
+
+      // Send the data to the Google Apps Script Web App
+      const response = await fetch(scriptUrl, {
+        method: 'POST',
+        body: JSON.stringify(newCapa),
+        headers: {
+          'Content-Type': 'text/plain;charset=utf-8',
+        },
+      });
+
+      if (!response.ok) {
+        throw new Error('فشل الاتصال بالخادم.');
+      }
+
+      const result = await response.json();
+      if (result.status === 'success') {
+        onAddCapa(newCapa);
+        setStep('success');
+      } else {
+        throw new Error(result.message || 'حدث خطأ غير معروف أثناء الحفظ.');
+      }
+    } catch (err: any) {
+      setErrorMsg(err.message || 'فشل الاتصال بالإنترنت، لم يتم إرسال أو حفظ البلاغ. يرجى المحاولة مرة أخرى.');
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   const handleReset = () => {
@@ -304,22 +343,43 @@ export const WorkerFloorScanModal: React.FC<WorkerFloorScanModalProps> = ({
                 />
               </div>
 
+              {/* Error Message */}
+              {errorMsg && (
+                <div className="bg-red-50 border border-red-200 p-3 rounded-xl flex items-start gap-2">
+                  <AlertTriangle className="w-5 h-5 text-red-600 shrink-0 mt-0.5" />
+                  <div className="text-red-800 text-xs font-bold leading-relaxed">
+                    {errorMsg}
+                  </div>
+                </div>
+              )}
+
               {/* Submit Buttons */}
               <div className="pt-2 flex items-center justify-end gap-2">
                 <button
                   type="button"
                   onClick={() => setStep('scan')}
-                  className="px-4 py-2.5 bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold rounded-xl cursor-pointer"
+                  disabled={isLoading}
+                  className="px-4 py-2.5 bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold rounded-xl cursor-pointer disabled:opacity-50"
                 >
                   إلغاء
                 </button>
 
                 <button
                   type="submit"
-                  className="flex items-center gap-2 px-6 py-2.5 bg-[#E74C3C] hover:bg-red-700 text-white font-black rounded-xl shadow-md cursor-pointer transition-all"
+                  disabled={isLoading}
+                  className="flex items-center gap-2 px-6 py-2.5 bg-[#E74C3C] hover:bg-red-700 text-white font-black rounded-xl shadow-md cursor-pointer transition-all disabled:opacity-70 disabled:cursor-not-allowed"
                 >
-                  <Send className="w-4 h-4" />
-                  <span>إرسال البلاغ فوراً لإدارة الجودة</span>
+                  {isLoading ? (
+                    <>
+                      <div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin"></div>
+                      <span>جاري الإرسال الحفظ...</span>
+                    </>
+                  ) : (
+                    <>
+                      <Send className="w-4 h-4" />
+                      <span>{errorMsg ? 'إعادة المحاولة' : 'إرسال البلاغ فوراً لإدارة الجودة'}</span>
+                    </>
+                  )}
                 </button>
               </div>
             </form>

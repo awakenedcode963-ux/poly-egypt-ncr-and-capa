@@ -11,8 +11,14 @@ import { CapaDashboardView } from './components/CapaDashboardView';
 import { CapaQrCenterView } from './components/CapaQrCenterView';
 import { AiAssistantView } from './components/AiAssistantView';
 import { ImplementationGuideView } from './components/ImplementationGuideView';
+import { WorkerReportPage } from './components/WorkerReportPage';
 
 export default function App() {
+  // Simple routing for standalone worker page
+  if (window.location.pathname === '/report') {
+    return <WorkerReportPage />;
+  }
+
   const [activeTab, setActiveTab] = useState<string>('capa-records');
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState<boolean>(false);
 

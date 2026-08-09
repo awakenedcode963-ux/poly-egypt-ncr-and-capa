@@ -209,6 +209,7 @@ export interface CAPARequest {
   lotNumber?: string;
   status: 'مفتوح (Open)' | 'قيد التنفيذ (In Progress)' | 'تم التنفيذ (Done)' | 'مغلق (Closed)';
   immediateAction: string;
+  correctiveAction?: string;
   preventiveAction?: string;
   responsiblePerson: string;
   targetDate: string;
@@ -216,6 +217,8 @@ export interface CAPARequest {
   delayDays: number;
   effectivenessEval: 'فعال (Effective)' | 'جزئي (Partial)' | 'غير فعال (Ineffective)' | 'قيد التقييم (Pending)';
   notes?: string;
+  attachmentUrl?: string;
+  attachmentBase64?: string;
 }
 
 // Full Combined Master Data State

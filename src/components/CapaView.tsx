@@ -119,8 +119,13 @@ export const CapaView: React.FC<CapaViewProps> = ({
     }, 1000);
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitError, setSubmitError] = useState('');
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    setSubmitError('');
+    setIsSubmitting(true);
 
     const newEntry: CAPARequest = {
       id: `CAPA-${Date.now().toString().slice(-4)}`,
@@ -148,8 +153,37 @@ export const CapaView: React.FC<CapaViewProps> = ({
       notes: form.notes
     };
 
-    onAddCapa(newEntry);
-    setShowForm(false);
+    try {
+      const scriptUrl = import.meta.env.VITE_GOOGLE_APPS_SCRIPT_URL;
+      
+      if (!scriptUrl) {
+        throw new Error('لم يتم إعداد رابط Web App (VITE_GOOGLE_APPS_SCRIPT_URL) في متغيرات البيئة.');
+      }
+
+      const response = await fetch(scriptUrl, {
+        method: 'POST',
+        body: JSON.stringify(newEntry),
+        headers: {
+          'Content-Type': 'text/plain;charset=utf-8',
+        },
+      });
+
+      if (!response.ok) {
+        throw new Error('فشل الاتصال بالخادم.');
+      }
+
+      const result = await response.json();
+      if (result.status === 'success') {
+        onAddCapa(newEntry);
+        setShowForm(false);
+      } else {
+        throw new Error(result.message || 'حدث خطأ غير معروف أثناء الحفظ.');
+      }
+    } catch (err: any) {
+      setSubmitError(err.message || 'فشل الاتصال بالإنترنت، لم يتم إرسال أو حفظ البلاغ. يرجى المحاولة مرة أخرى.');
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   // Filtered List
@@ -394,19 +428,37 @@ export const CapaView: React.FC<CapaViewProps> = ({
             </div>
           </div>
 
+          {submitError && (
+            <div className="bg-red-50 border border-red-200 p-3 rounded-xl flex items-start gap-2">
+              <AlertTriangle className="w-5 h-5 text-red-600 shrink-0 mt-0.5" />
+              <div className="text-red-800 text-xs font-bold leading-relaxed">
+                {submitError}
+              </div>
+            </div>
+          )}
+
           <div className="flex justify-end gap-3 pt-4 border-t border-slate-200">
             <button
               type="button"
               onClick={() => setShowForm(false)}
-              className="px-5 py-2.5 bg-slate-100 text-slate-700 font-bold rounded-xl text-xs"
+              disabled={isSubmitting}
+              className="px-5 py-2.5 bg-slate-100 text-slate-700 font-bold rounded-xl text-xs disabled:opacity-50"
             >
               إلغاء
             </button>
             <button
               type="submit"
-              className="px-6 py-2.5 bg-[#E74C3C] text-white font-black rounded-xl text-xs shadow-md hover:bg-red-700"
+              disabled={isSubmitting}
+              className="flex items-center gap-2 px-6 py-2.5 bg-[#E74C3C] text-white font-black rounded-xl text-xs shadow-md hover:bg-red-700 disabled:opacity-70 disabled:cursor-not-allowed"
             >
-              حفظ وتأكيد طلب CAPA / NCR ➔
+              {isSubmitting ? (
+                <>
+                  <div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin"></div>
+                  <span>جاري الإرسال الحفظ...</span>
+                </>
+              ) : (
+                <span>{submitError ? 'إعادة المحاولة ➔' : 'حفظ وتأكيد طلب CAPA / NCR ➔'}</span>
+              )}
             </button>
           </div>
         </form>
