@@ -1,0 +1,8 @@
+{
+  "name": "بولو إيجيبت - نظام CAPA و NCR وتحليل 5 Whys",
+  "description": "نظام منفصل مخصص لتسجيل حالات عدم المطابقة (NCR)، متابعة طلبات CAPA، وتحليل الأسباب الجذرية 5 Whys بطاقات QR Code وتقارير ISO لشركة بولو إيجيبت للتجارة والصناعة.",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}
