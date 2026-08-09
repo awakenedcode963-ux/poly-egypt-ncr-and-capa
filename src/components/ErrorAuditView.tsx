@@ -81,9 +81,9 @@ export const ErrorAuditView: React.FC<ErrorAuditViewProps> = ({
             {!isAutoFixed ? (
               <button
                 onClick={onApplyAutoFix}
-                className="inline-flex items-center justify-center gap-2 px-5 py-3 rounded-xl bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-400 hover:to-amber-500 text-slate-950 font-bold text-sm shadow-lg hover:shadow-amber-500/25 transition-all transform active:scale-95 cursor-pointer"
+                className="inline-flex items-center justify-center gap-2 px-5 py-3 rounded-xl bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-400 hover:to-amber-500 text-white font-bold text-sm shadow-lg hover:shadow-amber-500/25 transition-all transform active:scale-95 cursor-pointer"
               >
-                <Wand2 className="w-5 h-5 text-slate-950" />
+                <Wand2 className="w-5 h-5 text-white" />
                 <span>تصحيح كافة الأخطاء بنقرة واحدة</span>
               </button>
             ) : (
@@ -109,18 +109,18 @@ export const ErrorAuditView: React.FC<ErrorAuditViewProps> = ({
 
       {/* Stats Overview Grid */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-        <div className="bg-white rounded-xl p-5 border border-slate-200 shadow-sm flex items-center justify-between">
+        <div className="bg-white/10 backdrop-blur-xl rounded-xl p-5 border border-white/10 shadow-sm flex items-center justify-between">
           <div>
-            <p className="text-xs font-semibold text-slate-500">إجمالي الأخطاء والملاحظات</p>
-            <p className="text-2xl font-black text-slate-900 mt-1">{issues.length}</p>
+            <p className="text-xs font-semibold text-slate-400">إجمالي الأخطاء والملاحظات</p>
+            <p className="text-2xl font-black text-white mt-1">{issues.length}</p>
             <p className="text-xs text-slate-400 mt-0.5">في شيت البيانات الأساسية</p>
           </div>
-          <div className="p-3 bg-slate-100 text-slate-700 rounded-xl">
+          <div className="p-3 bg-white/10 text-slate-200 rounded-xl">
             <AlertTriangle className="w-6 h-6" />
           </div>
         </div>
 
-        <div className="bg-white rounded-xl p-5 border border-red-200 bg-red-50/20 shadow-sm flex items-center justify-between">
+        <div className="bg-white/10 backdrop-blur-xl rounded-xl p-5 border border-red-200 bg-red-50/20 shadow-sm flex items-center justify-between">
           <div>
             <p className="text-xs font-semibold text-red-700">أخطاء حرجة (Critical)</p>
             <p className="text-2xl font-black text-red-600 mt-1">{criticalCount}</p>
@@ -131,7 +131,7 @@ export const ErrorAuditView: React.FC<ErrorAuditViewProps> = ({
           </div>
         </div>
 
-        <div className="bg-white rounded-xl p-5 border border-amber-200 bg-amber-50/20 shadow-sm flex items-center justify-between">
+        <div className="bg-white/10 backdrop-blur-xl rounded-xl p-5 border border-amber-200 bg-amber-50/20 shadow-sm flex items-center justify-between">
           <div>
             <p className="text-xs font-semibold text-amber-800">أخطاء إملائية (Typos)</p>
             <p className="text-2xl font-black text-amber-600 mt-1">{warningCount}</p>
@@ -142,7 +142,7 @@ export const ErrorAuditView: React.FC<ErrorAuditViewProps> = ({
           </div>
         </div>
 
-        <div className="bg-white rounded-xl p-5 border border-blue-200 bg-blue-50/20 shadow-sm flex items-center justify-between">
+        <div className="bg-white/10 backdrop-blur-xl rounded-xl p-5 border border-blue-200 bg-blue-50/20 shadow-sm flex items-center justify-between">
           <div>
             <p className="text-xs font-semibold text-blue-800">تنسيق وتوحيد الأسماء</p>
             <p className="text-2xl font-black text-blue-600 mt-1">{infoCount}</p>
@@ -155,7 +155,7 @@ export const ErrorAuditView: React.FC<ErrorAuditViewProps> = ({
       </div>
 
       {/* Filter & Search Bar */}
-      <div className="bg-white rounded-xl p-4 border border-slate-200 shadow-sm flex flex-col md:flex-row md:items-center justify-between gap-4">
+      <div className="bg-white/10 backdrop-blur-xl rounded-xl p-4 border border-white/10 shadow-sm flex flex-col md:flex-row md:items-center justify-between gap-4">
         <div className="flex-1 relative">
           <Search className="w-4 h-4 absolute right-3.5 top-1/2 -translate-y-1/2 text-slate-400" />
           <input
@@ -163,12 +163,12 @@ export const ErrorAuditView: React.FC<ErrorAuditViewProps> = ({
             placeholder="بحث في وصف الخطأ، اسم المنتج، أو الكود..."
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            className="w-full pl-4 pr-10 py-2 rounded-lg border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-amber-500/20 focus:border-amber-500"
+            className="w-full pl-4 pr-10 py-2 rounded-lg border border-white/10 text-sm focus:outline-none focus:ring-2 focus:ring-amber-500/20 focus:border-amber-500"
           />
         </div>
 
         <div className="flex items-center gap-3 flex-wrap">
-          <div className="flex items-center gap-1 text-xs font-semibold text-slate-500">
+          <div className="flex items-center gap-1 text-xs font-semibold text-slate-400">
             <Filter className="w-3.5 h-3.5" />
             <span>تصفية حسب الخطورة:</span>
           </div>
@@ -176,7 +176,7 @@ export const ErrorAuditView: React.FC<ErrorAuditViewProps> = ({
           <select
             value={selectedSeverity}
             onChange={(e) => setSelectedSeverity(e.target.value)}
-            className="px-3 py-1.5 rounded-lg border border-slate-200 text-xs font-medium focus:outline-none focus:ring-2 focus:ring-amber-500/20 bg-slate-50"
+            className="px-3 py-1.5 rounded-lg border border-white/10 text-xs font-medium focus:outline-none focus:ring-2 focus:ring-amber-500/20 bg-white/5"
           >
             <option value="all">كافة المستويات ({issues.length})</option>
             <option value="critical">حرجة فقط ({criticalCount})</option>
@@ -187,7 +187,7 @@ export const ErrorAuditView: React.FC<ErrorAuditViewProps> = ({
           <select
             value={selectedSection}
             onChange={(e) => setSelectedSection(e.target.value)}
-            className="px-3 py-1.5 rounded-lg border border-slate-200 text-xs font-medium focus:outline-none focus:ring-2 focus:ring-amber-500/20 bg-slate-50"
+            className="px-3 py-1.5 rounded-lg border border-white/10 text-xs font-medium focus:outline-none focus:ring-2 focus:ring-amber-500/20 bg-white/5"
           >
             <option value="all">كافة الأقسام</option>
             <option value="pipes">الأنابيب (Pipes)</option>
@@ -203,16 +203,16 @@ export const ErrorAuditView: React.FC<ErrorAuditViewProps> = ({
       {/* Issues List */}
       <div className="space-y-4">
         {filteredIssues.length === 0 ? (
-          <div className="bg-white rounded-xl p-12 border border-slate-200 text-center space-y-3">
+          <div className="bg-white/10 backdrop-blur-xl rounded-xl p-12 border border-white/10 text-center space-y-3">
             <CheckCircle2 className="w-12 h-12 text-emerald-500 mx-auto" />
-            <h3 className="text-lg font-bold text-slate-800">لا توجد أخطاء ضمن الفلتر المختار</h3>
-            <p className="text-sm text-slate-500">تم تصحيح الأخطاء المطابقة أو لا توجد نتائج للبحث.</p>
+            <h3 className="text-lg font-bold text-white">لا توجد أخطاء ضمن الفلتر المختار</h3>
+            <p className="text-sm text-slate-400">تم تصحيح الأخطاء المطابقة أو لا توجد نتائج للبحث.</p>
           </div>
         ) : (
           filteredIssues.map((issue) => (
             <div
               key={issue.id}
-              className={`bg-white rounded-xl p-5 border transition-all ${
+              className={`bg-white/10 backdrop-blur-xl rounded-xl p-5 border transition-all ${
                 issue.applied
                   ? 'border-emerald-300 bg-emerald-50/20'
                   : issue.severity === 'critical'
@@ -242,7 +242,7 @@ export const ErrorAuditView: React.FC<ErrorAuditViewProps> = ({
                       </span>
                     )}
 
-                    <span className="bg-slate-100 text-slate-700 text-xs font-semibold px-2.5 py-0.5 rounded-md border border-slate-200">
+                    <span className="bg-white/10 text-slate-200 text-xs font-semibold px-2.5 py-0.5 rounded-md border border-white/10">
                       قسم: {issue.section === 'pipes' ? 'الأنابيب' : issue.section === 'fittings' ? 'الوصلات' : issue.section === 'inspectors' ? 'المفتشين' : issue.section === 'fitting_defects' ? 'عيوب الوصلات' : issue.section === 'machines' ? 'الماكينات' : 'معادلات الشيت'}
                     </span>
 
@@ -253,12 +253,12 @@ export const ErrorAuditView: React.FC<ErrorAuditViewProps> = ({
                     )}
                   </div>
 
-                  <h3 className="text-base font-bold text-slate-900">{issue.title}</h3>
-                  <p className="text-sm text-slate-600 leading-relaxed">{issue.description}</p>
+                  <h3 className="text-base font-bold text-white">{issue.title}</h3>
+                  <p className="text-sm text-slate-300 leading-relaxed">{issue.description}</p>
 
                   {/* Before vs After comparison */}
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2">
-                    <div className="bg-slate-50 p-3 rounded-lg border border-slate-200 text-xs">
+                    <div className="bg-white/5 p-3 rounded-lg border border-white/10 text-xs">
                       <span className="text-slate-400 font-semibold block mb-1">القيمة الحالية في الشيت (الخطأ):</span>
                       <code className="text-red-600 font-mono font-bold block break-all bg-red-50 p-1.5 rounded border border-red-100">
                         {issue.originalValue}

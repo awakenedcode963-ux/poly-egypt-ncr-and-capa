@@ -87,12 +87,12 @@ export const Sidebar: React.FC<SidebarProps> = ({
       {/* Sidebar Container */}
       <aside className={`
         fixed top-0 right-0 h-full w-[280px] bg-[#0B3A60] text-white z-50 flex flex-col justify-between
-        transition-transform duration-300 ease-in-out shadow-2xl border-l border-slate-700/50 font-sans dir-rtl
+        transition-transform duration-300 ease-in-out shadow-2xl  font-sans dir-rtl
         ${isOpen ? 'translate-x-0' : 'translate-x-full lg:translate-x-0'}
       `}>
         <div>
           {/* Brand Header with Polo Egypt Branding & Logo Icon */}
-          <div className="sidebar-brand px-5 py-5 sm:px-6 sm:py-5.5 border-b border-white/10 bg-[#07243d] space-y-4">
+          <div className="sidebar-brand px-5 py-5 sm:px-6 sm:py-5.5 border-b border-white/10 bg-white/5 space-y-4">
             <div className="flex items-center justify-between gap-3">
               <div className="flex items-center gap-3.5">
                 {/* Primary Visual Logo Icon - On the right in RTL with accessibility alt tag & title */}
@@ -139,7 +139,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
 
             <div className="bg-[#C0A46F]/15 border border-[#C0A46F]/35 rounded-xl p-2.5 px-3 flex items-center justify-between text-xs shadow-xs">
               <span className="font-extrabold text-[#C0A46F] text-[11px]">إدارة الجودة وتحليل 5 Whys</span>
-              <span className="bg-[#C0A46F] text-slate-950 px-2.5 py-0.5 rounded-md font-black text-[10px] tracking-wider shadow-xs">
+              <span className="bg-[#C0A46F] text-white px-2.5 py-0.5 rounded-md font-black text-[10px] tracking-wider shadow-xs">
                 ISO 9001
               </span>
             </div>
@@ -166,7 +166,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
                     w-full flex items-center justify-between px-3.5 py-3 rounded-xl text-xs font-bold
                     transition-all duration-200 cursor-pointer text-right group
                     ${isActive 
-                      ? 'bg-[#1E4E79] text-white border-r-4 border-[#C4A052] shadow-md pr-3' 
+                      ? 'bg-white/20 text-white border-r-4 border-[#C1A67B] shadow-[0_4px_12px_rgba(0,0,0,0.1)] pr-3 backdrop-blur-md' 
                       : 'text-slate-200 hover:bg-white/10 hover:text-white'
                     }
                   `}
@@ -181,7 +181,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
 
                   {item.badge && (
                     <span className={`text-[9px] px-2 py-0.5 rounded-md font-extrabold shrink-0 ${
-                      item.id === 'capa-records' ? 'bg-[#E74C3C] text-white animate-pulse' : 'bg-[#C4A052] text-slate-950'
+                      item.id === 'capa-records' ? 'bg-[#E74C3C] text-white animate-pulse' : 'bg-[#C4A052] text-white'
                     }`}>
                       {item.badge}
                     </span>

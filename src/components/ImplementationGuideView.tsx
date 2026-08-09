@@ -195,18 +195,18 @@ function getOrCreateSheet(ss, sheetName) {
       {/* Step by Step Implementation Methods */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         {/* Method 1: Google Apps Script Automatic Setup */}
-        <div className="bg-white rounded-2xl border border-slate-200 p-6 shadow-sm space-y-4">
-          <div className="flex items-center gap-3 border-b border-slate-100 pb-3">
+        <div className="bg-white/10 backdrop-blur-xl rounded-2xl border border-white/10 p-6 shadow-sm space-y-4">
+          <div className="flex items-center gap-3 border-b border-white/10 pb-3">
             <div className="p-2.5 bg-emerald-100 text-[#27AE60] rounded-xl font-black">
               <Code className="w-6 h-6" />
             </div>
             <div>
               <h3 className="font-extrabold text-[#1B4F72] text-sm">الطريقة الأولى: السكربت الأوتوماتيكي (Google Apps Script)</h3>
-              <p className="text-xs text-slate-500">إنشاء وتنسيق الـ 5 شيتات تلقائياً بكود واحد</p>
+              <p className="text-xs text-slate-400">إنشاء وتنسيق الـ 5 شيتات تلقائياً بكود واحد</p>
             </div>
           </div>
 
-          <ol className="text-xs space-y-2 text-slate-700 font-semibold list-decimal list-inside">
+          <ol className="text-xs space-y-2 text-slate-200 font-semibold list-decimal list-inside">
             <li>افتح أي ملف Google Sheet جديد في حسابك.</li>
             <li>من القائمة العلوية اختر <b>Extensions (الإضافات)</b> ثم <b>Apps Script</b>.</li>
             <li>امسح الكود الموجود والصق الكود التالي (Code.gs).</li>
@@ -226,33 +226,33 @@ function getOrCreateSheet(ss, sheetName) {
         </div>
 
         {/* Method 2: AppSheet 3-Minute Deployment Guide */}
-        <div className="bg-white rounded-2xl border border-slate-200 p-6 shadow-sm space-y-4">
-          <div className="flex items-center gap-3 border-b border-slate-100 pb-3">
+        <div className="bg-white/10 backdrop-blur-xl rounded-2xl border border-white/10 p-6 shadow-sm space-y-4">
+          <div className="flex items-center gap-3 border-b border-white/10 pb-3">
             <div className="p-2.5 bg-sky-100 text-[#2874A6] rounded-xl font-black">
               <Play className="w-6 h-6" />
             </div>
             <div>
               <h3 className="font-extrabold text-[#1B4F72] text-sm">الطريقة الثانية: تطبيق AppSheet للهاتف (No-Code)</h3>
-              <p className="text-xs text-slate-500">تحويل الشيت الموحد لتطبيق موبايل احترافي في 3 دقائق</p>
+              <p className="text-xs text-slate-400">تحويل الشيت الموحد لتطبيق موبايل احترافي في 3 دقائق</p>
             </div>
           </div>
 
-          <div className="space-y-3 text-xs font-semibold text-slate-700">
-            <div className="flex items-start gap-2 bg-slate-50 p-3 rounded-xl border border-slate-200">
+          <div className="space-y-3 text-xs font-semibold text-slate-200">
+            <div className="flex items-start gap-2 bg-white/5 p-3 rounded-xl border border-white/10">
               <span className="p-1 bg-[#1B4F72] text-white rounded font-bold text-[10px]">1</span>
               <div>
                 <b>رفع الشيت الموحد:</b> قم برفع ملف CSV المتأتي من زر التحميل أعلاه إلى Google Drive وافتحه كـ Google Sheet.
               </div>
             </div>
 
-            <div className="flex items-start gap-2 bg-slate-50 p-3 rounded-xl border border-slate-200">
+            <div className="flex items-start gap-2 bg-white/5 p-3 rounded-xl border border-white/10">
               <span className="p-1 bg-[#1B4F72] text-white rounded font-bold text-[10px]">2</span>
               <div>
                 <b>إنشاء تطبيق AppSheet:</b> من داخل Google Sheets اختر <b>Extensions ➔ AppSheet ➔ Create an App</b>.
               </div>
             </div>
 
-            <div className="flex items-start gap-2 bg-slate-50 p-3 rounded-xl border border-slate-200">
+            <div className="flex items-start gap-2 bg-white/5 p-3 rounded-xl border border-white/10">
               <span className="p-1 bg-[#1B4F72] text-white rounded font-bold text-[10px]">3</span>
               <div>
                 <b>إضافة الجداول (Tables):</b> سيقوم AppSheet بقراءة الجداول الخمسة تلقائياً. قم بتأكيد الجداول وتحديد مفتاح كل جدول (Key Column).
@@ -270,9 +270,9 @@ function getOrCreateSheet(ss, sheetName) {
       </div>
 
       {/* IMPORTRANGE Consolidated Formula Box */}
-      <div className="bg-white rounded-2xl border border-slate-200 p-6 shadow-sm space-y-4">
+      <div className="bg-white/10 backdrop-blur-xl rounded-2xl border border-white/10 p-6 shadow-sm space-y-4">
         <h3 className="font-extrabold text-[#1B4F72] text-sm">دليل معادلة IMPORTRANGE لدمج شيتات متعددة في شيت رئيسي واحد</h3>
-        <p className="text-xs text-slate-600">إذا كان لديك عدة ملفات منفصلة وترغب في تجميعها ديناميكياً داخل شيت رئيسي:</p>
+        <p className="text-xs text-slate-300">إذا كان لديك عدة ملفات منفصلة وترغب في تجميعها ديناميكياً داخل شيت رئيسي:</p>
 
         <div className="bg-slate-900 text-amber-300 p-4 rounded-xl font-mono text-xs flex items-center justify-between">
           <code>=IMPORTRANGE("رابط_الملف_الأصلي", "1_QC_Pipes_Fittings!A1:Q500")</code>
@@ -288,7 +288,7 @@ function getOrCreateSheet(ss, sheetName) {
       {/* Data Protection & ISO 9001 Security Audit Section */}
       <div className="bg-slate-900 text-white rounded-2xl p-6 shadow-xl space-y-4 border border-slate-800 dir-rtl">
         <div className="flex items-center gap-3 border-b border-slate-800 pb-3">
-          <div className="p-2 bg-[#C0A46F] text-slate-950 rounded-xl font-black">
+          <div className="p-2 bg-[#C0A46F] text-white rounded-xl font-black">
             <ShieldCheck className="w-6 h-6" />
           </div>
           <div>

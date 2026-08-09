@@ -46,7 +46,7 @@ export const CapaView: React.FC<CapaViewProps> = ({
   const [sourceFilter, setSourceFilter] = useState<string>('ALL');
 
   // AI 5-Whys generation state
-  const [isAiGenerating, setIsAiGenerating] = useState(false);
+  const [show5WhysForm, setShow5WhysForm] = useState(false);
 
   // Form State
   const [form, setForm] = useState({
@@ -76,49 +76,6 @@ export const CapaView: React.FC<CapaViewProps> = ({
     notes: ''
   });
 
-  // AI Auto-Suggest 5 Whys based on description
-  const handleAiSuggest5Whys = () => {
-    setIsAiGenerating(true);
-    setTimeout(() => {
-      const subjectLower = (form.subject + ' ' + form.ncrDescription).toLowerCase();
-
-      let suggested: FiveWhysAnalysis;
-
-      if (subjectLower.includes('فقاع') || subjectLower.includes('bubble') || subjectLower.includes('كوع') || subjectLower.includes('ppr')) {
-        suggested = {
-          why1: 'وجود جيوب وفقاعات هواء داخل جدار الوصلات المحقونة عند اختبار الضغط.',
-          why2: 'تمدد الرطوبة المحتبسة داخل حبيبات خام PPR أثناء انصهارها بالاسطوانة عند 220°C.',
-          why3: 'انخفاض كفاءة وسرعة هواء فرن تجفيف الخام الأوتوماتيكي (Hopper Dryer).',
-          why4: 'تراكم الغبار وانسداد الفلتر الهوائي لسحب مجفف الهوبر وعدم تنظيفه.',
-          why5: 'عدم وجود شيك لست صيانة أسبوعية لفلتر المجفف ضمن نموذج الصيانة الوقائية.'
-        };
-      } else if (subjectLower.includes('وزن') || subjectLower.includes('كالسيت') || subjectLower.includes('خلط') || subjectLower.includes('pvc')) {
-        suggested = {
-          why1: 'زيادة نسبة هشاشة وسهولة كسر أنابيب UPVC عند اختبار الانحناء والصدمة.',
-          why2: 'زيادة كمية كربونات الكالسيوم (الكالسيت) في خلطة البودرة عن النسبة المعتمدة.',
-          why3: 'قراءة ميزان الإضافات الحساس يعطي وزناً أقل من الحقيقي بـ +4.5kg.',
-          why4: 'اهتزاز قاعدة الميزان وتراكم بودرة الـ PVC على خلايا التحميل (Load Cells).',
-          why5: 'غياب تطبيق المعايرة اليومية للموازين الحساسة بأوزان معايرة قياسية قبل بداية الوردية.'
-        };
-      } else {
-        suggested = {
-          why1: `حدوث عدم مطابقة في المنتج (${form.subject || 'العيب المذكور'}) أثناء الفحص.`,
-          why2: 'انحراف أحد معايير التشغيل الفنية عن المدى المسموح به في بطاقة المواصفة.',
-          why3: 'تغير استجابة الحساسات أو التبريد أثناء التشغيل بسبب الإجهاد التشغيلي.',
-          why4: 'تأخر تنفيذ معايرة الحساسات ومراجعة ضغوط التشغيل بجدول الصيانة الوقائية.',
-          why5: 'الحاجة لتحديث خطة الفحص الدوري والـ SOP المعياري للوردية لمنع تكرار الانحراف.'
-        };
-      }
-
-      setForm(prev => ({
-        ...prev,
-        rootCause: suggested.why5,
-        fiveWhys: suggested
-      }));
-      setIsAiGenerating(false);
-    }, 1000);
-  };
-
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitError, setSubmitError] = useState('');
 
@@ -141,8 +98,8 @@ export const CapaView: React.FC<CapaViewProps> = ({
       productName: form.productName,
       machineCode: form.machineCode,
       lotNumber: form.lotNumber,
-      rootCause: form.fiveWhys.why5 || form.rootCause || 'قيد التحليل النهائي',
-      fiveWhys: form.fiveWhys,
+      rootCause: (show5WhysForm ? form.fiveWhys.why5 : '') || form.rootCause || 'قيد التحليل النهائي',
+      fiveWhys: show5WhysForm ? form.fiveWhys : { why1: '', why2: '', why3: '', why4: '', why5: '' },
       status: 'مفتوح (Open)',
       immediateAction: form.immediateAction,
       preventiveAction: form.preventiveAction,
@@ -203,106 +160,78 @@ export const CapaView: React.FC<CapaViewProps> = ({
   });
 
   return (
-    <div className="p-4 sm:p-6 lg:p-8 space-y-6 dir-rtl font-sans">
+    <div className="space-y-6 dir-rtl font-sans pb-8 bg-transparent">
       {/* Release Phase 1 Header Banner with Polo Egypt Branding */}
-      <div className="bg-[#0B3A60] text-white p-6 rounded-2xl shadow-xl border border-[#1E4E79] space-y-4">
-        <div className="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-4 border-b border-white/10 pb-4">
-          <PoloEgyptLogo variant="horizontal" size="md" lightMode={true} />
-
-          <div className="flex flex-wrap items-center gap-2">
-            <span className="bg-[#C4A052] text-slate-950 text-xs font-black px-3.5 py-1.5 rounded-full shadow-sm flex items-center gap-1.5">
-              <ShieldCheck className="w-4 h-4" />
-              <span>الإطلاق الرسمي: النسخة الأولى (Phase 1)</span>
-            </span>
-
-            <button
-              onClick={() => {
-                setSelectedCapaForQr(null);
-                setIsQrModalOpen(true);
-              }}
-              className="flex items-center gap-2 px-3.5 py-1.5 bg-white/10 hover:bg-white/20 text-white text-xs font-bold rounded-full border border-white/20 transition-all cursor-pointer"
-            >
-              <QrCode className="w-4 h-4 text-[#C4A052]" />
-              <span>QR Code للوصول عبر الهاتف بالمصنع</span>
-            </button>
-          </div>
-        </div>
-
-        <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
-          <div>
-            <h2 className="text-xl font-black text-white flex items-center gap-2">
-              <span>نظام تسجيل حالات عدم المطابقة (NCR)، الـ CAPA، وتحليل الـ 5 Whys</span>
-            </h2>
-            <p className="text-xs text-slate-200 mt-1 max-w-3xl leading-relaxed">
-              المنظومة الرقمية المعتمدة لشركة <b>بولو إيجيبت للتجارة والصناعة ش.م.م</b> لتتبع عدم المطابقة، إدارة الإجراءات التصحيحية والوقائية، وتحليل المسببات الجذرية بطريقة 5 Whys طبقاً لمواصفة ISO 9001.
-            </p>
-          </div>
-
-          <button
-            onClick={() => setShowForm(!showForm)}
-            className="flex items-center gap-2 px-5 py-3 bg-[#E74C3C] hover:bg-red-700 text-white text-xs font-black rounded-xl transition-all shadow-md cursor-pointer shrink-0"
-          >
-            <Plus className="w-4 h-4" />
-            <span>{showForm ? 'إلغاء النموذج' : '+ إصدار طلب CAPA / NCR جديد'}</span>
-          </button>
-        </div>
+      <div className="bg-white/5 backdrop-blur-3xl border-b border-white/20 text-white pt-8 pb-12 px-6 sm:px-10 lg:px-12 rounded-b-3xl shadow-[0_8px_32px_0_rgba(0,0,0,0.37)] relative overflow-hidden flex flex-col items-center text-center space-y-6 -mt-6 z-20">
+        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[500px] bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-[#C1A67B]/20 via-transparent to-transparent pointer-events-none"></div>
+        <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white drop-shadow-md relative z-10">
+          نظام تسجيل حالات عدم المطابقة (NCR)، الـ CAPA، وتحليل الـ 5 Whys
+        </h2>
+        <p className="text-slate-300 max-w-3xl leading-relaxed text-sm sm:text-base relative z-10">
+          المنظومة الرقمية المعتمدة لشركة <b>بولو إيجيبت للتجارة والصناعة ش.م.م</b> لتتبع عدم المطابقة، إدارة الإجراءات التصحيحية والوقائية، وتحليل المسببات الجذرية بطريقة 5 Whys طبقاً لمواصفة ISO 9001.
+        </p>
+        <button onClick={() => setShowForm(!showForm)} className="relative z-10 mt-4 px-8 py-4 bg-gradient-to-r from-[#C1A67B] to-yellow-600 text-white font-bold rounded-xl hover:scale-[1.02] transition-transform shadow-[0_4px_20px_rgba(193,166,123,0.4),inset_0_1px_1px_rgba(255,255,255,0.5)] text-base sm:text-lg flex items-center gap-3 cursor-pointer">
+          <Plus className="w-5 h-5 sm:w-6 sm:h-6" />
+          <span>{showForm ? "إلغاء النموذج" : "إصدار طلب CAPA / NCR جديد"}</span>
+        </button>
       </div>
 
+      <div className="px-4 sm:px-6 lg:px-8 space-y-6">
       {/* Creation Form Modal / Card */}
       {showForm && (
-        <form onSubmit={handleSubmit} className="bg-white p-6 rounded-2xl border-2 border-[#E74C3C] shadow-2xl space-y-6">
-          <div className="border-b border-slate-200 pb-3 flex items-center justify-between">
+        <form onSubmit={handleSubmit} className="bg-white/10 backdrop-blur-xl p-6 rounded-2xl border-2 border-[#E74C3C] shadow-2xl space-y-6">
+          <div className="border-b border-white/10 pb-3 flex items-center justify-between">
             <div className="flex items-center gap-2">
               <AlertTriangle className="w-5 h-5 text-[#E74C3C]" />
               <h3 className="font-extrabold text-[#0B3A60] text-sm">
                 نموذج إصدار عدم مطابقة وفعل تصحيحي وقائي - ISO QAF-04-03
               </h3>
             </div>
-            <span className="text-xs bg-red-100 text-red-800 font-extrabold px-3 py-1 rounded-full">
+            <span className="text-xs bg-red-500/20 text-red-300 font-extrabold px-3 py-1 rounded-full">
               بولو إيجيبت QA/QC
             </span>
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 text-xs font-semibold">
             <div>
-              <label className="block text-slate-700 mb-1">تاريخ الإصدار</label>
+              <label className="block text-slate-300 mb-1">تاريخ الإصدار</label>
               <input
                 type="date"
                 value={form.date}
                 onChange={(e) => setForm({ ...form, date: e.target.value })}
-                className="w-full p-2.5 bg-slate-50 border border-slate-300 rounded-xl"
+                className="w-full p-2.5 bg-white/5 border border-white/10 text-white placeholder-white/50 focus:ring-2 focus:ring-[#C1A67B] focus:bg-white/10 transition-all rounded-xl"
                 required
               />
             </div>
 
             <div>
-              <label className="block text-slate-700 mb-1">مُصدر البلاغ (مهندس/مفتش الجودة)</label>
+              <label className="block text-slate-300 mb-1">مُصدر البلاغ (مهندس/مفتش الجودة)</label>
               <input
                 type="text"
                 value={form.requesterName}
                 onChange={(e) => setForm({ ...form, requesterName: e.target.value })}
-                className="w-full p-2.5 bg-slate-50 border border-slate-300 rounded-xl font-bold"
+                className="w-full p-2.5 bg-white/5 border border-white/10 text-white placeholder-white/50 focus:ring-2 focus:ring-[#C1A67B] focus:bg-white/10 transition-all rounded-xl font-bold"
                 required
               />
             </div>
 
             <div>
-              <label className="block text-slate-700 mb-1">الإدارة / القسم الموجه إليه البلاغ</label>
+              <label className="block text-slate-300 mb-1">الإدارة / القسم الموجه إليه البلاغ</label>
               <select
                 value={form.targetDepartment}
                 onChange={(e) => setForm({ ...form, targetDepartment: e.target.value })}
-                className="w-full p-2.5 bg-slate-50 border border-slate-300 rounded-xl font-bold"
+                className="w-full p-2.5 bg-white/5 border border-white/10 text-white placeholder-white/50 focus:ring-2 focus:ring-[#C1A67B] focus:bg-white/10 transition-all rounded-xl font-bold"
               >
                 {masterData.departments.map(d => <option key={d} value={d}>{d}</option>)}
               </select>
             </div>
 
             <div>
-              <label className="block text-slate-700 mb-1">مصدر عدم المطابقة</label>
+              <label className="block text-slate-300 mb-1">مصدر عدم المطابقة</label>
               <select
                 value={form.source}
                 onChange={(e) => setForm({ ...form, source: e.target.value as any })}
-                className="w-full p-2.5 bg-slate-50 border border-slate-300 rounded-xl font-bold"
+                className="w-full p-2.5 bg-white/5 border border-white/10 text-white placeholder-white/50 focus:ring-2 focus:ring-[#C1A67B] focus:bg-white/10 transition-all rounded-xl font-bold"
               >
                 <option value="فحص جودة (QC)">فحص جودة (QC)</option>
                 <option value="شكوى عميل (Customer)">شكوى عميل (Customer)</option>
@@ -312,11 +241,11 @@ export const CapaView: React.FC<CapaViewProps> = ({
             </div>
 
             <div>
-              <label className="block text-slate-700 mb-1">درجة الأولوية والخطورة</label>
+              <label className="block text-slate-300 mb-1">درجة الأولوية والخطورة</label>
               <select
                 value={form.priority}
                 onChange={(e) => setForm({ ...form, priority: e.target.value as any })}
-                className="w-full p-2.5 bg-slate-50 border border-slate-300 rounded-xl font-bold text-red-600"
+                className="w-full p-2.5 bg-white/5 border border-white/10 text-white placeholder-white/50 focus:ring-2 focus:ring-[#C1A67B] focus:bg-white/10 transition-all rounded-xl font-bold text-red-600"
               >
                 <option value="حرج (Critical)">حرج (Critical)</option>
                 <option value="عالي (High)">عالي (High)</option>
@@ -326,104 +255,115 @@ export const CapaView: React.FC<CapaViewProps> = ({
             </div>
 
             <div>
-              <label className="block text-slate-700 mb-1">المنتج المتأثر</label>
+              <label className="block text-slate-300 mb-1">المنتج المتأثر</label>
               <input
                 type="text"
                 value={form.productName}
                 onChange={(e) => setForm({ ...form, productName: e.target.value })}
                 placeholder="مثال: كوع PPR 20mm أو أنبوب UPVC 110mm"
-                className="w-full p-2.5 bg-slate-50 border border-slate-300 rounded-xl font-bold"
+                className="w-full p-2.5 bg-white/5 border border-white/10 text-white placeholder-white/50 focus:ring-2 focus:ring-[#C1A67B] focus:bg-white/10 transition-all rounded-xl font-bold"
               />
             </div>
 
             <div>
-              <label className="block text-slate-700 mb-1">رقم الماكينة / الخط</label>
+              <label className="block text-slate-300 mb-1">رقم الماكينة / الخط</label>
               <input
                 type="text"
                 value={form.machineCode}
                 onChange={(e) => setForm({ ...form, machineCode: e.target.value })}
-                className="w-full p-2.5 bg-slate-50 border border-slate-300 rounded-xl font-bold"
+                className="w-full p-2.5 bg-white/5 border border-white/10 text-white placeholder-white/50 focus:ring-2 focus:ring-[#C1A67B] focus:bg-white/10 transition-all rounded-xl font-bold"
               />
             </div>
 
             <div>
-              <label className="block text-slate-700 mb-1">رقم التشغيلة (Lot / Batch No.)</label>
+              <label className="block text-slate-300 mb-1">رقم التشغيلة (Lot / Batch No.)</label>
               <input
                 type="text"
                 value={form.lotNumber}
                 onChange={(e) => setForm({ ...form, lotNumber: e.target.value })}
-                className="w-full p-2.5 bg-slate-50 border border-slate-300 rounded-xl font-bold text-[#0B3A60]"
+                className="w-full p-2.5 bg-white/5 border border-white/10 text-white placeholder-white/50 focus:ring-2 focus:ring-[#C1A67B] focus:bg-white/10 transition-all rounded-xl font-bold text-[#0B3A60]"
               />
             </div>
 
             <div>
-              <label className="block text-slate-700 mb-1">التاريخ المستهدف للإغلاق</label>
+              <label className="block text-slate-300 mb-1">التاريخ المستهدف للإغلاق</label>
               <input
                 type="date"
                 value={form.targetDate}
                 onChange={(e) => setForm({ ...form, targetDate: e.target.value })}
-                className="w-full p-2.5 bg-slate-50 border border-slate-300 rounded-xl font-bold text-red-600"
+                className="w-full p-2.5 bg-white/5 border border-white/10 text-white placeholder-white/50 focus:ring-2 focus:ring-[#C1A67B] focus:bg-white/10 transition-all rounded-xl font-bold text-red-600"
                 required
               />
             </div>
 
             <div className="sm:col-span-3">
-              <label className="block text-slate-700 mb-1">عنوان موضوع عدم المطابقة</label>
+              <label className="block text-slate-300 mb-1">عنوان موضوع عدم المطابقة</label>
               <input
                 type="text"
                 value={form.subject}
                 onChange={(e) => setForm({ ...form, subject: e.target.value })}
                 placeholder="مثال: وجود فقاعات هواء داخلية تؤدي لكسر الكوع PPR 20mm عند اختبار الضغط"
-                className="w-full p-2.5 bg-slate-50 border border-slate-300 rounded-xl font-bold text-slate-900"
+                className="w-full p-2.5 bg-white/5 border border-white/10 text-white placeholder-white/50 focus:ring-2 focus:ring-[#C1A67B] focus:bg-white/10 transition-all rounded-xl font-bold text-white"
                 required
               />
             </div>
 
             <div className="sm:col-span-3">
-              <label className="block text-slate-700 mb-1">وصف حالة عدم المطابقة NCR Description</label>
+              <label className="block text-slate-300 mb-1">وصف حالة عدم المطابقة NCR Description</label>
               <textarea
                 value={form.ncrDescription}
                 onChange={(e) => setForm({ ...form, ncrDescription: e.target.value })}
                 rows={2}
                 placeholder="اكتب التفاصيل الرقمية للرفض وعينة الفحص..."
-                className="w-full p-2.5 bg-slate-50 border border-slate-300 rounded-xl font-medium"
+                className="w-full p-2.5 bg-white/5 border border-white/10 text-white placeholder-white/50 focus:ring-2 focus:ring-[#C1A67B] focus:bg-white/10 transition-all rounded-xl font-medium"
                 required
               />
             </div>
           </div>
 
           {/* Interactive 5 Whys Tree Section */}
-          <div className="pt-2">
-            <FiveWhysTree
-              fiveWhys={form.fiveWhys}
-              onChange={(updated) => setForm({ ...form, fiveWhys: updated, rootCause: updated.why5 })}
-              isEditable={true}
-              onAiAutoSuggest={handleAiSuggest5Whys}
-              isAiGenerating={isAiGenerating}
-            />
+          <div className="pt-2 mt-2">
+            <button
+              type="button"
+              onClick={() => setShow5WhysForm(!show5WhysForm)}
+              className="flex items-center justify-center sm:justify-start gap-2 px-4 py-2.5 bg-white/10 hover:bg-white/20 text-[#0B3A60] text-xs font-black rounded-xl transition-all w-full sm:w-auto border border-white/10 shadow-sm cursor-pointer"
+            >
+              <Plus className={`w-4 h-4 transition-transform ${show5WhysForm ? 'rotate-45' : ''}`} />
+              <span>{show5WhysForm ? 'إخفاء تحليل 5 Whys' : 'إضافة تحليل 5 Whys يدوياً (اختياري)'}</span>
+            </button>
+            
+            {show5WhysForm && (
+              <div className="mt-4 animate-in fade-in slide-in-from-top-2 duration-300">
+                <FiveWhysTree
+                  fiveWhys={form.fiveWhys}
+                  onChange={(updated) => setForm({ ...form, fiveWhys: updated, rootCause: updated.why5 })}
+                  isEditable={true}
+                />
+              </div>
+            )}
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-xs font-semibold">
             <div>
-              <label className="block text-slate-700 mb-1">الإجراء التصحيحي الفوري (Immediate Corrective Action)</label>
+              <label className="block text-slate-300 mb-1">الإجراء التصحيحي الفوري (Immediate Corrective Action)</label>
               <textarea
                 value={form.immediateAction}
                 onChange={(e) => setForm({ ...form, immediateAction: e.target.value })}
                 rows={2}
                 placeholder="الإجراء الواجب تنفيذه فوراً للسيطرة على الشحنة والمصنع..."
-                className="w-full p-2.5 bg-slate-50 border border-slate-300 rounded-xl font-medium"
+                className="w-full p-2.5 bg-white/5 border border-white/10 text-white placeholder-white/50 focus:ring-2 focus:ring-[#C1A67B] focus:bg-white/10 transition-all rounded-xl font-medium"
                 required
               />
             </div>
 
             <div>
-              <label className="block text-slate-700 mb-1">الإجراء الوقائي الدائم (Preventive Action)</label>
+              <label className="block text-slate-300 mb-1">الإجراء الوقائي الدائم (Preventive Action)</label>
               <textarea
                 value={form.preventiveAction}
                 onChange={(e) => setForm({ ...form, preventiveAction: e.target.value })}
                 rows={2}
                 placeholder="الإجراء لمنع تكرار المسبب على المدى البعيد..."
-                className="w-full p-2.5 bg-slate-50 border border-slate-300 rounded-xl font-medium"
+                className="w-full p-2.5 bg-white/5 border border-white/10 text-white placeholder-white/50 focus:ring-2 focus:ring-[#C1A67B] focus:bg-white/10 transition-all rounded-xl font-medium"
               />
             </div>
           </div>
@@ -437,12 +377,12 @@ export const CapaView: React.FC<CapaViewProps> = ({
             </div>
           )}
 
-          <div className="flex justify-end gap-3 pt-4 border-t border-slate-200">
+          <div className="flex justify-end gap-3 pt-4 border-t border-white/10">
             <button
               type="button"
               onClick={() => setShowForm(false)}
               disabled={isSubmitting}
-              className="px-5 py-2.5 bg-slate-100 text-slate-700 font-bold rounded-xl text-xs disabled:opacity-50"
+              className="px-5 py-2.5 bg-white/10 text-slate-300 font-bold rounded-xl text-xs disabled:opacity-50"
             >
               إلغاء
             </button>
@@ -465,7 +405,7 @@ export const CapaView: React.FC<CapaViewProps> = ({
       )}
 
       {/* Filter and Search Bar */}
-      <div className="bg-white p-4 rounded-2xl border border-slate-200 shadow-xs space-y-3">
+      <div className="bg-white/10 backdrop-blur-xl p-4 rounded-2xl border border-white/20 shadow-\[0_8px_32px_0_rgba(0,0,0,0.37)\] space-y-3">
         <div className="flex flex-col md:flex-row items-center justify-between gap-3">
           {/* Search Box */}
           <div className="relative w-full md:w-96">
@@ -475,20 +415,20 @@ export const CapaView: React.FC<CapaViewProps> = ({
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
               placeholder="بحث برقم CAPA، المكون، العيب، أو المهندس..."
-              className="w-full pr-9 pl-4 py-2 bg-slate-50 border border-slate-200 rounded-xl text-xs font-semibold focus:outline-none focus:ring-2 focus:ring-[#0B3A60]"
+              className="w-full pr-9 pl-4 py-2 bg-white/5 text-white border border-white/10 rounded-xl text-xs font-semibold focus:outline-none focus:ring-2 focus:ring-[#0B3A60]"
             />
           </div>
 
           {/* Quick Filters */}
           <div className="flex flex-wrap items-center gap-2 w-full md:w-auto text-xs font-bold">
-            <div className="flex items-center gap-1 bg-slate-100 p-1 rounded-xl">
-              <span className="text-slate-500 px-2 text-[10px]">الحالة:</span>
+            <div className="flex items-center gap-1 bg-white/10 p-1 rounded-xl">
+              <span className="text-slate-400 px-2 text-[10px]">الحالة:</span>
               {['ALL', 'Open', 'Progress', 'Done', 'Closed'].map((st) => (
                 <button
                   key={st}
                   onClick={() => setStatusFilter(st)}
                   className={`px-2.5 py-1 rounded-lg text-[11px] font-bold transition-all cursor-pointer ${
-                    statusFilter === st ? 'bg-[#0B3A60] text-white shadow-xs' : 'text-slate-600 hover:text-slate-900'
+                    statusFilter === st ? 'bg-white/20 text-white shadow-md' : 'text-slate-300 hover:text-white'
                   }`}
                 >
                   {st === 'ALL' ? 'الكل' : st === 'Open' ? 'مفتوح' : st === 'Progress' ? 'قيد التنفيذ' : st === 'Done' ? 'تم' : 'مغلق'}
@@ -496,14 +436,14 @@ export const CapaView: React.FC<CapaViewProps> = ({
               ))}
             </div>
 
-            <div className="flex items-center gap-1 bg-slate-100 p-1 rounded-xl">
-              <span className="text-slate-500 px-2 text-[10px]">الأولوية:</span>
+            <div className="flex items-center gap-1 bg-white/10 p-1 rounded-xl">
+              <span className="text-slate-400 px-2 text-[10px]">الأولوية:</span>
               {['ALL', 'Critical', 'High', 'Medium'].map((pr) => (
                 <button
                   key={pr}
                   onClick={() => setPriorityFilter(pr)}
                   className={`px-2.5 py-1 rounded-lg text-[11px] font-bold transition-all cursor-pointer ${
-                    priorityFilter === pr ? 'bg-[#E74C3C] text-white shadow-xs' : 'text-slate-600 hover:text-slate-900'
+                    priorityFilter === pr ? 'bg-red-500/40 text-white shadow-md' : 'text-slate-300 hover:text-white'
                   }`}
                 >
                   {pr === 'ALL' ? 'الكل' : pr === 'Critical' ? 'حرج' : pr === 'High' ? 'عالي' : 'متوسط'}
@@ -522,17 +462,17 @@ export const CapaView: React.FC<CapaViewProps> = ({
           return (
             <div 
               key={capa.id} 
-              className="bg-white rounded-2xl border border-slate-200 p-6 shadow-xs hover:border-[#0B3A60] transition-all space-y-4"
+              className="bg-white/10 backdrop-blur-xl rounded-2xl border border-white/10 p-6 shadow-xs hover:border-[#0B3A60] transition-all space-y-4"
             >
               {/* Card Top Header */}
-              <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 border-b border-slate-100 pb-3">
+              <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 border-b border-white/10 pb-3">
                 <div className="flex flex-wrap items-center gap-2">
                   <span className="font-black text-sm bg-[#0B3A60] text-white px-3.5 py-1 rounded-xl shadow-xs">
                     {capa.capaNo}
                   </span>
 
                   <span className={`px-2.5 py-0.5 rounded-full text-xs font-black ${
-                    capa.priority.includes('حرج') ? 'bg-red-100 text-red-800 border border-red-300' :
+                    capa.priority.includes('حرج') ? 'bg-red-500/20 text-red-300 border border-red-300' :
                     capa.priority.includes('عالي') ? 'bg-orange-100 text-orange-800 border border-orange-300' :
                     'bg-amber-100 text-amber-800'
                   }`}>
@@ -540,7 +480,7 @@ export const CapaView: React.FC<CapaViewProps> = ({
                   </span>
 
                   {capa.lotNumber && (
-                    <span className="bg-slate-100 text-slate-700 text-[11px] font-extrabold px-2.5 py-0.5 rounded-lg border border-slate-200">
+                    <span className="bg-white/10 text-slate-300 text-[11px] font-extrabold px-2.5 py-0.5 rounded-lg border border-white/10">
                       تشغيلة: {capa.lotNumber}
                     </span>
                   )}
@@ -552,7 +492,7 @@ export const CapaView: React.FC<CapaViewProps> = ({
                       setSelectedCapaForQr(capa);
                       setIsQrModalOpen(true);
                     }}
-                    className="flex items-center gap-1.5 px-3 py-1.5 bg-slate-100 hover:bg-[#C4A052] hover:text-slate-950 text-slate-700 text-xs font-bold rounded-xl transition-all cursor-pointer border border-slate-200"
+                    className="flex items-center gap-1.5 px-3 py-1.5 bg-white/10 hover:bg-[#C4A052] hover:text-white text-slate-300 text-xs font-bold rounded-xl transition-all cursor-pointer border border-white/10"
                     title="طباعة بطاقة QR"
                   >
                     <QrCode className="w-4 h-4" />
@@ -572,13 +512,13 @@ export const CapaView: React.FC<CapaViewProps> = ({
               {/* Subject and Description */}
               <div>
                 <h3 className="font-extrabold text-[#0B3A60] text-base leading-snug">{capa.subject}</h3>
-                <p className="text-xs text-slate-600 mt-1.5 leading-relaxed bg-slate-50 p-3 rounded-xl border border-slate-100">
+                <p className="text-xs text-slate-300 mt-1.5 leading-relaxed bg-white/5 text-white p-3 rounded-xl border border-white/10">
                   <b>وصف عدم المطابقة NCR:</b> {capa.ncrDescription}
                 </p>
               </div>
 
               {/* Product and Responsibilities */}
-              <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-3 text-xs font-semibold text-slate-700 bg-sky-50/50 p-3.5 rounded-xl border border-sky-100">
+              <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-3 text-xs font-semibold text-slate-300 bg-sky-50/50 p-3.5 rounded-xl border border-sky-100">
                 <div><b>القسم المعني:</b> {capa.targetDepartment}</div>
                 <div><b>المسؤول التنفيذي:</b> {capa.responsiblePerson}</div>
                 <div><b>التاريخ المستهدف:</b> <span className="text-red-600 font-bold">{capa.targetDate}</span></div>
@@ -589,21 +529,21 @@ export const CapaView: React.FC<CapaViewProps> = ({
               <div className="grid grid-cols-1 md:grid-cols-2 gap-3 text-xs">
                 <div className="bg-emerald-50/70 p-3 rounded-xl border border-emerald-200/60">
                   <span className="font-bold text-emerald-900 block mb-1">الإجراء التصحيحي الفوري:</span>
-                  <p className="text-slate-700">{capa.immediateAction}</p>
+                  <p className="text-slate-300">{capa.immediateAction}</p>
                 </div>
 
                 <div className="bg-amber-50/70 p-3 rounded-xl border border-amber-200/60">
                   <span className="font-bold text-amber-900 block mb-1">السبب الجذر (Root Cause):</span>
-                  <p className="text-slate-700">{capa.rootCause}</p>
+                  <p className="text-slate-300">{capa.rootCause}</p>
                 </div>
               </div>
 
               {/* 5 Whys Tree Toggle */}
               {capa.fiveWhys && (
-                <div className="pt-2 border-t border-slate-100">
+                <div className="pt-2 border-t border-white/10">
                   <button
                     onClick={() => setExpandedWhysId(isWhysExpanded ? null : capa.id)}
-                    className="flex items-center justify-between w-full p-2.5 bg-slate-100 hover:bg-slate-200/80 rounded-xl text-xs font-extrabold text-[#0B3A60] transition-all cursor-pointer"
+                    className="flex items-center justify-between w-full p-2.5 bg-white/10 hover:bg-white/20/80 rounded-xl text-xs font-extrabold text-[#0B3A60] transition-all cursor-pointer"
                   >
                     <span className="flex items-center gap-2">
                       <HelpCircle className="w-4 h-4 text-[#C4A052]" />
@@ -624,14 +564,15 @@ export const CapaView: React.FC<CapaViewProps> = ({
         })}
 
         {filteredRequests.length === 0 && (
-          <div className="bg-white p-12 text-center rounded-2xl border border-slate-200 space-y-3">
+          <div className="bg-white/10 backdrop-blur-xl p-12 text-center rounded-2xl border border-white/20 shadow-\[0_8px_32px_0_rgba(0,0,0,0.37)\] space-y-3">
             <AlertCircle className="w-10 h-10 text-slate-300 mx-auto" />
-            <h4 className="font-bold text-slate-700 text-sm">لا توجد طلبات عدم مطابقة تطابق البحث</h4>
+            <h4 className="font-bold text-slate-300 text-sm">لا توجد طلبات عدم مطابقة تطابق البحث</h4>
             <p className="text-xs text-slate-400">جرب تغيير أسلوب البحث أو إزالة بعض التصفية.</p>
           </div>
         )}
       </div>
 
+      </div>
       {/* QR Code Modal */}
       <CapaQrModal
         capa={selectedCapaForQr}

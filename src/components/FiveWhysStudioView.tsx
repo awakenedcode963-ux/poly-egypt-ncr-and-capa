@@ -118,7 +118,7 @@ export const FiveWhysStudioView: React.FC<FiveWhysStudioViewProps> = ({
         <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-4 border-b border-white/10 pb-4">
           <PoloEgyptLogo variant="horizontal" size="md" lightMode={true} />
           
-          <span className="bg-[#C4A052] text-slate-950 font-black text-xs px-3.5 py-1.5 rounded-full">
+          <span className="bg-[#C4A052] text-white font-black text-xs px-3.5 py-1.5 rounded-full">
             أداة تحليل الأسباب الجذرية (5 Whys Root Cause Studio)
           </span>
         </div>
@@ -144,13 +144,13 @@ export const FiveWhysStudioView: React.FC<FiveWhysStudioViewProps> = ({
       </div>
 
       {/* Selector & Actions Card */}
-      <div className="bg-white p-5 rounded-2xl border border-slate-200 shadow-xs flex flex-col md:flex-row items-center justify-between gap-4">
+      <div className="bg-white/10 backdrop-blur-xl p-5 rounded-2xl border border-white/10 shadow-xs flex flex-col md:flex-row items-center justify-between gap-4">
         <div className="flex items-center gap-3 w-full md:w-auto">
-          <span className="text-xs font-bold text-slate-600 shrink-0">اختر بلاغ عدم المطابقة:</span>
+          <span className="text-xs font-bold text-slate-300 shrink-0">اختر بلاغ عدم المطابقة:</span>
           <select
             value={selectedCapaId}
             onChange={(e) => handleSelectCapa(e.target.value)}
-            className="w-full md:w-96 p-2.5 bg-slate-50 border border-slate-300 rounded-xl text-xs font-bold text-[#0B3A60]"
+            className="w-full md:w-96 p-2.5 bg-white/5 border border-white/20 rounded-xl text-xs font-bold text-[#0B3A60]"
           >
             {capaRequests.map(c => (
               <option key={c.id} value={c.id}>
@@ -163,7 +163,7 @@ export const FiveWhysStudioView: React.FC<FiveWhysStudioViewProps> = ({
         <div className="flex flex-wrap items-center gap-2 w-full md:w-auto">
           <button
             onClick={handleCopySummary}
-            className="flex items-center gap-1.5 px-3 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-bold rounded-xl transition-all cursor-pointer"
+            className="flex items-center gap-1.5 px-3 py-2 bg-white/10 hover:bg-white/20 text-slate-200 text-xs font-bold rounded-xl transition-all cursor-pointer"
           >
             {copied ? <Check className="w-4 h-4 text-emerald-600" /> : <Copy className="w-4 h-4" />}
             <span>{copied ? 'تم النسخ!' : 'نسخ النص'}</span>
@@ -188,12 +188,12 @@ export const FiveWhysStudioView: React.FC<FiveWhysStudioViewProps> = ({
               {selectedCapa.targetDepartment}
             </span>
           </div>
-          <p className="text-slate-600 font-medium"><b>الوصف:</b> {selectedCapa.ncrDescription}</p>
+          <p className="text-slate-300 font-medium"><b>الوصف:</b> {selectedCapa.ncrDescription}</p>
         </div>
       )}
 
       {/* Interactive 5 Whys Component */}
-      <div className="bg-white p-6 rounded-2xl border border-slate-200 shadow-xs">
+      <div className="bg-white/10 backdrop-blur-xl p-6 rounded-2xl border border-white/10 shadow-xs">
         <FiveWhysTree
           fiveWhys={currentWhys}
           onChange={(updated) => setCurrentWhys(updated)}

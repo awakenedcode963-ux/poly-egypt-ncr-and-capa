@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { Menu, Download, QrCode, PlusCircle, ShieldCheck, Smartphone, AlertTriangle } from 'lucide-react';
-import { PoloEgyptLogo } from './PoloEgyptLogo';
 import { CapaQrModal } from './CapaQrModal';
 import { WorkerFloorScanModal } from './WorkerFloorScanModal';
 import { CAPARequest } from '../types';
@@ -59,79 +58,66 @@ export const Header: React.FC<HeaderProps> = ({
 
   return (
     <>
-      <header className="bg-white border-b border-slate-200 sticky top-0 z-30 shadow-xs dir-rtl font-sans">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between gap-4">
-          {/* Left / Mobile Toggle & Page Title */}
-          <div className="flex items-center gap-3">
-            <button
-              onClick={onOpenMobile}
-              className="lg:hidden p-2 text-slate-600 hover:text-[#0B3A60] hover:bg-slate-100 rounded-lg transition-colors"
-              title="القائمة"
-            >
-              <Menu className="w-6 h-6" />
-            </button>
-
-            <div className="hidden xl:block border-l border-slate-200 pl-3 ml-1">
-              <PoloEgyptLogo variant="horizontal" size="sm" />
-            </div>
-
-            <div>
-              <h1 className="text-base sm:text-lg font-black text-[#0B3A60] flex items-center gap-2">
-                <span>{current.title}</span>
-                <span className="text-[10px] bg-red-100 text-red-800 px-2.5 py-0.5 rounded-full font-extrabold hidden md:inline-block">
-                  نظام منفصل معتمد
-                </span>
-              </h1>
-              <p className="text-xs font-medium text-slate-500 hidden sm:block">
-                {current.subtitle}
-              </p>
-            </div>
-          </div>
-
-          {/* Action Buttons */}
-          <div className="flex items-center gap-2 sm:gap-3">
-            {/* Worker Mobile Scan Button for Production Floor */}
-            <button
-              onClick={() => setIsWorkerScanOpen(true)}
-              className="flex items-center gap-1.5 px-3 py-2 bg-[#0B3A60] hover:bg-sky-900 text-white text-xs font-black rounded-xl transition-all shadow-sm cursor-pointer border border-sky-800"
-              title="مسح QR بالصالة وتسجيل عيب سريع بواسطة الفني"
-            >
-              <Smartphone className="w-4 h-4 text-[#C0A46F]" />
-              <span className="hidden sm:inline">مسح QR صالة الإنتاج</span>
-              <span className="sm:hidden">مسح QR</span>
-            </button>
-
-            {/* Quick QR Code for Mobile Floor Access */}
-            <button
-              onClick={() => setIsQrModalOpen(true)}
-              className="flex items-center gap-1.5 px-3 py-2 bg-slate-100 hover:bg-[#C0A46F] hover:text-slate-950 text-slate-800 text-xs font-extrabold rounded-xl transition-all cursor-pointer border border-slate-200"
-              title="رمز QR Code للوصول عبر الهاتف"
-            >
-              <QrCode className="w-4 h-4 text-[#0B3A60]" />
-              <span className="hidden md:inline">QR Code الموبايل</span>
-            </button>
-
-            {/* Quick Direct Sheet Download Button */}
-            <button
-              onClick={() => setActiveTab('sheets-guide')}
-              className="flex items-center gap-2 px-3 sm:px-4 py-2 bg-[#27AE60] hover:bg-emerald-700 text-white text-xs font-extrabold rounded-xl transition-all shadow-sm hover:shadow-md cursor-pointer"
-            >
-              <Download className="w-4 h-4" />
-              <span className="hidden lg:inline">تصدير Google Sheets</span>
-              <span className="lg:hidden">تصدير</span>
-            </button>
-
-            {/* New Record Quick Action */}
-            {onQuickNewEntry && (
+      <header className="bg-[#0B3A60] sticky top-0 z-30 shadow-none dir-rtl font-sans text-white relative overflow-hidden">
+        {/* Glow */}
+        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[500px] bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-[#C1A67B]/20 via-transparent to-transparent pointer-events-none"></div>
+        
+        {/* Navbar (Glassmorphism) */}
+        <div className="relative bg-white/5 backdrop-blur-md border-b border-white/10">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 min-h-[5rem] py-3 flex flex-col sm:flex-row items-center sm:justify-between gap-3 sm:gap-4">
+            
+            {/* Left / Mobile Toggle & Page Title */}
+            <div className="flex items-center justify-between sm:justify-start gap-4 w-full sm:w-auto">
               <button
-                onClick={onQuickNewEntry}
-                className="flex items-center gap-2 px-3 sm:px-4 py-2 bg-[#E74C3C] hover:bg-red-700 text-white text-xs font-extrabold rounded-xl transition-all shadow-sm hover:shadow-md cursor-pointer"
+                onClick={onOpenMobile}
+                className="lg:hidden p-2 text-white hover:text-sky-100 hover:bg-white/10 rounded-lg transition-colors"
+                title="القائمة"
               >
-                <PlusCircle className="w-4 h-4" />
-                <span className="hidden sm:inline">+ إصدار NCR جديد</span>
-                <span className="sm:hidden">+ NCR</span>
+                <Menu className="w-6 h-6" />
               </button>
-            )}
+              
+              <div className="bg-white/10 backdrop-blur-xl p-1.5 rounded-xl shadow-lg border border-white/20 shrink-0">
+                <img src="/assets/polo-egypt-logo.png" alt="Polo Egypt" className="h-10 sm:h-12 w-auto object-contain" onError={(e) => { e.currentTarget.style.display = 'none'; }} />
+              </div>
+              
+              <div className="hidden sm:block">
+                <h1 className="text-base sm:text-lg font-black text-white flex items-center gap-2 drop-shadow-md">
+                  <span>{current.title}</span>
+                </h1>
+                <p className="text-xs font-bold text-slate-300 drop-shadow-sm">
+                  {current.subtitle}
+                </p>
+              </div>
+            </div>
+
+            {/* Action Buttons (Glass Pills) */}
+            <div className="flex flex-wrap items-center justify-center sm:justify-end gap-2 sm:gap-3 w-full sm:w-auto">
+              <button
+                onClick={() => setIsWorkerScanOpen(true)}
+                className="flex items-center gap-1.5 px-3 py-2 bg-white/10 hover:bg-white/20 text-white border border-white/20 backdrop-blur-sm rounded-full transition-all text-xs font-black shadow-sm"
+              >
+                <Smartphone className="w-4 h-4 text-[#C0A46F]" />
+                <span className="hidden sm:inline">مسح QR صالة الإنتاج</span>
+                <span className="sm:hidden">مسح QR</span>
+              </button>
+              
+              <button
+                onClick={() => setIsQrModalOpen(true)}
+                className="flex items-center gap-1.5 px-3 py-2 bg-white/10 hover:bg-white/20 text-white border border-white/20 backdrop-blur-sm rounded-full transition-all text-xs font-extrabold shadow-sm"
+              >
+                <QrCode className="w-4 h-4 text-[#C0A46F]" />
+                <span className="hidden md:inline">QR Code</span>
+              </button>
+              
+              <button
+                onClick={() => setActiveTab('sheets-guide')}
+                className="flex items-center gap-1.5 px-3 sm:px-4 py-2 bg-white/10 hover:bg-white/20 text-white border border-white/20 backdrop-blur-sm rounded-full transition-all text-xs font-extrabold shadow-sm"
+              >
+                <Download className="w-4 h-4 text-[#C0A46F]" />
+                <span className="hidden lg:inline">تصدير Sheets</span>
+                <span className="lg:hidden">تصدير</span>
+              </button>
+            </div>
           </div>
         </div>
       </header>
@@ -143,7 +129,7 @@ export const Header: React.FC<HeaderProps> = ({
         onClose={() => setIsQrModalOpen(false)}
       />
 
-      {/* Worker Floor Scan & Mobile Incident Entry Modal */}
+      {/* Worker Floor Scan Modal */}
       <WorkerFloorScanModal
         isOpen={isWorkerScanOpen}
         onClose={() => setIsWorkerScanOpen(false)}

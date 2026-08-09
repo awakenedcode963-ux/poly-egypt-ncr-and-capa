@@ -44,7 +44,7 @@ export default function App() {
   };
 
   return (
-    <div className="min-h-screen bg-[#F8F9FA] flex flex-col lg:flex-row font-sans text-slate-900" dir="rtl">
+    <div className="min-h-screen bg-gradient-to-br from-[#0B3A60] via-[#0f2e4a] to-[#1a365d] flex flex-col lg:flex-row font-sans text-white overflow-x-hidden" dir="rtl">
       {/* Sidebar Navigation */}
       <Sidebar
         activeTab={activeTab}
@@ -118,7 +118,7 @@ export default function App() {
         </main>
 
         {/* Global Footer */}
-        <footer className="bg-white border-t border-slate-200 py-4 px-6 text-xs text-slate-500 flex flex-col sm:flex-row items-center justify-between gap-2 mt-auto">
+        <footer className="bg-white/5 backdrop-blur-xl border-t border-white/20 py-4 px-6 text-xs text-slate-300 flex flex-col sm:flex-row items-center justify-between gap-2 mt-auto">
           <span>بولو إيجيبت للتجارة والصناعة ش.م.م © {new Date().getFullYear()} - نظام إدارة عدم المطابقة و CAPA و 5 Whys المنفصل</span>
           <div className="flex items-center gap-3 font-semibold text-slate-600">
             <span>ISO 9001 Standard Compliant</span>

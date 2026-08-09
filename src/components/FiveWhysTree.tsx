@@ -85,7 +85,7 @@ export const FiveWhysTree: React.FC<FiveWhysTreeProps> = ({
       {/* Header Banner */}
       <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 bg-slate-900 text-white p-4 rounded-xl">
         <div className="flex items-center gap-3">
-          <div className="p-2 bg-[#E67E22] text-slate-950 rounded-lg">
+          <div className="p-2 bg-[#E67E22] text-white rounded-lg">
             <HelpCircle className="w-5 h-5 text-white" />
           </div>
           <div>
@@ -103,7 +103,7 @@ export const FiveWhysTree: React.FC<FiveWhysTreeProps> = ({
             type="button"
             onClick={onAiAutoSuggest}
             disabled={isAiGenerating}
-            className="flex items-center gap-2 px-3.5 py-2 bg-[#C4A052] hover:bg-amber-600 text-slate-950 text-xs font-black rounded-lg transition-all shadow-md cursor-pointer disabled:opacity-50 shrink-0"
+            className="flex items-center gap-2 px-3.5 py-2 bg-[#C4A052] hover:bg-amber-600 text-white text-xs font-black rounded-lg transition-all shadow-md cursor-pointer disabled:opacity-50 shrink-0"
           >
             <Sparkles className={`w-4 h-4 ${isAiGenerating ? 'animate-spin' : ''}`} />
             <span>{isAiGenerating ? 'جاري التحليل بالذكاء الاصطناعي...' : 'اقتراح 5 Whys بالذكاء الاصطناعي'}</span>
@@ -121,7 +121,7 @@ export const FiveWhysTree: React.FC<FiveWhysTreeProps> = ({
                   <span className={`px-2.5 py-0.5 rounded-full text-xs font-black ${step.badgeColor}`}>
                     المستوى {step.num}
                   </span>
-                  <span className="font-extrabold text-xs text-slate-900">{step.title}</span>
+                  <span className="font-extrabold text-xs text-white">{step.title}</span>
                 </div>
                 {step.num === 5 && (
                   <span className="text-[11px] bg-emerald-200 text-emerald-900 px-2.5 py-0.5 rounded-md font-black flex items-center gap-1">
@@ -131,7 +131,7 @@ export const FiveWhysTree: React.FC<FiveWhysTreeProps> = ({
                 )}
               </div>
 
-              <p className="text-[11px] text-slate-500 font-medium">{step.desc}</p>
+              <p className="text-[11px] text-slate-400 font-medium">{step.desc}</p>
 
               {isEditable ? (
                 <textarea
@@ -139,10 +139,10 @@ export const FiveWhysTree: React.FC<FiveWhysTreeProps> = ({
                   onChange={(e) => handleTextChange(step.key, e.target.value)}
                   placeholder={`اكتب الإجابة على السؤال ${step.num}...`}
                   rows={2}
-                  className="w-full p-2.5 bg-white border border-slate-300 rounded-lg text-xs font-bold text-slate-800 focus:ring-2 focus:ring-[#1B4F72] focus:outline-none"
+                  className="w-full p-2.5 bg-white border border-white/20 rounded-lg text-xs font-bold text-white focus:ring-2 focus:ring-[#1B4F72] focus:outline-none"
                 />
               ) : (
-                <div className="bg-white/80 p-3 rounded-lg border border-slate-200/60 text-xs font-bold text-slate-800 leading-relaxed">
+                <div className="bg-white/5 backdrop-blur-md p-3 rounded-lg border border-white/10 text-xs font-bold text-white leading-relaxed">
                   {step.value ? (
                     step.value
                   ) : (

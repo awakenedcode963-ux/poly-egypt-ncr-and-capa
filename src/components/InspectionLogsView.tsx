@@ -74,13 +74,13 @@ export const InspectionLogsView: React.FC<InspectionLogsViewProps> = ({
     <div className="space-y-6">
       
       {/* Header */}
-      <div className="bg-white rounded-2xl p-6 border border-slate-200 shadow-sm flex flex-col md:flex-row md:items-center justify-between gap-4">
+      <div className="bg-white/10 backdrop-blur-xl rounded-2xl p-6 border border-white/10 shadow-sm flex flex-col md:flex-row md:items-center justify-between gap-4">
         <div>
           <div className="flex items-center gap-2">
             <FileSpreadsheet className="w-6 h-6 text-amber-500" />
-            <h2 className="text-xl font-bold text-slate-900">سجل القراءات والفحوصات اليومية (Inspection Logs)</h2>
+            <h2 className="text-xl font-bold text-white">سجل القراءات والفحوصات اليومية (Inspection Logs)</h2>
           </div>
-          <p className="text-sm text-slate-500 mt-1">
+          <p className="text-sm text-slate-400 mt-1">
             استعراض كافة نتائج الفحوصات المسجلة بالمصنع وتصدير التقرير اليومي/الشهري بملف Excel CSV.
           </p>
         </div>
@@ -95,7 +95,7 @@ export const InspectionLogsView: React.FC<InspectionLogsViewProps> = ({
       </div>
 
       {/* Search & Filter */}
-      <div className="bg-white rounded-xl p-4 border border-slate-200 shadow-sm flex flex-col md:flex-row md:items-center justify-between gap-4">
+      <div className="bg-white/10 backdrop-blur-xl rounded-xl p-4 border border-white/10 shadow-sm flex flex-col md:flex-row md:items-center justify-between gap-4">
         <div className="flex-1 relative">
           <Search className="w-4 h-4 absolute right-3.5 top-1/2 -translate-y-1/2 text-slate-400" />
           <input
@@ -103,7 +103,7 @@ export const InspectionLogsView: React.FC<InspectionLogsViewProps> = ({
             placeholder="بحث باسم المنتج، الكود، المفتش، رقم الماكينة، أو العيب..."
             value={search}
             onChange={(e) => setSearch(e.target.value)}
-            className="w-full pl-4 pr-10 py-2.5 rounded-lg border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-amber-500/20"
+            className="w-full pl-4 pr-10 py-2.5 rounded-lg border border-white/10 text-sm focus:outline-none focus:ring-2 focus:ring-amber-500/20"
           />
         </div>
 
@@ -111,7 +111,7 @@ export const InspectionLogsView: React.FC<InspectionLogsViewProps> = ({
           <select
             value={filterCategory}
             onChange={(e) => setFilterCategory(e.target.value)}
-            className="px-3 py-2 rounded-lg border border-slate-200 text-xs font-medium bg-slate-50"
+            className="px-3 py-2 rounded-lg border border-white/10 text-xs font-medium bg-white/5"
           >
             <option value="all">كافة الأقسام</option>
             <option value="pipe">الأنابيب فقط</option>
@@ -121,7 +121,7 @@ export const InspectionLogsView: React.FC<InspectionLogsViewProps> = ({
           <select
             value={filterStatus}
             onChange={(e) => setFilterStatus(e.target.value)}
-            className="px-3 py-2 rounded-lg border border-slate-200 text-xs font-medium bg-slate-50"
+            className="px-3 py-2 rounded-lg border border-white/10 text-xs font-medium bg-white/5"
           >
             <option value="all">كافة الحالات</option>
             <option value="pass">مقبول (Pass)</option>
@@ -132,7 +132,7 @@ export const InspectionLogsView: React.FC<InspectionLogsViewProps> = ({
       </div>
 
       {/* Logs Table */}
-      <div className="bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden">
+      <div className="bg-white/10 backdrop-blur-xl rounded-2xl border border-white/10 shadow-sm overflow-hidden">
         <div className="overflow-x-auto">
           <table className="w-full text-right border-collapse text-sm">
             <thead>
@@ -149,7 +149,7 @@ export const InspectionLogsView: React.FC<InspectionLogsViewProps> = ({
                 <th className="p-3.5 border-b border-slate-800 w-12">حذف</th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-slate-100 text-slate-700 text-xs">
+            <tbody className="divide-y divide-slate-100 text-slate-200 text-xs">
               {filteredLogs.length === 0 ? (
                 <tr>
                   <td colSpan={10} className="p-8 text-center text-slate-400 font-medium">
@@ -158,8 +158,8 @@ export const InspectionLogsView: React.FC<InspectionLogsViewProps> = ({
                 </tr>
               ) : (
                 filteredLogs.map((log) => (
-                  <tr key={log.id} className="hover:bg-slate-50 transition-colors">
-                    <td className="p-3.5 font-mono text-slate-500 whitespace-nowrap">{log.date}</td>
+                  <tr key={log.id} className="hover:bg-white/5 transition-colors">
+                    <td className="p-3.5 font-mono text-slate-400 whitespace-nowrap">{log.date}</td>
                     <td className="p-3.5">
                       <span className={`px-2 py-0.5 rounded text-[11px] font-bold ${
                         log.category === 'pipe' ? 'bg-amber-100 text-amber-800' : 'bg-sky-100 text-sky-800'
@@ -168,18 +168,18 @@ export const InspectionLogsView: React.FC<InspectionLogsViewProps> = ({
                       </span>
                     </td>
                     <td className="p-3.5 font-medium">
-                      <div className="font-mono font-bold text-slate-900">{log.productCode}</div>
-                      <div className="text-[11px] text-slate-500 truncate max-w-[180px]">{log.productName}</div>
+                      <div className="font-mono font-bold text-white">{log.productCode}</div>
+                      <div className="text-[11px] text-slate-400 truncate max-w-[180px]">{log.productName}</div>
                     </td>
-                    <td className="p-3.5 font-bold font-mono text-slate-800">{log.machineCode}</td>
-                    <td className="p-3.5 font-medium text-slate-800">{log.inspectorName}</td>
+                    <td className="p-3.5 font-bold font-mono text-white">{log.machineCode}</td>
+                    <td className="p-3.5 font-medium text-white">{log.inspectorName}</td>
                     <td className="p-3.5 font-mono">
-                      <span className="font-bold text-slate-900">{log.defectiveQty}</span> / {log.sampleSize}
+                      <span className="font-bold text-white">{log.defectiveQty}</span> / {log.sampleSize}
                     </td>
                     <td className="p-3.5 font-mono font-bold text-amber-700">
                       {log.rejectRate}%
                     </td>
-                    <td className="p-3.5 text-slate-600">
+                    <td className="p-3.5 text-slate-300">
                       {log.defectName} ({log.defectCode})
                     </td>
                     <td className="p-3.5">

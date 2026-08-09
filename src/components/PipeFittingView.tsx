@@ -166,7 +166,7 @@ export const PipeFittingView: React.FC<PipeFittingViewProps> = ({
   return (
     <div className="p-4 sm:p-6 lg:p-8 space-y-6">
       {/* Module Header */}
-      <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 bg-white p-5 rounded-2xl border border-slate-200 shadow-xs">
+      <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 bg-white/10 backdrop-blur-xl p-5 rounded-2xl border border-white/10 shadow-xs">
         <div>
           <h2 className="text-lg font-black text-[#1B4F72] flex items-center gap-2">
             <span>الوحدة 1: جودة الأنابيب والوصلات</span>
@@ -174,7 +174,7 @@ export const PipeFittingView: React.FC<PipeFittingViewProps> = ({
               54 عمود تفصيلي
             </span>
           </h2>
-          <p className="text-xs text-slate-500 mt-1">تسجيل الفحوصات بقطاع الأنابيب (Extrusion) والوصلات (Injection)</p>
+          <p className="text-xs text-slate-400 mt-1">تسجيل الفحوصات بقطاع الأنابيب (Extrusion) والوصلات (Injection)</p>
         </div>
 
         <div className="flex items-center gap-2 w-full sm:w-auto">
@@ -188,7 +188,7 @@ export const PipeFittingView: React.FC<PipeFittingViewProps> = ({
 
           <button
             onClick={handleExportCSV}
-            className="flex items-center justify-center gap-2 px-4 py-2 bg-slate-100 hover:bg-slate-200 text-[#1B4F72] text-xs font-extrabold rounded-xl transition-all cursor-pointer border border-slate-300"
+            className="flex items-center justify-center gap-2 px-4 py-2 bg-white/10 hover:bg-white/20 text-[#1B4F72] text-xs font-extrabold rounded-xl transition-all cursor-pointer border border-white/20"
           >
             <Download className="w-4 h-4" />
             <span>تصدير CSV</span>
@@ -198,8 +198,8 @@ export const PipeFittingView: React.FC<PipeFittingViewProps> = ({
 
       {/* Entry Form Modal/Dropdown */}
       {showForm && (
-        <form onSubmit={handleSubmit} className="bg-white p-6 rounded-2xl border-2 border-[#2874A6] shadow-lg space-y-6 animate-fadeIn">
-          <div className="border-b border-slate-200 pb-3 flex items-center justify-between">
+        <form onSubmit={handleSubmit} className="bg-white/10 backdrop-blur-xl p-6 rounded-2xl border-2 border-[#2874A6] shadow-lg space-y-6 animate-fadeIn">
+          <div className="border-b border-white/10 pb-3 flex items-center justify-between">
             <h3 className="font-extrabold text-[#1B4F72] text-sm">نموذج تسجيل فحص الجودة الموحد</h3>
             <span className="text-xs font-bold text-slate-400">قسم الأنابيب والوصلات</span>
           </div>
@@ -207,11 +207,11 @@ export const PipeFittingView: React.FC<PipeFittingViewProps> = ({
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 text-xs font-semibold">
             {/* Category */}
             <div>
-              <label className="block text-slate-700 mb-1">القسم</label>
+              <label className="block text-slate-200 mb-1">القسم</label>
               <select
                 value={formData.category}
                 onChange={(e) => setFormData({ ...formData, category: e.target.value as 'pipe' | 'fitting', productCode: '' })}
-                className="w-full p-2.5 bg-slate-50 border border-slate-300 rounded-xl font-bold"
+                className="w-full p-2.5 bg-white/5 border border-white/20 rounded-xl font-bold"
               >
                 <option value="pipe">بثق الأنابيب (Extrusion)</option>
                 <option value="fitting">حقن الوصلات (Injection)</option>
@@ -220,23 +220,23 @@ export const PipeFittingView: React.FC<PipeFittingViewProps> = ({
 
             {/* Date */}
             <div>
-              <label className="block text-slate-700 mb-1">تاريخ الفحص</label>
+              <label className="block text-slate-200 mb-1">تاريخ الفحص</label>
               <input
                 type="date"
                 value={formData.date}
                 onChange={(e) => setFormData({ ...formData, date: e.target.value })}
-                className="w-full p-2.5 bg-slate-50 border border-slate-300 rounded-xl font-bold"
+                className="w-full p-2.5 bg-white/5 border border-white/20 rounded-xl font-bold"
                 required
               />
             </div>
 
             {/* Shift */}
             <div>
-              <label className="block text-slate-700 mb-1">الوردية</label>
+              <label className="block text-slate-200 mb-1">الوردية</label>
               <select
                 value={formData.shiftName}
                 onChange={(e) => setFormData({ ...formData, shiftName: e.target.value })}
-                className="w-full p-2.5 bg-slate-50 border border-slate-300 rounded-xl font-bold"
+                className="w-full p-2.5 bg-white/5 border border-white/20 rounded-xl font-bold"
               >
                 {masterData.shifts.map(s => (
                   <option key={s.code} value={s.name}>{s.name}</option>
@@ -246,11 +246,11 @@ export const PipeFittingView: React.FC<PipeFittingViewProps> = ({
 
             {/* Inspector */}
             <div>
-              <label className="block text-slate-700 mb-1">فني الجودة / المفتش</label>
+              <label className="block text-slate-200 mb-1">فني الجودة / المفتش</label>
               <select
                 value={formData.inspectorName}
                 onChange={(e) => setFormData({ ...formData, inspectorName: e.target.value })}
-                className="w-full p-2.5 bg-slate-50 border border-slate-300 rounded-xl font-bold"
+                className="w-full p-2.5 bg-white/5 border border-white/20 rounded-xl font-bold"
               >
                 {masterData.inspectors.map(ins => (
                   <option key={ins.id} value={ins.name}>{ins.name}</option>
@@ -260,11 +260,11 @@ export const PipeFittingView: React.FC<PipeFittingViewProps> = ({
 
             {/* Product Selection */}
             <div>
-              <label className="block text-slate-700 mb-1">اختيار المنتج (الكود)</label>
+              <label className="block text-slate-200 mb-1">اختيار المنتج (الكود)</label>
               <select
                 value={formData.productCode}
                 onChange={(e) => handleProductChange(e.target.value)}
-                className="w-full p-2.5 bg-slate-50 border border-slate-300 rounded-xl font-bold"
+                className="w-full p-2.5 bg-white/5 border border-white/20 rounded-xl font-bold"
                 required
               >
                 <option value="">-- اختر المنتج --</option>
@@ -282,11 +282,11 @@ export const PipeFittingView: React.FC<PipeFittingViewProps> = ({
 
             {/* Machine */}
             <div>
-              <label className="block text-slate-700 mb-1">رقم الماكينة / الخط</label>
+              <label className="block text-slate-200 mb-1">رقم الماكينة / الخط</label>
               <select
                 value={formData.machineCode}
                 onChange={(e) => setFormData({ ...formData, machineCode: e.target.value })}
-                className="w-full p-2.5 bg-slate-50 border border-slate-300 rounded-xl font-bold"
+                className="w-full p-2.5 bg-white/5 border border-white/20 rounded-xl font-bold"
               >
                 <option value="">-- اختر الماكينة --</option>
                 {(formData.category === 'pipe' ? masterData.extrusionMachines : masterData.injectionMachines).map(m => (
@@ -297,12 +297,12 @@ export const PipeFittingView: React.FC<PipeFittingViewProps> = ({
 
             {/* Sample Size */}
             <div>
-              <label className="block text-slate-700 mb-1">حجم العينة المفحوصة (قطعة)</label>
+              <label className="block text-slate-200 mb-1">حجم العينة المفحوصة (قطعة)</label>
               <input
                 type="number"
                 value={formData.sampleSize}
                 onChange={(e) => setFormData({ ...formData, sampleSize: Number(e.target.value) })}
-                className="w-full p-2.5 bg-slate-50 border border-slate-300 rounded-xl font-bold"
+                className="w-full p-2.5 bg-white/5 border border-white/20 rounded-xl font-bold"
                 min={1}
                 required
               />
@@ -310,12 +310,12 @@ export const PipeFittingView: React.FC<PipeFittingViewProps> = ({
 
             {/* Defective Quantity */}
             <div>
-              <label className="block text-slate-700 mb-1">عدد المرفوضات (قطعة)</label>
+              <label className="block text-slate-200 mb-1">عدد المرفوضات (قطعة)</label>
               <input
                 type="number"
                 value={formData.defectiveQty}
                 onChange={(e) => handleDefectiveQtyChange(Number(e.target.value))}
-                className="w-full p-2.5 bg-slate-50 border border-slate-300 rounded-xl font-bold text-red-600"
+                className="w-full p-2.5 bg-white/5 border border-white/20 rounded-xl font-bold text-red-600"
                 min={0}
                 required
               />
@@ -323,11 +323,11 @@ export const PipeFittingView: React.FC<PipeFittingViewProps> = ({
 
             {/* Defect Code */}
             <div>
-              <label className="block text-slate-700 mb-1">نوع العيب المرصود</label>
+              <label className="block text-slate-200 mb-1">نوع العيب المرصود</label>
               <select
                 value={formData.defectCode}
                 onChange={(e) => handleDefectChange(e.target.value)}
-                className="w-full p-2.5 bg-slate-50 border border-slate-300 rounded-xl font-bold"
+                className="w-full p-2.5 bg-white/5 border border-white/20 rounded-xl font-bold"
               >
                 <option value="">-- اختر العيب --</option>
                 {(formData.category === 'pipe' ? masterData.pipeDefects : masterData.fittingDefects).map(d => (
@@ -338,7 +338,7 @@ export const PipeFittingView: React.FC<PipeFittingViewProps> = ({
 
             {/* Auto Status */}
             <div>
-              <label className="block text-slate-700 mb-1">النتيجة التلقائية</label>
+              <label className="block text-slate-200 mb-1">النتيجة التلقائية</label>
               <input
                 type="text"
                 value={formData.status}
@@ -353,22 +353,22 @@ export const PipeFittingView: React.FC<PipeFittingViewProps> = ({
 
             {/* Notes */}
             <div className="sm:col-span-2 lg:col-span-2">
-              <label className="block text-slate-700 mb-1">ملاحظات الفحص</label>
+              <label className="block text-slate-200 mb-1">ملاحظات الفحص</label>
               <input
                 type="text"
                 value={formData.notes}
                 onChange={(e) => setFormData({ ...formData, notes: e.target.value })}
                 placeholder="أضف أي ملحوظة كالمواد الخام المستخدمة أو ظروف التشغيل..."
-                className="w-full p-2.5 bg-slate-50 border border-slate-300 rounded-xl font-medium"
+                className="w-full p-2.5 bg-white/5 border border-white/20 rounded-xl font-medium"
               />
             </div>
           </div>
 
-          <div className="flex justify-end gap-3 pt-4 border-t border-slate-200">
+          <div className="flex justify-end gap-3 pt-4 border-t border-white/10">
             <button
               type="button"
               onClick={() => setShowForm(false)}
-              className="px-5 py-2.5 bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold rounded-xl text-xs"
+              className="px-5 py-2.5 bg-white/10 hover:bg-white/20 text-slate-200 font-bold rounded-xl text-xs"
             >
               إلغاء
             </button>
@@ -383,7 +383,7 @@ export const PipeFittingView: React.FC<PipeFittingViewProps> = ({
       )}
 
       {/* Filter and Search Bar */}
-      <div className="bg-white p-4 rounded-2xl border border-slate-200 shadow-xs flex flex-col sm:flex-row items-center justify-between gap-4">
+      <div className="bg-white/10 backdrop-blur-xl p-4 rounded-2xl border border-white/10 shadow-xs flex flex-col sm:flex-row items-center justify-between gap-4">
         {/* Search Input */}
         <div className="relative w-full sm:w-80">
           <Search className="w-4 h-4 text-slate-400 absolute right-3 top-3" />
@@ -392,17 +392,17 @@ export const PipeFittingView: React.FC<PipeFittingViewProps> = ({
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
             placeholder="بحث باسم المنتج، الكود، أو الفني..."
-            className="w-full pr-9 pl-3 py-2 bg-slate-50 border border-slate-300 rounded-xl text-xs font-semibold focus:outline-none focus:border-[#2874A6]"
+            className="w-full pr-9 pl-3 py-2 bg-white/5 border border-white/20 rounded-xl text-xs font-semibold focus:outline-none focus:border-[#2874A6]"
           />
         </div>
 
         {/* Filter Category */}
         <div className="flex items-center gap-2 w-full sm:w-auto overflow-x-auto pb-1 sm:pb-0">
-          <span className="text-xs font-bold text-slate-500 whitespace-nowrap">التصفية:</span>
+          <span className="text-xs font-bold text-slate-400 whitespace-nowrap">التصفية:</span>
           <button
             onClick={() => setFilterCategory('all')}
             className={`px-3 py-1.5 text-xs font-extrabold rounded-lg transition-all cursor-pointer ${
-              filterCategory === 'all' ? 'bg-[#1B4F72] text-white' : 'bg-slate-100 text-slate-600 hover:bg-slate-200'
+              filterCategory === 'all' ? 'bg-[#1B4F72] text-white' : 'bg-white/10 text-slate-300 hover:bg-white/20'
             }`}
           >
             الكل ({logs.length})
@@ -410,7 +410,7 @@ export const PipeFittingView: React.FC<PipeFittingViewProps> = ({
           <button
             onClick={() => setFilterCategory('pipe')}
             className={`px-3 py-1.5 text-xs font-extrabold rounded-lg transition-all cursor-pointer ${
-              filterCategory === 'pipe' ? 'bg-[#2874A6] text-white' : 'bg-slate-100 text-slate-600 hover:bg-slate-200'
+              filterCategory === 'pipe' ? 'bg-[#2874A6] text-white' : 'bg-white/10 text-slate-300 hover:bg-white/20'
             }`}
           >
             أنابيب ({logs.filter(l => l.category === 'pipe').length})
@@ -418,7 +418,7 @@ export const PipeFittingView: React.FC<PipeFittingViewProps> = ({
           <button
             onClick={() => setFilterCategory('fitting')}
             className={`px-3 py-1.5 text-xs font-extrabold rounded-lg transition-all cursor-pointer ${
-              filterCategory === 'fitting' ? 'bg-[#E67E22] text-white' : 'bg-slate-100 text-slate-600 hover:bg-slate-200'
+              filterCategory === 'fitting' ? 'bg-[#E67E22] text-white' : 'bg-white/10 text-slate-300 hover:bg-white/20'
             }`}
           >
             وصلات ({logs.filter(l => l.category === 'fitting').length})
@@ -427,7 +427,7 @@ export const PipeFittingView: React.FC<PipeFittingViewProps> = ({
       </div>
 
       {/* Logs Table */}
-      <div className="bg-white rounded-2xl border border-slate-200 shadow-xs overflow-hidden">
+      <div className="bg-white/10 backdrop-blur-xl rounded-2xl border border-white/10 shadow-xs overflow-hidden">
         <div className="overflow-x-auto">
           <table className="w-full text-right text-xs">
             <thead className="bg-[#1B4F72] text-white font-bold">
@@ -443,7 +443,7 @@ export const PipeFittingView: React.FC<PipeFittingViewProps> = ({
                 <th className="p-3.5 text-center">إجراءات</th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-slate-100 font-medium text-slate-700">
+            <tbody className="divide-y divide-slate-100 font-medium text-slate-200">
               {filteredLogs.length === 0 ? (
                 <tr>
                   <td colSpan={9} className="p-8 text-center text-slate-400 font-semibold">
@@ -452,27 +452,27 @@ export const PipeFittingView: React.FC<PipeFittingViewProps> = ({
                 </tr>
               ) : (
                 filteredLogs.map((log) => (
-                  <tr key={log.id} className="hover:bg-slate-50 transition-colors">
+                  <tr key={log.id} className="hover:bg-white/5 transition-colors">
                     <td className="p-3.5">
                       <span className="font-extrabold text-[#1B4F72] block">{log.id}</span>
                       <span className="text-[10px] text-slate-400">[{log.productCode}]</span>
                     </td>
                     <td className="p-3.5">
-                      <div className="font-bold text-slate-900">{log.productName}</div>
-                      <span className="text-[10px] bg-slate-100 text-slate-600 px-1.5 py-0.5 rounded font-semibold">
+                      <div className="font-bold text-white">{log.productName}</div>
+                      <span className="text-[10px] bg-white/10 text-slate-300 px-1.5 py-0.5 rounded font-semibold">
                         {log.category === 'pipe' ? 'أنبوب B' : `وصلة (${log.material || 'PPR'})`}
                       </span>
                     </td>
                     <td className="p-3.5">
-                      <div className="font-semibold text-slate-800">{log.date}</div>
-                      <span className="text-[10px] text-slate-500">{log.shiftName}</span>
+                      <div className="font-semibold text-white">{log.date}</div>
+                      <span className="text-[10px] text-slate-400">{log.shiftName}</span>
                     </td>
                     <td className="p-3.5">
                       <div className="font-bold text-[#2874A6]">م {log.machineCode}</div>
-                      <span className="text-[10px] text-slate-500">{log.inspectorName}</span>
+                      <span className="text-[10px] text-slate-400">{log.inspectorName}</span>
                     </td>
                     <td className="p-3.5 text-center">
-                      <span className="font-bold text-slate-800">{log.sampleSize}</span> / <span className="font-bold text-red-600">{log.defectiveQty}</span>
+                      <span className="font-bold text-white">{log.sampleSize}</span> / <span className="font-bold text-red-600">{log.defectiveQty}</span>
                     </td>
                     <td className="p-3.5">
                       <span className={`font-black px-2 py-0.5 rounded-full text-[11px] ${
@@ -484,7 +484,7 @@ export const PipeFittingView: React.FC<PipeFittingViewProps> = ({
                       </span>
                     </td>
                     <td className="p-3.5">
-                      <div className="font-bold text-slate-800">{log.defectName}</div>
+                      <div className="font-bold text-white">{log.defectName}</div>
                       <span className="text-[10px] text-slate-400">كود: {log.defectCode}</span>
                     </td>
                     <td className="p-3.5 text-center">

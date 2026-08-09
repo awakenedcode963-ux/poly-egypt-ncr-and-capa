@@ -62,7 +62,7 @@ export const MaintenanceView: React.FC<MaintenanceViewProps> = ({
   return (
     <div className="p-4 sm:p-6 lg:p-8 space-y-6">
       {/* Header */}
-      <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 bg-white p-5 rounded-2xl border border-slate-200 shadow-xs">
+      <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 bg-white/10 backdrop-blur-xl p-5 rounded-2xl border border-white/10 shadow-xs">
         <div>
           <h2 className="text-lg font-black text-[#1B4F72] flex items-center gap-2">
             <span>الوحدة 4: إدارة الصيانة الوقائية والأعطال وحياة الماكينات</span>
@@ -70,15 +70,15 @@ export const MaintenanceView: React.FC<MaintenanceViewProps> = ({
               Maintenance OS
             </span>
           </h2>
-          <p className="text-xs text-slate-500 mt-1">تتبع الخطط الوقائية، بلاغات الأعطال المفاجئة، وساعات العمر الافتراضي</p>
+          <p className="text-xs text-slate-400 mt-1">تتبع الخطط الوقائية، بلاغات الأعطال المفاجئة، وساعات العمر الافتراضي</p>
         </div>
 
         {/* Sub-tabs */}
-        <div className="flex items-center gap-2 bg-slate-100 p-1 rounded-xl">
+        <div className="flex items-center gap-2 bg-white/10 p-1 rounded-xl">
           <button
             onClick={() => setActiveSubTab('breakdowns')}
             className={`px-3 py-1.5 text-xs font-black rounded-lg transition-all cursor-pointer ${
-              activeSubTab === 'breakdowns' ? 'bg-[#1B4F72] text-white shadow-xs' : 'text-slate-600 hover:text-slate-900'
+              activeSubTab === 'breakdowns' ? 'bg-[#1B4F72] text-white shadow-xs' : 'text-slate-300 hover:text-white'
             }`}
           >
             بلاغات الأعطال ({breakdownLogs.length})
@@ -86,7 +86,7 @@ export const MaintenanceView: React.FC<MaintenanceViewProps> = ({
           <button
             onClick={() => setActiveSubTab('preventive')}
             className={`px-3 py-1.5 text-xs font-black rounded-lg transition-all cursor-pointer ${
-              activeSubTab === 'preventive' ? 'bg-[#1B4F72] text-white shadow-xs' : 'text-slate-600 hover:text-slate-900'
+              activeSubTab === 'preventive' ? 'bg-[#1B4F72] text-white shadow-xs' : 'text-slate-300 hover:text-white'
             }`}
           >
             الصيانة الوقائية ({preventiveLogs.length})
@@ -94,7 +94,7 @@ export const MaintenanceView: React.FC<MaintenanceViewProps> = ({
           <button
             onClick={() => setActiveSubTab('life')}
             className={`px-3 py-1.5 text-xs font-black rounded-lg transition-all cursor-pointer ${
-              activeSubTab === 'life' ? 'bg-[#1B4F72] text-white shadow-xs' : 'text-slate-600 hover:text-slate-900'
+              activeSubTab === 'life' ? 'bg-[#1B4F72] text-white shadow-xs' : 'text-slate-300 hover:text-white'
             }`}
           >
             حياة الماكينات ({machineLifeList.length})
@@ -116,26 +116,26 @@ export const MaintenanceView: React.FC<MaintenanceViewProps> = ({
           </div>
 
           {showForm && (
-            <form onSubmit={handleSubmitBreakdown} className="bg-white p-6 rounded-2xl border-2 border-red-500 shadow-lg space-y-4">
-              <h4 className="font-extrabold text-red-700 text-xs border-b border-slate-200 pb-2">نموذج بلاغ عطل ميكانيكي / كهربائي</h4>
+            <form onSubmit={handleSubmitBreakdown} className="bg-white/10 backdrop-blur-xl p-6 rounded-2xl border-2 border-red-500 shadow-lg space-y-4">
+              <h4 className="font-extrabold text-red-700 text-xs border-b border-white/10 pb-2">نموذج بلاغ عطل ميكانيكي / كهربائي</h4>
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 text-xs font-semibold">
                 <div>
-                  <label className="block text-slate-700 mb-1">تاريخ العطل</label>
+                  <label className="block text-slate-200 mb-1">تاريخ العطل</label>
                   <input
                     type="date"
                     value={form.date}
                     onChange={(e) => setForm({ ...form, date: e.target.value })}
-                    className="w-full p-2.5 bg-slate-50 border border-slate-300 rounded-xl"
+                    className="w-full p-2.5 bg-white/5 border border-white/20 rounded-xl"
                     required
                   />
                 </div>
 
                 <div>
-                  <label className="block text-slate-700 mb-1">الماكينة المتوقفة</label>
+                  <label className="block text-slate-200 mb-1">الماكينة المتوقفة</label>
                   <select
                     value={form.machineCode}
                     onChange={(e) => setForm({ ...form, machineCode: e.target.value })}
-                    className="w-full p-2.5 bg-slate-50 border border-slate-300 rounded-xl font-bold"
+                    className="w-full p-2.5 bg-white/5 border border-white/20 rounded-xl font-bold"
                   >
                     {[...masterData.extrusionMachines, ...masterData.injectionMachines].map(m => (
                       <option key={m.id} value={m.code}>ماكينة رقم {m.code} ({m.type === 'extrusion' ? 'بثق' : 'حقن'})</option>
@@ -144,68 +144,68 @@ export const MaintenanceView: React.FC<MaintenanceViewProps> = ({
                 </div>
 
                 <div>
-                  <label className="block text-slate-700 mb-1">وصف العطل</label>
+                  <label className="block text-slate-200 mb-1">وصف العطل</label>
                   <input
                     type="text"
                     value={form.description}
                     onChange={(e) => setForm({ ...form, description: e.target.value })}
                     placeholder="مثال: توقف الهيدروليك أو انكسار النوزل..."
-                    className="w-full p-2.5 bg-slate-50 border border-slate-300 rounded-xl"
+                    className="w-full p-2.5 bg-white/5 border border-white/20 rounded-xl"
                     required
                   />
                 </div>
 
                 <div>
-                  <label className="block text-slate-700 mb-1">السبب الجذر الفعلي (Root Cause)</label>
+                  <label className="block text-slate-200 mb-1">السبب الجذر الفعلي (Root Cause)</label>
                   <input
                     type="text"
                     value={form.rootCause}
                     onChange={(e) => setForm({ ...form, rootCause: e.target.value })}
                     placeholder="سبب العطل من الفحص..."
-                    className="w-full p-2.5 bg-slate-50 border border-slate-300 rounded-xl"
+                    className="w-full p-2.5 bg-white/5 border border-white/20 rounded-xl"
                     required
                   />
                 </div>
 
                 <div>
-                  <label className="block text-slate-700 mb-1">زمن التوقف Downtime (ساعة)</label>
+                  <label className="block text-slate-200 mb-1">زمن التوقف Downtime (ساعة)</label>
                   <input
                     type="number"
                     step="0.5"
                     value={form.downtimeHours}
                     onChange={(e) => setForm({ ...form, downtimeHours: Number(e.target.value) })}
-                    className="w-full p-2.5 bg-slate-50 border border-slate-300 rounded-xl font-bold text-red-600"
+                    className="w-full p-2.5 bg-white/5 border border-white/20 rounded-xl font-bold text-red-600"
                     required
                   />
                 </div>
 
                 <div>
-                  <label className="block text-slate-700 mb-1">قطع الغيار المستبدلة</label>
+                  <label className="block text-slate-200 mb-1">قطع الغيار المستبدلة</label>
                   <input
                     type="text"
                     value={form.partsReplaced}
                     onChange={(e) => setForm({ ...form, partsReplaced: e.target.value })}
                     placeholder="أو اكتب: لا يوجد"
-                    className="w-full p-2.5 bg-slate-50 border border-slate-300 rounded-xl"
+                    className="w-full p-2.5 bg-white/5 border border-white/20 rounded-xl"
                   />
                 </div>
 
                 <div>
-                  <label className="block text-slate-700 mb-1">تكلفة الإصلاح (جنيه EGP)</label>
+                  <label className="block text-slate-200 mb-1">تكلفة الإصلاح (جنيه EGP)</label>
                   <input
                     type="number"
                     value={form.costEGP}
                     onChange={(e) => setForm({ ...form, costEGP: Number(e.target.value) })}
-                    className="w-full p-2.5 bg-slate-50 border border-slate-300 rounded-xl font-bold"
+                    className="w-full p-2.5 bg-white/5 border border-white/20 rounded-xl font-bold"
                   />
                 </div>
 
                 <div>
-                  <label className="block text-slate-700 mb-1">حالة الإصلاح</label>
+                  <label className="block text-slate-200 mb-1">حالة الإصلاح</label>
                   <select
                     value={form.repairStatus}
                     onChange={(e) => setForm({ ...form, repairStatus: e.target.value as any })}
-                    className="w-full p-2.5 bg-slate-50 border border-slate-300 rounded-xl font-bold"
+                    className="w-full p-2.5 bg-white/5 border border-white/20 rounded-xl font-bold"
                   >
                     <option value="مكتمل (Fixed)">مكتمل وتم التشغيل</option>
                     <option value="قيد الإصلاح (In Progress)">قيد الإصلاح</option>
@@ -225,7 +225,7 @@ export const MaintenanceView: React.FC<MaintenanceViewProps> = ({
             </form>
           )}
 
-          <div className="bg-white rounded-2xl border border-slate-200 shadow-xs overflow-hidden">
+          <div className="bg-white/10 backdrop-blur-xl rounded-2xl border border-white/10 shadow-xs overflow-hidden">
             <table className="w-full text-right text-xs">
               <thead className="bg-[#1B4F72] text-white font-bold">
                 <tr>
@@ -239,22 +239,22 @@ export const MaintenanceView: React.FC<MaintenanceViewProps> = ({
               </thead>
               <tbody className="divide-y divide-slate-100 font-medium">
                 {breakdownLogs.map((b) => (
-                  <tr key={b.id} className="hover:bg-slate-50">
+                  <tr key={b.id} className="hover:bg-white/5">
                     <td className="p-3.5 font-extrabold text-[#1B4F72]">
                       ماكينة {b.machineCode}
                       <span className="block text-[10px] text-slate-400">{b.id}</span>
                     </td>
                     <td className="p-3.5">
                       <div>{b.date}</div>
-                      <span className="text-[10px] text-slate-500">{b.shift}</span>
+                      <span className="text-[10px] text-slate-400">{b.shift}</span>
                     </td>
                     <td className="p-3.5">
-                      <div className="font-bold text-slate-900">{b.description}</div>
+                      <div className="font-bold text-white">{b.description}</div>
                       <span className="text-[10px] text-red-600">السبب: {b.rootCause}</span>
                     </td>
                     <td className="p-3.5 text-center font-black text-red-600">{b.downtimeHours} ساعة</td>
                     <td className="p-3.5 text-center">
-                      <div className="font-semibold text-slate-800">{b.partsReplaced || 'لا يوجد'}</div>
+                      <div className="font-semibold text-white">{b.partsReplaced || 'لا يوجد'}</div>
                       <span className="text-[10px] font-bold text-emerald-700">{b.costEGP} EGP</span>
                     </td>
                     <td className="p-3.5 text-center">
@@ -276,7 +276,7 @@ export const MaintenanceView: React.FC<MaintenanceViewProps> = ({
 
       {/* Sub-tab 2: Preventive Maintenance */}
       {activeSubTab === 'preventive' && (
-        <div className="bg-white rounded-2xl border border-slate-200 shadow-xs overflow-hidden p-5 space-y-4">
+        <div className="bg-white/10 backdrop-blur-xl rounded-2xl border border-white/10 shadow-xs overflow-hidden p-5 space-y-4">
           <h3 className="font-extrabold text-[#1B4F72] text-sm">خطط وسجلات الصيانة الوقائية (Preventive Maintenance)</h3>
           <table className="w-full text-right text-xs">
             <thead className="bg-[#1B4F72] text-white font-bold">
@@ -291,7 +291,7 @@ export const MaintenanceView: React.FC<MaintenanceViewProps> = ({
             </thead>
             <tbody className="divide-y divide-slate-100 font-medium">
               {preventiveLogs.map((p) => (
-                <tr key={p.id} className="hover:bg-slate-50">
+                <tr key={p.id} className="hover:bg-white/5">
                   <td className="p-3.5 font-bold text-[#1B4F72]">ماكينة {p.machineCode}</td>
                   <td className="p-3.5 font-bold text-purple-700">{p.maintType}</td>
                   <td className="p-3.5">{p.description}</td>
@@ -315,12 +315,12 @@ export const MaintenanceView: React.FC<MaintenanceViewProps> = ({
 
       {/* Sub-tab 3: Machine Life Analysis */}
       {activeSubTab === 'life' && (
-        <div className="bg-white rounded-2xl border border-slate-200 shadow-xs p-5 space-y-4">
+        <div className="bg-white/10 backdrop-blur-xl rounded-2xl border border-white/10 shadow-xs p-5 space-y-4">
           <h3 className="font-extrabold text-[#1B4F72] text-sm">تقييم العمر الافتراضي والهلاك للماكينات</h3>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             {machineLifeList.map((m) => (
-              <div key={m.machineCode} className="p-4 bg-slate-50 rounded-2xl border border-slate-200 space-y-3">
-                <div className="flex items-center justify-between border-b border-slate-200 pb-2">
+              <div key={m.machineCode} className="p-4 bg-white/5 rounded-2xl border border-white/10 space-y-3">
+                <div className="flex items-center justify-between border-b border-white/10 pb-2">
                   <span className="font-black text-[#1B4F72] text-sm">{m.machineName}</span>
                   <span className={`px-2 py-0.5 text-[10px] font-black rounded-full ${
                     m.currentStatus === 'ممتازة' ? 'bg-emerald-100 text-emerald-800' :
@@ -330,13 +330,13 @@ export const MaintenanceView: React.FC<MaintenanceViewProps> = ({
                     {m.currentStatus}
                   </span>
                 </div>
-                <div className="text-xs space-y-1 font-semibold text-slate-600">
+                <div className="text-xs space-y-1 font-semibold text-slate-300">
                   <div className="flex justify-between"><span>ساعات التشغيل الكلية:</span> <b>{m.totalOperatingHours} ساعة</b></div>
                   <div className="flex justify-between"><span>إجمالي الأعطال:</span> <b className="text-red-600">{m.totalBreakdowns} عطل</b></div>
                   <div className="flex justify-between"><span>تكلفة الصيانة التراكمية:</span> <b className="text-emerald-700">{m.totalMaintCostEGP} EGP</b></div>
                 </div>
                 <div>
-                  <div className="flex justify-between text-[11px] font-bold text-slate-700 mb-1">
+                  <div className="flex justify-between text-[11px] font-bold text-slate-200 mb-1">
                     <span>الكفاءة المتبقية:</span>
                     <span>{m.efficiencyRemainingPct}%</span>
                   </div>

@@ -135,10 +135,10 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
         {/* Module 1: Pipe & Fitting */}
         <div 
           onClick={() => setActiveTab('pipe-fitting')}
-          className="bg-white rounded-2xl p-4 shadow-sm border border-slate-200 hover:border-[#2874A6] transition-all cursor-pointer group hover:shadow-md"
+          className="bg-white/10 backdrop-blur-xl rounded-2xl p-4 shadow-sm border border-white/10 hover:border-[#2874A6] transition-all cursor-pointer group hover:shadow-md"
         >
           <div className="flex items-center justify-between mb-2">
-            <span className="text-xs font-bold text-slate-500">1️⃣ الأنابيب والوصلات</span>
+            <span className="text-xs font-bold text-slate-400">1️⃣ الأنابيب والوصلات</span>
             <div className="p-2 bg-sky-100 text-[#1B4F72] rounded-xl group-hover:scale-110 transition-transform">
               <Pipette className="w-5 h-5 text-[#2874A6]" />
             </div>
@@ -148,7 +148,7 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
             <ArrowUpRight className="w-3.5 h-3.5" />
             <span>معدل الرفض الكلي</span>
           </div>
-          <div className="text-[10px] text-slate-400 mt-2 border-t border-slate-100 pt-1.5">
+          <div className="text-[10px] text-slate-400 mt-2 border-t border-white/10 pt-1.5">
             إجمالي العينات: {totalSamples} عينة
           </div>
         </div>
@@ -156,10 +156,10 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
         {/* Module 2: Mixing */}
         <div 
           onClick={() => setActiveTab('mixing')}
-          className="bg-white rounded-2xl p-4 shadow-sm border border-slate-200 hover:border-[#27AE60] transition-all cursor-pointer group hover:shadow-md"
+          className="bg-white/10 backdrop-blur-xl rounded-2xl p-4 shadow-sm border border-white/10 hover:border-[#27AE60] transition-all cursor-pointer group hover:shadow-md"
         >
           <div className="flex items-center justify-between mb-2">
-            <span className="text-xs font-bold text-slate-500">2️⃣ جودة الخلطات</span>
+            <span className="text-xs font-bold text-slate-400">2️⃣ جودة الخلطات</span>
             <div className="p-2 bg-emerald-100 text-[#27AE60] rounded-xl group-hover:scale-110 transition-transform">
               <FlaskConical className="w-5 h-5 text-[#27AE60]" />
             </div>
@@ -169,7 +169,7 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
             <CheckCircle2 className="w-3.5 h-3.5" />
             <span>مطابقة الأوزان المسموحة</span>
           </div>
-          <div className="text-[10px] text-slate-400 mt-2 border-t border-slate-100 pt-1.5">
+          <div className="text-[10px] text-slate-400 mt-2 border-t border-white/10 pt-1.5">
             الخلطات المفحوصة: {mixingLogs.length} خلطة
           </div>
         </div>
@@ -177,10 +177,10 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
         {/* Module 3: Injection */}
         <div 
           onClick={() => setActiveTab('injection')}
-          className="bg-white rounded-2xl p-4 shadow-sm border border-slate-200 hover:border-[#E67E22] transition-all cursor-pointer group hover:shadow-md"
+          className="bg-white/10 backdrop-blur-xl rounded-2xl p-4 shadow-sm border border-white/10 hover:border-[#E67E22] transition-all cursor-pointer group hover:shadow-md"
         >
           <div className="flex items-center justify-between mb-2">
-            <span className="text-xs font-bold text-slate-500">3️⃣ إنتاج الحقن</span>
+            <span className="text-xs font-bold text-slate-400">3️⃣ إنتاج الحقن</span>
             <div className="p-2 bg-orange-100 text-[#E67E22] rounded-xl group-hover:scale-110 transition-transform">
               <Flame className="w-5 h-5 text-[#E67E22]" />
             </div>
@@ -190,7 +190,7 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
             <TrendingUp className="w-3.5 h-3.5" />
             <span>كفاءة التشغيل OEE</span>
           </div>
-          <div className="text-[10px] text-slate-400 mt-2 border-t border-slate-100 pt-1.5">
+          <div className="text-[10px] text-slate-400 mt-2 border-t border-white/10 pt-1.5">
             السجلات: {injectionLogs.length} ورديات
           </div>
         </div>
@@ -198,20 +198,20 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
         {/* Module 4: Maintenance */}
         <div 
           onClick={() => setActiveTab('maintenance')}
-          className="bg-white rounded-2xl p-4 shadow-sm border border-slate-200 hover:border-[#E74C3C] transition-all cursor-pointer group hover:shadow-md"
+          className="bg-white/10 backdrop-blur-xl rounded-2xl p-4 shadow-sm border border-white/10 hover:border-[#E74C3C] transition-all cursor-pointer group hover:shadow-md"
         >
           <div className="flex items-center justify-between mb-2">
-            <span className="text-xs font-bold text-slate-500">4️⃣ أوقات التوقف</span>
+            <span className="text-xs font-bold text-slate-400">4️⃣ أوقات التوقف</span>
             <div className="p-2 bg-purple-100 text-purple-700 rounded-xl group-hover:scale-110 transition-transform">
               <Wrench className="w-5 h-5 text-purple-700" />
             </div>
           </div>
-          <div className="text-2xl font-black text-purple-900">{totalDowntimeHours} <span className="text-xs font-bold text-slate-500">ساعة</span></div>
+          <div className="text-2xl font-black text-purple-900">{totalDowntimeHours} <span className="text-xs font-bold text-slate-400">ساعة</span></div>
           <div className="flex items-center gap-1 text-[11px] font-bold text-red-600 mt-1">
             <Clock className="w-3.5 h-3.5" />
             <span>تأخير صيانة: {overdueMaintenance}</span>
           </div>
-          <div className="text-[10px] text-slate-400 mt-2 border-t border-slate-100 pt-1.5">
+          <div className="text-[10px] text-slate-400 mt-2 border-t border-white/10 pt-1.5">
             بلاغات الأعطال: {breakdownLogs.length}
           </div>
         </div>
@@ -219,20 +219,20 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
         {/* Module 5: CAPA */}
         <div 
           onClick={() => setActiveTab('capa')}
-          className="bg-white rounded-2xl p-4 shadow-sm border border-slate-200 hover:border-red-500 transition-all cursor-pointer group hover:shadow-md"
+          className="bg-white/10 backdrop-blur-xl rounded-2xl p-4 shadow-sm border border-white/10 hover:border-red-500 transition-all cursor-pointer group hover:shadow-md"
         >
           <div className="flex items-center justify-between mb-2">
-            <span className="text-xs font-bold text-slate-500">5️⃣ طلبات CAPA</span>
+            <span className="text-xs font-bold text-slate-400">5️⃣ طلبات CAPA</span>
             <div className="p-2 bg-red-100 text-[#E74C3C] rounded-xl group-hover:scale-110 transition-transform">
               <AlertTriangle className="w-5 h-5 text-[#E74C3C]" />
             </div>
           </div>
-          <div className="text-2xl font-black text-[#E74C3C]">{openCapas} <span className="text-xs font-bold text-slate-500">مفتوح</span></div>
+          <div className="text-2xl font-black text-[#E74C3C]">{openCapas} <span className="text-xs font-bold text-slate-400">مفتوح</span></div>
           <div className="flex items-center gap-1 text-[11px] font-bold text-red-600 mt-1">
             <AlertOctagon className="w-3.5 h-3.5" />
             <span>طلبات حرجة: {criticalCapas}</span>
           </div>
-          <div className="text-[10px] text-slate-400 mt-2 border-t border-slate-100 pt-1.5">
+          <div className="text-[10px] text-slate-400 mt-2 border-t border-white/10 pt-1.5">
             إجمالي CAPA: {capaRequests.length} طلب
           </div>
         </div>
@@ -241,11 +241,11 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
       {/* Charts Section */}
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
         {/* Pareto Defects Bar Chart */}
-        <div className="lg:col-span-2 bg-white rounded-2xl p-5 shadow-sm border border-slate-200">
+        <div className="lg:col-span-2 bg-white/10 backdrop-blur-xl rounded-2xl p-5 shadow-sm border border-white/10">
           <div className="flex items-center justify-between mb-4">
             <div>
               <h3 className="font-bold text-[#1B4F72] text-sm">تحليل العيوب الشائعة (Pareto Defects Chart)</h3>
-              <p className="text-xs text-slate-500">أكثر العيوب تكراراً بالمصنع لحلها جذرياً</p>
+              <p className="text-xs text-slate-400">أكثر العيوب تكراراً بالمصنع لحلها جذرياً</p>
             </div>
             <span className="text-xs font-bold bg-[#1B4F72]/10 text-[#1B4F72] px-2.5 py-1 rounded-lg">
               الأنابيب والوصلات
@@ -269,10 +269,10 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
         </div>
 
         {/* CAPA Priority Donut Chart */}
-        <div className="bg-white rounded-2xl p-5 shadow-sm border border-slate-200 flex flex-col justify-between">
+        <div className="bg-white/10 backdrop-blur-xl rounded-2xl p-5 shadow-sm border border-white/10 flex flex-col justify-between">
           <div>
             <h3 className="font-bold text-[#1B4F72] text-sm mb-1">أولويات طلبات CAPA</h3>
-            <p className="text-xs text-slate-500 mb-4">تصنيف طلبات الفعل التصحيحي حسب الأهمية</p>
+            <p className="text-xs text-slate-400 mb-4">تصنيف طلبات الفعل التصحيحي حسب الأهمية</p>
 
             <div className="h-52 relative">
               <ResponsiveContainer width="100%" height="100%">
@@ -297,9 +297,9 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
           </div>
 
           {/* Custom Legend */}
-          <div className="grid grid-cols-2 gap-2 border-t border-slate-100 pt-3">
+          <div className="grid grid-cols-2 gap-2 border-t border-white/10 pt-3">
             {capaByPriority.map((item, idx) => (
-              <div key={idx} className="flex items-center gap-2 text-xs font-semibold text-slate-700">
+              <div key={idx} className="flex items-center gap-2 text-xs font-semibold text-slate-200">
                 <span className="w-3 h-3 rounded-full shrink-0" style={{ backgroundColor: item.color }} />
                 <span className="truncate">{item.name}: <b>{item.value}</b></span>
               </div>
@@ -309,11 +309,11 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
       </div>
 
       {/* Production Trend Area Chart */}
-      <div className="bg-white rounded-2xl p-5 shadow-sm border border-slate-200">
+      <div className="bg-white/10 backdrop-blur-xl rounded-2xl p-5 shadow-sm border border-white/10">
         <div className="flex items-center justify-between mb-4">
           <div>
             <h3 className="font-bold text-[#1B4F72] text-sm">معدل الرفض ومؤشر الكفاءة الأسبوعي</h3>
-            <p className="text-xs text-slate-500">تتبع استقرار جودة الإنتاج وكفاءة التشغيل اليومية</p>
+            <p className="text-xs text-slate-400">تتبع استقرار جودة الإنتاج وكفاءة التشغيل اليومية</p>
           </div>
         </div>
 

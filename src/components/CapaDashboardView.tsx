@@ -94,7 +94,7 @@ export const CapaDashboardView: React.FC<CapaDashboardViewProps> = ({
           <PoloEgyptLogo variant="horizontal" size="md" lightMode={true} />
           
           <div className="flex items-center gap-2">
-            <span className="bg-[#C4A052] text-slate-950 font-black text-xs px-3.5 py-1.5 rounded-full shadow-sm flex items-center gap-1.5">
+            <span className="bg-[#C4A052] text-white font-black text-xs px-3.5 py-1.5 rounded-full shadow-sm flex items-center gap-1.5">
               <ShieldCheck className="w-4 h-4" />
               <span>نظام منفصل معتمد ISO 9001</span>
             </span>
@@ -103,7 +103,7 @@ export const CapaDashboardView: React.FC<CapaDashboardViewProps> = ({
 
         <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
           <div>
-            <h2 className="text-xl sm:text-2xl font-black text-white flex items-center gap-2">
+            <h2 className="text-lg sm:text-xl md:text-2xl font-black text-white flex flex-wrap items-center gap-2">
               <span>لوحة تحليلات ومؤشرات أداء عدم المطابقة والـ CAPA</span>
             </h2>
             <p className="text-xs text-slate-200 mt-1 max-w-2xl leading-relaxed">
@@ -111,7 +111,7 @@ export const CapaDashboardView: React.FC<CapaDashboardViewProps> = ({
             </p>
           </div>
 
-          <div className="flex items-center gap-2 shrink-0">
+          <div className="flex flex-wrap items-center gap-2 shrink-0 w-full sm:w-auto">
             <button
               onClick={onNavigateToRecords}
               className="px-4 py-2.5 bg-[#E74C3C] hover:bg-red-700 text-white font-black text-xs rounded-xl transition-all shadow-md cursor-pointer"
@@ -120,7 +120,7 @@ export const CapaDashboardView: React.FC<CapaDashboardViewProps> = ({
             </button>
             <button
               onClick={onNavigateToWhys}
-              className="px-4 py-2.5 bg-[#C4A052] hover:bg-amber-600 text-slate-950 font-black text-xs rounded-xl transition-all shadow-md cursor-pointer"
+              className="px-4 py-2.5 bg-[#C4A052] hover:bg-amber-600 text-white font-black text-xs rounded-xl transition-all shadow-md cursor-pointer"
             >
               استوديو 5 Whys
             </button>
@@ -131,9 +131,9 @@ export const CapaDashboardView: React.FC<CapaDashboardViewProps> = ({
       {/* KPI Cards Row */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
         {/* Total NCRs */}
-        <div className="bg-white p-5 rounded-2xl border border-slate-200 shadow-xs flex items-center justify-between">
+        <div className="bg-white/10 backdrop-blur-xl p-5 rounded-2xl border border-white/10 shadow-xs flex items-center justify-between">
           <div className="space-y-1">
-            <span className="text-xs font-bold text-slate-500">إجمالي طلبات NCR / CAPA</span>
+            <span className="text-xs font-bold text-slate-400">إجمالي طلبات NCR / CAPA</span>
             <div className="text-2xl font-black text-[#0B3A60]">{totalCount} طلب</div>
             <span className="text-[11px] text-slate-400 font-semibold">{criticalCount} بلاغ بدرجة حرجة</span>
           </div>
@@ -143,9 +143,9 @@ export const CapaDashboardView: React.FC<CapaDashboardViewProps> = ({
         </div>
 
         {/* In Progress */}
-        <div className="bg-white p-5 rounded-2xl border border-slate-200 shadow-xs flex items-center justify-between">
+        <div className="bg-white/10 backdrop-blur-xl p-5 rounded-2xl border border-white/10 shadow-xs flex items-center justify-between">
           <div className="space-y-1">
-            <span className="text-xs font-bold text-slate-500">قيد التحليل والتنفيذ</span>
+            <span className="text-xs font-bold text-slate-400">قيد التحليل والتنفيذ</span>
             <div className="text-2xl font-black text-[#E67E22]">{openCount + inProgressCount} طلب</div>
             <span className="text-[11px] text-amber-600 font-bold">{openCount} مفتوح / {inProgressCount} قيد المتابعة</span>
           </div>
@@ -155,9 +155,9 @@ export const CapaDashboardView: React.FC<CapaDashboardViewProps> = ({
         </div>
 
         {/* Closure Rate */}
-        <div className="bg-white p-5 rounded-2xl border border-slate-200 shadow-xs flex items-center justify-between">
+        <div className="bg-white/10 backdrop-blur-xl p-5 rounded-2xl border border-white/10 shadow-xs flex items-center justify-between">
           <div className="space-y-1">
-            <span className="text-xs font-bold text-slate-500">نسبة الإغلاق والتنفيذ</span>
+            <span className="text-xs font-bold text-slate-400">نسبة الإغلاق والتنفيذ</span>
             <div className="text-2xl font-black text-emerald-600">{closureRate}%</div>
             <span className="text-[11px] text-emerald-700 font-bold">{closedCount} طلب مغلق بنجاح</span>
           </div>
@@ -167,9 +167,9 @@ export const CapaDashboardView: React.FC<CapaDashboardViewProps> = ({
         </div>
 
         {/* Effectiveness Rate */}
-        <div className="bg-white p-5 rounded-2xl border border-slate-200 shadow-xs flex items-center justify-between">
+        <div className="bg-white/10 backdrop-blur-xl p-5 rounded-2xl border border-white/10 shadow-xs flex items-center justify-between">
           <div className="space-y-1">
-            <span className="text-xs font-bold text-slate-500">فاعلية الإجراء الوقائي</span>
+            <span className="text-xs font-bold text-slate-400">فاعلية الإجراء الوقائي</span>
             <div className="text-2xl font-black text-[#C4A052]">{effectivenessRate}%</div>
             <span className="text-[11px] text-slate-400 font-semibold">استناداً إلى تقييمات ISO</span>
           </div>
@@ -182,8 +182,8 @@ export const CapaDashboardView: React.FC<CapaDashboardViewProps> = ({
       {/* Analytics Charts Grid */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         {/* Dept Bar Chart */}
-        <div className="bg-white p-6 rounded-2xl border border-slate-200 shadow-xs space-y-4">
-          <div className="flex items-center justify-between border-b border-slate-100 pb-3">
+        <div className="bg-white/10 backdrop-blur-xl p-6 rounded-2xl border border-white/10 shadow-xs space-y-4">
+          <div className="flex items-center justify-between border-b border-white/10 pb-3">
             <div className="flex items-center gap-2">
               <BarChart3 className="w-5 h-5 text-[#0B3A60]" />
               <h3 className="font-extrabold text-sm text-[#0B3A60]">توزيع عدم المطابقة حسب الأقسام</h3>
@@ -210,8 +210,8 @@ export const CapaDashboardView: React.FC<CapaDashboardViewProps> = ({
         </div>
 
         {/* Priority Pie Chart */}
-        <div className="bg-white p-6 rounded-2xl border border-slate-200 shadow-xs space-y-4">
-          <div className="flex items-center justify-between border-b border-slate-100 pb-3">
+        <div className="bg-white/10 backdrop-blur-xl p-6 rounded-2xl border border-white/10 shadow-xs space-y-4">
+          <div className="flex items-center justify-between border-b border-white/10 pb-3">
             <div className="flex items-center gap-2">
               <PieIcon className="w-5 h-5 text-[#E74C3C]" />
               <h3 className="font-extrabold text-sm text-[#0B3A60]">تصنيف الطلبات حسب درجة الأولوية</h3>
@@ -246,8 +246,8 @@ export const CapaDashboardView: React.FC<CapaDashboardViewProps> = ({
       </div>
 
       {/* Latest CAPAs Table Summary */}
-      <div className="bg-white p-6 rounded-2xl border border-slate-200 shadow-xs space-y-4">
-        <div className="flex items-center justify-between border-b border-slate-100 pb-3">
+      <div className="bg-white/10 backdrop-blur-xl p-6 rounded-2xl border border-white/10 shadow-xs space-y-4">
+        <div className="flex items-center justify-between border-b border-white/10 pb-3">
           <div className="flex items-center gap-2">
             <Activity className="w-5 h-5 text-[#0B3A60]" />
             <h3 className="font-extrabold text-sm text-[#0B3A60]">آخر طلبات عدم المطابقة المفتوحة</h3>
@@ -263,7 +263,7 @@ export const CapaDashboardView: React.FC<CapaDashboardViewProps> = ({
         <div className="overflow-x-auto">
           <table className="w-full text-xs text-right">
             <thead>
-              <tr className="bg-slate-50 text-slate-600 border-b border-slate-200">
+              <tr className="bg-white/5 text-slate-300 border-b border-white/10">
                 <th className="p-3">رقم الطلب</th>
                 <th className="p-3">تاريخ البلاغ</th>
                 <th className="p-3">الموضوع / العيب</th>
@@ -275,11 +275,11 @@ export const CapaDashboardView: React.FC<CapaDashboardViewProps> = ({
             </thead>
             <tbody className="divide-y divide-slate-100 font-semibold">
               {capaRequests.slice(0, 5).map((capa) => (
-                <tr key={capa.id} className="hover:bg-slate-50/80">
+                <tr key={capa.id} className="hover:bg-white/5/80">
                   <td className="p-3 font-black text-[#0B3A60]">{capa.capaNo}</td>
-                  <td className="p-3 text-slate-500">{capa.date}</td>
-                  <td className="p-3 text-slate-900 font-bold max-w-xs truncate">{capa.subject}</td>
-                  <td className="p-3 text-slate-700">{capa.targetDepartment}</td>
+                  <td className="p-3 text-slate-400">{capa.date}</td>
+                  <td className="p-3 text-white font-bold max-w-xs truncate">{capa.subject}</td>
+                  <td className="p-3 text-slate-200">{capa.targetDepartment}</td>
                   <td className="p-3">
                     <span className={`px-2 py-0.5 rounded-full text-[10px] font-black ${
                       capa.priority.includes('حرج') ? 'bg-red-100 text-red-800' : 'bg-amber-100 text-amber-800'
@@ -287,7 +287,7 @@ export const CapaDashboardView: React.FC<CapaDashboardViewProps> = ({
                       {capa.priority}
                     </span>
                   </td>
-                  <td className="p-3 text-slate-600 max-w-xs truncate">{capa.rootCause}</td>
+                  <td className="p-3 text-slate-300 max-w-xs truncate">{capa.rootCause}</td>
                   <td className="p-3">
                     <span className={`px-2.5 py-0.5 rounded-full text-[10px] font-bold ${
                       capa.status.includes('Done') || capa.status.includes('مغلق')

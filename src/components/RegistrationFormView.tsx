@@ -149,7 +149,7 @@ export const RegistrationFormView: React.FC<RegistrationFormViewProps> = ({
             type="button"
             onClick={() => handleCategoryChange('pipe')}
             className={`flex items-center gap-1.5 px-4 py-2 rounded-lg text-xs font-bold transition-all cursor-pointer ${
-              category === 'pipe' ? 'bg-amber-500 text-slate-950 shadow-md' : 'text-slate-400 hover:text-white'
+              category === 'pipe' ? 'bg-amber-500 text-white shadow-md' : 'text-slate-400 hover:text-white'
             }`}
           >
             <Factory className="w-4 h-4" />
@@ -160,7 +160,7 @@ export const RegistrationFormView: React.FC<RegistrationFormViewProps> = ({
             type="button"
             onClick={() => handleCategoryChange('fitting')}
             className={`flex items-center gap-1.5 px-4 py-2 rounded-lg text-xs font-bold transition-all cursor-pointer ${
-              category === 'fitting' ? 'bg-amber-500 text-slate-950 shadow-md' : 'text-slate-400 hover:text-white'
+              category === 'fitting' ? 'bg-amber-500 text-white shadow-md' : 'text-slate-400 hover:text-white'
             }`}
           >
             <Layers className="w-4 h-4" />
@@ -185,34 +185,34 @@ export const RegistrationFormView: React.FC<RegistrationFormViewProps> = ({
       )}
 
       {/* Main Form Card */}
-      <form onSubmit={handleSubmit} className="bg-white rounded-2xl p-6 sm:p-8 border border-slate-200 shadow-sm space-y-6">
+      <form onSubmit={handleSubmit} className="bg-white/10 backdrop-blur-xl rounded-2xl p-6 sm:p-8 border border-white/10 shadow-sm space-y-6">
         
         {/* Section 1: Basic Operational Data */}
         <div className="space-y-4">
-          <h3 className="text-sm font-bold text-slate-900 border-b pb-2 flex items-center gap-2">
+          <h3 className="text-sm font-bold text-white border-b pb-2 flex items-center gap-2">
             <Clock className="w-4 h-4 text-amber-500" />
             <span>البيانات التشغيلية الأساسية</span>
           </h3>
 
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
             <div>
-              <label className="block text-xs font-semibold text-slate-700 mb-1">تاريخ الفحص:</label>
+              <label className="block text-xs font-semibold text-slate-200 mb-1">تاريخ الفحص:</label>
               <input
                 type="date"
                 required
                 value={date}
                 onChange={(e) => setDate(e.target.value)}
-                className="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-amber-500/20"
+                className="w-full px-3 py-2 bg-white/5 border border-white/10 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-amber-500/20"
               />
             </div>
 
             <div>
-              <label className="block text-xs font-semibold text-slate-700 mb-1">المفتش القائم بالفحص:</label>
+              <label className="block text-xs font-semibold text-slate-200 mb-1">المفتش القائم بالفحص:</label>
               <select
                 required
                 value={inspectorName}
                 onChange={(e) => setInspectorName(e.target.value)}
-                className="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-amber-500/20"
+                className="w-full px-3 py-2 bg-white/5 border border-white/10 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-amber-500/20"
               >
                 <option value="">اختر اسم المفتش...</option>
                 {masterData.inspectors.map((insp) => (
@@ -222,12 +222,12 @@ export const RegistrationFormView: React.FC<RegistrationFormViewProps> = ({
             </div>
 
             <div>
-              <label className="block text-xs font-semibold text-slate-700 mb-1">الوردية (Shift):</label>
+              <label className="block text-xs font-semibold text-slate-200 mb-1">الوردية (Shift):</label>
               <select
                 required
                 value={shiftName}
                 onChange={(e) => setShiftName(e.target.value)}
-                className="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-amber-500/20"
+                className="w-full px-3 py-2 bg-white/5 border border-white/10 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-amber-500/20"
               >
                 {masterData.shifts.map((s) => (
                   <option key={s.code} value={s.name}>{s.name}</option>
@@ -239,21 +239,21 @@ export const RegistrationFormView: React.FC<RegistrationFormViewProps> = ({
 
         {/* Section 2: Product & Machine Selection */}
         <div className="space-y-4">
-          <h3 className="text-sm font-bold text-slate-900 border-b pb-2 flex items-center gap-2">
+          <h3 className="text-sm font-bold text-white border-b pb-2 flex items-center gap-2">
             <Wrench className="w-4 h-4 text-amber-500" />
             <span>المنتج والخط / الماكينة</span>
           </h3>
 
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
             <div>
-              <label className="block text-xs font-semibold text-slate-700 mb-1">
+              <label className="block text-xs font-semibold text-slate-200 mb-1">
                 اختر كود أو اسم المنتج ({category === 'pipe' ? 'أنبوب' : 'وصلة'}):
               </label>
               <select
                 required
                 value={productCode}
                 onChange={(e) => setProductCode(e.target.value)}
-                className="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-amber-500/20"
+                className="w-full px-3 py-2 bg-white/5 border border-white/10 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-amber-500/20"
               >
                 <option value="">اختر المنتج من قائمة Master Data...</option>
                 {category === 'pipe' ? (
@@ -273,23 +273,23 @@ export const RegistrationFormView: React.FC<RegistrationFormViewProps> = ({
             </div>
 
             <div>
-              <label className="block text-xs font-semibold text-slate-700 mb-1">اسم المنتج التلقائي:</label>
+              <label className="block text-xs font-semibold text-slate-200 mb-1">اسم المنتج التلقائي:</label>
               <input
                 type="text"
                 readOnly
                 value={productName}
                 placeholder="سيتم التعبئة تلقائياً عند اختيار الكود..."
-                className="w-full px-3 py-2 bg-slate-100 border border-slate-200 rounded-lg text-sm text-slate-700 font-semibold"
+                className="w-full px-3 py-2 bg-white/10 border border-white/10 rounded-lg text-sm text-slate-200 font-semibold"
               />
             </div>
 
             <div>
-              <label className="block text-xs font-semibold text-slate-700 mb-1">رقم/كود الماكينة:</label>
+              <label className="block text-xs font-semibold text-slate-200 mb-1">رقم/كود الماكينة:</label>
               <select
                 required
                 value={machineCode}
                 onChange={(e) => setMachineCode(e.target.value)}
-                className="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-amber-500/20"
+                className="w-full px-3 py-2 bg-white/5 border border-white/10 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-amber-500/20"
               >
                 <option value="">اختر رقم الماكينة...</option>
                 {category === 'pipe' ? (
@@ -308,26 +308,26 @@ export const RegistrationFormView: React.FC<RegistrationFormViewProps> = ({
 
         {/* Section 3: Inspection Results & Defect Details */}
         <div className="space-y-4">
-          <h3 className="text-sm font-bold text-slate-900 border-b pb-2 flex items-center gap-2">
+          <h3 className="text-sm font-bold text-white border-b pb-2 flex items-center gap-2">
             <ShieldAlert className="w-4 h-4 text-amber-500" />
             <span>نتائج الفحص والعيوب المرصودة</span>
           </h3>
 
           <div className="grid grid-cols-1 sm:grid-cols-4 gap-4">
             <div>
-              <label className="block text-xs font-semibold text-slate-700 mb-1">حجم العينة (Sample Size):</label>
+              <label className="block text-xs font-semibold text-slate-200 mb-1">حجم العينة (Sample Size):</label>
               <input
                 type="number"
                 min="1"
                 required
                 value={sampleSize}
                 onChange={(e) => setSampleSize(Number(e.target.value))}
-                className="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-amber-500/20"
+                className="w-full px-3 py-2 bg-white/5 border border-white/10 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-amber-500/20"
               />
             </div>
 
             <div>
-              <label className="block text-xs font-semibold text-slate-700 mb-1">عدد التالف / المعيب:</label>
+              <label className="block text-xs font-semibold text-slate-200 mb-1">عدد التالف / المعيب:</label>
               <input
                 type="number"
                 min="0"
@@ -335,17 +335,17 @@ export const RegistrationFormView: React.FC<RegistrationFormViewProps> = ({
                 required
                 value={defectiveQty}
                 onChange={(e) => setDefectiveQty(Number(e.target.value))}
-                className="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-amber-500/20"
+                className="w-full px-3 py-2 bg-white/5 border border-white/10 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-amber-500/20"
               />
             </div>
 
             <div>
-              <label className="block text-xs font-semibold text-slate-700 mb-1">نوع العيب الرئيسي:</label>
+              <label className="block text-xs font-semibold text-slate-200 mb-1">نوع العيب الرئيسي:</label>
               <select
                 required
                 value={defectCode}
                 onChange={(e) => setDefectCode(e.target.value)}
-                className="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-amber-500/20"
+                className="w-full px-3 py-2 bg-white/5 border border-white/10 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-amber-500/20"
               >
                 <option value="">اختر كود العيب...</option>
                 {category === 'pipe' ? (
@@ -361,8 +361,8 @@ export const RegistrationFormView: React.FC<RegistrationFormViewProps> = ({
             </div>
 
             <div>
-              <label className="block text-xs font-semibold text-slate-700 mb-1">نسبة المرفوضات (Reject Rate):</label>
-              <div className="px-3 py-2 bg-slate-100 border border-slate-200 rounded-lg text-sm font-black font-mono text-amber-700 flex items-center justify-between">
+              <label className="block text-xs font-semibold text-slate-200 mb-1">نسبة المرفوضات (Reject Rate):</label>
+              <div className="px-3 py-2 bg-white/10 border border-white/10 rounded-lg text-sm font-black font-mono text-amber-700 flex items-center justify-between">
                 <span>{rejectRate}%</span>
                 <span className={`text-xs px-2 py-0.5 rounded-md font-bold ${
                   defectiveQty === 0 ? 'bg-emerald-100 text-emerald-800' : rejectRate > 10 ? 'bg-red-100 text-red-800' : 'bg-amber-100 text-amber-800'
@@ -374,13 +374,13 @@ export const RegistrationFormView: React.FC<RegistrationFormViewProps> = ({
           </div>
 
           <div>
-            <label className="block text-xs font-semibold text-slate-700 mb-1">ملاحظات والتوصيات الفنية:</label>
+            <label className="block text-xs font-semibold text-slate-200 mb-1">ملاحظات والتوصيات الفنية:</label>
             <textarea
               rows={2}
               value={notes}
               onChange={(e) => setNotes(e.target.value)}
               placeholder="اكتب أسباب العيب أو أي توجيهات لمهندس الشفت..."
-              className="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-amber-500/20"
+              className="w-full px-3 py-2 bg-white/5 border border-white/10 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-amber-500/20"
             />
           </div>
         </div>
@@ -389,7 +389,7 @@ export const RegistrationFormView: React.FC<RegistrationFormViewProps> = ({
         <div className="pt-2 flex items-center justify-end gap-3 border-t">
           <button
             type="submit"
-            className="w-full sm:w-auto px-8 py-3 rounded-xl bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold text-sm shadow-md transition-all cursor-pointer"
+            className="w-full sm:w-auto px-8 py-3 rounded-xl bg-amber-500 hover:bg-amber-400 text-white font-bold text-sm shadow-md transition-all cursor-pointer"
           >
             حفظ الفحص في سجل الجودة
           </button>
