@@ -15,7 +15,7 @@ export const CapaQrModal: React.FC<CapaQrModalProps> = ({
   capa,
   isOpen,
   onClose,
-  systemMobileUrl = window.location.href
+  systemMobileUrl = `${window.location.origin}/?view=report`
 }) => {
   const [copied, setCopied] = useState(false);
 
@@ -46,11 +46,11 @@ export const CapaQrModal: React.FC<CapaQrModalProps> = ({
 
   return (
     <div className="fixed inset-0 bg-slate-950/70 z-50 flex items-center justify-center p-4 backdrop-blur-xs font-sans dir-rtl">
-      <div className="bg-white w-full max-w-lg rounded-2xl shadow-2xl border border-white/10 overflow-hidden flex flex-col max-h-[90vh]">
+      <div className="bg-white text-slate-900 w-full max-w-lg rounded-2xl shadow-2xl border border-white/10 overflow-hidden flex flex-col max-h-[90vh]">
         {/* Header */}
         <div className="p-4 bg-[#0B3A60] text-white flex items-center justify-between">
           <div className="flex items-center gap-2">
-            <QrCode className="w-5 h-5 text-[#C4A052]" />
+            <QrCode className="w-5 h-5 text-amber-400" />
             <span className="font-black text-sm">
               {capa ? `بطاقة QR Code للتقرير المعياري ${capa.capaNo}` : 'رمز QR Code للتسجيل السريع عبر الموبايل'}
             </span>
@@ -94,7 +94,7 @@ export const CapaQrModal: React.FC<CapaQrModalProps> = ({
           {capa ? (
             <div className="bg-white/10 backdrop-blur-xl p-4 rounded-xl border border-white/10 shadow-xs space-y-2 text-xs">
               <div className="flex items-center justify-between border-b border-white/10 pb-2">
-                <span className="font-extrabold text-[#0B3A60] text-sm">{capa.capaNo}</span>
+                <span className="font-extrabold text-white text-sm">{capa.capaNo}</span>
                 <span className={`px-2.5 py-0.5 rounded-full font-black text-[10px] ${
                   capa.priority.includes('حرج') ? 'bg-red-100 text-red-800' :
                   capa.priority.includes('عالي') ? 'bg-orange-100 text-orange-800' :
@@ -125,7 +125,7 @@ export const CapaQrModal: React.FC<CapaQrModalProps> = ({
             </div>
           ) : (
             <div className="bg-white/10 backdrop-blur-xl p-4 rounded-xl border border-white/10 shadow-xs text-xs space-y-1 text-slate-200 font-semibold text-center">
-              <p className="font-bold text-[#0B3A60]">رابط تسجيل عدم المطابقة الميداني</p>
+              <p className="font-bold text-white">رابط تسجيل عدم المطابقة الميداني</p>
               <p className="text-[11px] text-slate-400">
                 يمكن لمفتشي الجودة وفنيي الخطوط مسح هذا الكود بواسطة هاتف الموبايل للوصول المباشر إلى نموذج تسجيل NCR والـ 5 Whys.
               </p>
@@ -137,7 +137,7 @@ export const CapaQrModal: React.FC<CapaQrModalProps> = ({
         <div className="p-4 bg-white border-t border-white/10 flex items-center justify-between gap-2">
           <button
             onClick={handleCopyLink}
-            className="flex items-center gap-1.5 px-3 py-2 bg-white/10 hover:bg-white/20 text-slate-200 font-bold text-xs rounded-xl transition-all cursor-pointer"
+            className="flex items-center gap-1.5 px-3 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold text-xs rounded-xl transition-all cursor-pointer"
           >
             {copied ? <Check className="w-4 h-4 text-emerald-600" /> : <Share2 className="w-4 h-4" />}
             <span>{copied ? 'تم نسخ الرابط!' : 'مشاركة الرابط'}</span>
@@ -146,7 +146,7 @@ export const CapaQrModal: React.FC<CapaQrModalProps> = ({
           <div className="flex items-center gap-2">
             <button
               onClick={onClose}
-              className="px-4 py-2 bg-white/10 text-slate-200 font-bold text-xs rounded-xl"
+              className="px-4 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold text-xs rounded-xl cursor-pointer"
             >
               إغلاق
             </button>
@@ -154,7 +154,7 @@ export const CapaQrModal: React.FC<CapaQrModalProps> = ({
               onClick={handlePrint}
               className="flex items-center gap-2 px-5 py-2 bg-[#0B3A60] hover:bg-sky-900 text-white font-black text-xs rounded-xl shadow-md cursor-pointer"
             >
-              <Printer className="w-4 h-4 text-[#C4A052]" />
+              <Printer className="w-4 h-4 text-amber-400" />
               <span>طباعة بطاقة QR (Print Tag)</span>
             </button>
           </div>

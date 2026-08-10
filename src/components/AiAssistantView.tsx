@@ -100,7 +100,7 @@ export const AiAssistantView: React.FC<AiAssistantViewProps> = ({ masterData, lo
               key={idx}
               onClick={() => handleSend(p)}
               disabled={loading}
-              className="p-3 bg-white hover:bg-amber-50/60 border border-white/10 hover:border-amber-300 rounded-xl text-right text-xs font-medium text-slate-200 hover:text-amber-950 transition-all shadow-xs cursor-pointer"
+              className="p-3 bg-white/5 hover:bg-amber-50/60 border border-white/10 hover:border-amber-300 rounded-xl text-right text-xs font-medium text-slate-200 hover:text-amber-950 transition-all shadow-xs cursor-pointer"
             >
               💬 {p}
             </button>
@@ -155,7 +155,7 @@ export const AiAssistantView: React.FC<AiAssistantViewProps> = ({ masterData, lo
           value={input}
           onChange={(e) => setInput(e.target.value)}
           disabled={loading}
-          className="flex-1 px-4 py-3 bg-white border border-white/10 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-amber-500/20 shadow-xs"
+          className="flex-1 px-4 py-3 bg-white/5 text-white placeholder-white/50 border border-white/10 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-amber-500/20 shadow-xs"
         />
         <button
           type="submit"

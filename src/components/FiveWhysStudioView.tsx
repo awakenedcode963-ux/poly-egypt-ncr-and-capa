@@ -150,7 +150,7 @@ export const FiveWhysStudioView: React.FC<FiveWhysStudioViewProps> = ({
           <select
             value={selectedCapaId}
             onChange={(e) => handleSelectCapa(e.target.value)}
-            className="w-full md:w-96 p-2.5 bg-white/5 border border-white/20 rounded-xl text-xs font-bold text-[#0B3A60]"
+            className="w-full md:w-96 p-2.5 bg-white/5 border border-white/20 rounded-xl text-xs font-bold text-white placeholder-white/50"
           >
             {capaRequests.map(c => (
               <option key={c.id} value={c.id}>
@@ -188,7 +188,7 @@ export const FiveWhysStudioView: React.FC<FiveWhysStudioViewProps> = ({
               {selectedCapa.targetDepartment}
             </span>
           </div>
-          <p className="text-slate-300 font-medium"><b>الوصف:</b> {selectedCapa.ncrDescription}</p>
+          <p className="text-sky-900 font-medium"><b>الوصف:</b> {selectedCapa.ncrDescription}</p>
         </div>
       )}
 

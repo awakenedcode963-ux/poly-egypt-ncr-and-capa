@@ -143,7 +143,7 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
               <Pipette className="w-5 h-5 text-[#2874A6]" />
             </div>
           </div>
-          <div className="text-2xl font-black text-[#1B4F72]">{overallRejectRate}%</div>
+          <div className="text-2xl font-black text-white">{overallRejectRate}%</div>
           <div className="flex items-center gap-1 text-[11px] font-bold text-amber-600 mt-1">
             <ArrowUpRight className="w-3.5 h-3.5" />
             <span>معدل الرفض الكلي</span>
@@ -161,10 +161,10 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
           <div className="flex items-center justify-between mb-2">
             <span className="text-xs font-bold text-slate-400">2️⃣ جودة الخلطات</span>
             <div className="p-2 bg-emerald-100 text-[#27AE60] rounded-xl group-hover:scale-110 transition-transform">
-              <FlaskConical className="w-5 h-5 text-[#27AE60]" />
+              <FlaskConical className="w-5 h-5 text-emerald-400" />
             </div>
           </div>
-          <div className="text-2xl font-black text-[#27AE60]">{mixingQualityRate}%</div>
+          <div className="text-2xl font-black text-emerald-400">{mixingQualityRate}%</div>
           <div className="flex items-center gap-1 text-[11px] font-bold text-emerald-600 mt-1">
             <CheckCircle2 className="w-3.5 h-3.5" />
             <span>مطابقة الأوزان المسموحة</span>
@@ -182,10 +182,10 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
           <div className="flex items-center justify-between mb-2">
             <span className="text-xs font-bold text-slate-400">3️⃣ إنتاج الحقن</span>
             <div className="p-2 bg-orange-100 text-[#E67E22] rounded-xl group-hover:scale-110 transition-transform">
-              <Flame className="w-5 h-5 text-[#E67E22]" />
+              <Flame className="w-5 h-5 text-orange-400" />
             </div>
           </div>
-          <div className="text-2xl font-black text-[#E67E22]">{avgInjectionEff}%</div>
+          <div className="text-2xl font-black text-orange-400">{avgInjectionEff}%</div>
           <div className="flex items-center gap-1 text-[11px] font-bold text-orange-600 mt-1">
             <TrendingUp className="w-3.5 h-3.5" />
             <span>كفاءة التشغيل OEE</span>
@@ -244,10 +244,10 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
         <div className="lg:col-span-2 bg-white/10 backdrop-blur-xl rounded-2xl p-5 shadow-sm border border-white/10">
           <div className="flex items-center justify-between mb-4">
             <div>
-              <h3 className="font-bold text-[#1B4F72] text-sm">تحليل العيوب الشائعة (Pareto Defects Chart)</h3>
+              <h3 className="font-bold text-white text-sm">تحليل العيوب الشائعة (Pareto Defects Chart)</h3>
               <p className="text-xs text-slate-400">أكثر العيوب تكراراً بالمصنع لحلها جذرياً</p>
             </div>
-            <span className="text-xs font-bold bg-[#1B4F72]/10 text-[#1B4F72] px-2.5 py-1 rounded-lg">
+            <span className="text-xs font-bold bg-sky-500/20 text-sky-100 px-2.5 py-1 rounded-lg">
               الأنابيب والوصلات
             </span>
           </div>
@@ -271,7 +271,7 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
         {/* CAPA Priority Donut Chart */}
         <div className="bg-white/10 backdrop-blur-xl rounded-2xl p-5 shadow-sm border border-white/10 flex flex-col justify-between">
           <div>
-            <h3 className="font-bold text-[#1B4F72] text-sm mb-1">أولويات طلبات CAPA</h3>
+            <h3 className="font-bold text-white text-sm mb-1">أولويات طلبات CAPA</h3>
             <p className="text-xs text-slate-400 mb-4">تصنيف طلبات الفعل التصحيحي حسب الأهمية</p>
 
             <div className="h-52 relative">
@@ -312,7 +312,7 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
       <div className="bg-white/10 backdrop-blur-xl rounded-2xl p-5 shadow-sm border border-white/10">
         <div className="flex items-center justify-between mb-4">
           <div>
-            <h3 className="font-bold text-[#1B4F72] text-sm">معدل الرفض ومؤشر الكفاءة الأسبوعي</h3>
+            <h3 className="font-bold text-white text-sm">معدل الرفض ومؤشر الكفاءة الأسبوعي</h3>
             <p className="text-xs text-slate-400">تتبع استقرار جودة الإنتاج وكفاءة التشغيل اليومية</p>
           </div>
         </div>

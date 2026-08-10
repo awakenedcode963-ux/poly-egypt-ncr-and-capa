@@ -8,23 +8,35 @@ import { Header } from './components/Header';
 import { CapaView } from './components/CapaView';
 import { FiveWhysStudioView } from './components/FiveWhysStudioView';
 import { CapaDashboardView } from './components/CapaDashboardView';
+import { PinGate } from './components/PinGate';
+
 import { CapaQrCenterView } from './components/CapaQrCenterView';
 import { AiAssistantView } from './components/AiAssistantView';
 import { ImplementationGuideView } from './components/ImplementationGuideView';
 import { WorkerReportPage } from './components/WorkerReportPage';
 
 export default function App() {
-  // Simple routing for standalone worker page
-  if (window.location.pathname === '/report') {
-    return <WorkerReportPage />;
-  }
-
+  const [isAuthenticated, setIsAuthenticated] = useState<boolean>(() => sessionStorage.getItem('polo_qc_authenticated') === 'true');
   const [activeTab, setActiveTab] = useState<string>('capa-records');
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState<boolean>(false);
 
   // State for Master Data & CAPA Requests
   const [masterData, setMasterData] = useState<MasterDataState>(RAW_MASTER_DATA);
   const [capaRequests, setCapaRequests] = useState<CAPARequest[]>(INITIAL_CAPA_REQUESTS);
+
+  // Simple routing for standalone worker page
+  if (new URLSearchParams(window.location.search).get('view') === 'report') {
+    return <WorkerReportPage />;
+  }
+
+  if (!isAuthenticated) {
+    return (
+      <PinGate onSuccess={() => {
+        sessionStorage.setItem('polo_qc_authenticated', 'true');
+        setIsAuthenticated(true);
+      }} />
+    );
+  }
 
   const handleAddCapa = (newCapa: CAPARequest) => {
     setCapaRequests(prev => [newCapa, ...prev]);
@@ -120,12 +132,12 @@ export default function App() {
         {/* Global Footer */}
         <footer className="bg-white/5 backdrop-blur-xl border-t border-white/20 py-4 px-6 text-xs text-slate-300 flex flex-col sm:flex-row items-center justify-between gap-2 mt-auto">
           <span>بولو إيجيبت للتجارة والصناعة ش.م.م © {new Date().getFullYear()} - نظام إدارة عدم المطابقة و CAPA و 5 Whys المنفصل</span>
-          <div className="flex items-center gap-3 font-semibold text-slate-600">
+          <div className="flex items-center gap-3 font-semibold text-slate-400">
             <span>ISO 9001 Standard Compliant</span>
             <span>•</span>
             <button 
               onClick={() => setActiveTab('sheets-guide')}
-              className="text-[#0B3A60] hover:underline cursor-pointer font-bold"
+              className="text-sky-300 hover:text-white hover:underline cursor-pointer font-bold"
             >
               تصدير جوجل شيت ودليل الربط
             </button>

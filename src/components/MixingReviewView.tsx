@@ -98,7 +98,7 @@ export const MixingReviewView: React.FC<MixingReviewViewProps> = ({
       {/* Header */}
       <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 bg-white/10 backdrop-blur-xl p-5 rounded-2xl border border-white/10 shadow-xs">
         <div>
-          <h2 className="text-lg font-black text-[#1B4F72] flex items-center gap-2">
+          <h2 className="text-lg font-black text-white flex items-center gap-2">
             <span>الوحدة 2: مراجعة تركيبة الخلطات الجافة (Mixing Review)</span>
             <span className="text-xs bg-emerald-100 text-[#27AE60] px-2.5 py-0.5 rounded-full font-extrabold">
               7 مكونات خامات
@@ -156,8 +156,8 @@ export const MixingReviewView: React.FC<MixingReviewViewProps> = ({
       {showForm && (
         <form onSubmit={handleSubmit} className="bg-white/10 backdrop-blur-xl p-6 rounded-2xl border-2 border-[#27AE60] shadow-lg space-y-6">
           <div className="border-b border-white/10 pb-3 flex items-center justify-between">
-            <h3 className="font-extrabold text-[#1B4F72] text-sm flex items-center gap-2">
-              <Calculator className="w-5 h-5 text-[#27AE60]" />
+            <h3 className="font-extrabold text-white text-sm flex items-center gap-2">
+              <Calculator className="w-5 h-5 text-emerald-400" />
               <span>نموذج فحص ومراجعة أوزان الخلطة الجافة</span>
             </h3>
             <span className="text-xs font-bold text-slate-400">قائمة المكونات الـ 7</span>
@@ -170,7 +170,7 @@ export const MixingReviewView: React.FC<MixingReviewViewProps> = ({
                 type="date"
                 value={form.date}
                 onChange={(e) => setForm({ ...form, date: e.target.value })}
-                className="w-full p-2.5 bg-white/5 border border-white/20 rounded-xl font-bold"
+                className="w-full p-2.5 bg-white/5 border border-white/20 rounded-xl font-bold text-white placeholder-white/50"
                 required
               />
             </div>
@@ -180,7 +180,7 @@ export const MixingReviewView: React.FC<MixingReviewViewProps> = ({
               <select
                 value={form.shift}
                 onChange={(e) => setForm({ ...form, shift: e.target.value })}
-                className="w-full p-2.5 bg-white/5 border border-white/20 rounded-xl font-bold"
+                className="w-full p-2.5 bg-white/5 border border-white/20 rounded-xl font-bold text-white placeholder-white/50"
               >
                 {masterData.shifts.map(s => <option key={s.code} value={s.name}>{s.name}</option>)}
               </select>
@@ -191,7 +191,7 @@ export const MixingReviewView: React.FC<MixingReviewViewProps> = ({
               <select
                 value={form.supervisor}
                 onChange={(e) => setForm({ ...form, supervisor: e.target.value })}
-                className="w-full p-2.5 bg-white/5 border border-white/20 rounded-xl font-bold"
+                className="w-full p-2.5 bg-white/5 border border-white/20 rounded-xl font-bold text-white placeholder-white/50"
               >
                 {masterData.supervisors.map(sup => <option key={sup} value={sup}>{sup}</option>)}
               </select>
@@ -203,7 +203,7 @@ export const MixingReviewView: React.FC<MixingReviewViewProps> = ({
                 type="text"
                 value={form.batchNo}
                 onChange={(e) => setForm({ ...form, batchNo: e.target.value })}
-                className="w-full p-2.5 bg-white/5 border border-white/20 rounded-xl font-bold"
+                className="w-full p-2.5 bg-white/5 border border-white/20 rounded-xl font-bold text-white placeholder-white/50"
                 required
               />
             </div>
@@ -216,7 +216,7 @@ export const MixingReviewView: React.FC<MixingReviewViewProps> = ({
                 step="0.1"
                 value={form.pvcActualKg}
                 onChange={(e) => setForm({ ...form, pvcActualKg: Number(e.target.value) })}
-                className="w-full p-2.5 bg-white/5 border border-white/20 rounded-xl font-bold"
+                className="w-full p-2.5 bg-white/5 border border-white/20 rounded-xl font-bold text-white placeholder-white/50"
                 required
               />
             </div>
@@ -228,7 +228,7 @@ export const MixingReviewView: React.FC<MixingReviewViewProps> = ({
                 step="0.1"
                 value={form.stabilizerActualKg}
                 onChange={(e) => setForm({ ...form, stabilizerActualKg: Number(e.target.value) })}
-                className="w-full p-2.5 bg-white/5 border border-white/20 rounded-xl font-bold"
+                className="w-full p-2.5 bg-white/5 border border-white/20 rounded-xl font-bold text-white placeholder-white/50"
                 required
               />
             </div>
@@ -240,7 +240,7 @@ export const MixingReviewView: React.FC<MixingReviewViewProps> = ({
                 step="0.1"
                 value={form.calciumActualKg}
                 onChange={(e) => setForm({ ...form, calciumActualKg: Number(e.target.value) })}
-                className="w-full p-2.5 bg-white/5 border border-white/20 rounded-xl font-bold"
+                className="w-full p-2.5 bg-white/5 border border-white/20 rounded-xl font-bold text-white placeholder-white/50"
                 required
               />
             </div>
@@ -252,7 +252,7 @@ export const MixingReviewView: React.FC<MixingReviewViewProps> = ({
                 step="0.1"
                 value={form.waxActualKg}
                 onChange={(e) => setForm({ ...form, waxActualKg: Number(e.target.value) })}
-                className="w-full p-2.5 bg-white/5 border border-white/20 rounded-xl font-bold"
+                className="w-full p-2.5 bg-white/5 border border-white/20 rounded-xl font-bold text-white placeholder-white/50"
                 required
               />
             </div>
@@ -264,7 +264,7 @@ export const MixingReviewView: React.FC<MixingReviewViewProps> = ({
                 step="0.1"
                 value={form.pigmentActualKg}
                 onChange={(e) => setForm({ ...form, pigmentActualKg: Number(e.target.value) })}
-                className="w-full p-2.5 bg-white/5 border border-white/20 rounded-xl font-bold"
+                className="w-full p-2.5 bg-white/5 border border-white/20 rounded-xl font-bold text-white placeholder-white/50"
                 required
               />
             </div>
@@ -276,7 +276,7 @@ export const MixingReviewView: React.FC<MixingReviewViewProps> = ({
                 step="0.1"
                 value={form.modifierActualKg}
                 onChange={(e) => setForm({ ...form, modifierActualKg: Number(e.target.value) })}
-                className="w-full p-2.5 bg-white/5 border border-white/20 rounded-xl font-bold"
+                className="w-full p-2.5 bg-white/5 border border-white/20 rounded-xl font-bold text-white placeholder-white/50"
                 required
               />
             </div>
@@ -288,7 +288,7 @@ export const MixingReviewView: React.FC<MixingReviewViewProps> = ({
                 step="0.1"
                 value={form.lubricantActualKg}
                 onChange={(e) => setForm({ ...form, lubricantActualKg: Number(e.target.value) })}
-                className="w-full p-2.5 bg-white/5 border border-white/20 rounded-xl font-bold"
+                className="w-full p-2.5 bg-white/5 border border-white/20 rounded-xl font-bold text-white placeholder-white/50"
                 required
               />
             </div>
@@ -296,7 +296,7 @@ export const MixingReviewView: React.FC<MixingReviewViewProps> = ({
             {/* Calculated Result Badge */}
             <div className="bg-white/5 p-3 rounded-2xl border border-white/10 flex flex-col justify-center text-center">
               <span className="text-[11px] text-slate-400 font-bold block">إجمالي الوزن الفعلي والنتيجة</span>
-              <div className="text-lg font-black text-[#1B4F72]">{currentTotalKg} kg</div>
+              <div className="text-lg font-black text-white">{currentTotalKg} kg</div>
               <div className={`text-xs font-extrabold mt-1 ${
                 status === 'OK' ? 'text-emerald-600' : status === 'Warning' ? 'text-amber-600' : 'text-red-600'
               }`}>
@@ -343,7 +343,7 @@ export const MixingReviewView: React.FC<MixingReviewViewProps> = ({
             <tbody className="divide-y divide-slate-100 font-medium">
               {mixingLogs.map((log) => (
                 <tr key={log.id} className="hover:bg-white/5 transition-colors">
-                  <td className="p-3.5 font-extrabold text-[#1B4F72]">
+                  <td className="p-3.5 font-extrabold text-white">
                     {log.batchNo}
                     <span className="block text-[10px] text-slate-400">{log.id}</span>
                   </td>
@@ -360,7 +360,7 @@ export const MixingReviewView: React.FC<MixingReviewViewProps> = ({
                   <td className="p-3.5 text-center text-[11px] text-slate-300">
                     مستقر: {log.stabilizerActualKg} | شمع: {log.waxActualKg}
                   </td>
-                  <td className="p-3.5 text-center font-black text-[#1B4F72]">{log.totalActualKg} kg</td>
+                  <td className="p-3.5 text-center font-black text-white">{log.totalActualKg} kg</td>
                   <td className="p-3.5 text-center">
                     <span className={`font-bold ${log.deviationPct > 3 ? 'text-red-600' : 'text-emerald-600'}`}>
                       {log.deviationKg > 0 ? `+${log.deviationKg}` : log.deviationKg} kg ({log.deviationPct}%)

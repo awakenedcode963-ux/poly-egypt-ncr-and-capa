@@ -183,7 +183,7 @@ export const CapaView: React.FC<CapaViewProps> = ({
           <div className="border-b border-white/10 pb-3 flex items-center justify-between">
             <div className="flex items-center gap-2">
               <AlertTriangle className="w-5 h-5 text-[#E74C3C]" />
-              <h3 className="font-extrabold text-[#0B3A60] text-sm">
+              <h3 className="font-extrabold text-white text-sm">
                 نموذج إصدار عدم مطابقة وفعل تصحيحي وقائي - ISO QAF-04-03
               </h3>
             </div>
@@ -281,7 +281,7 @@ export const CapaView: React.FC<CapaViewProps> = ({
                 type="text"
                 value={form.lotNumber}
                 onChange={(e) => setForm({ ...form, lotNumber: e.target.value })}
-                className="w-full p-2.5 bg-white/5 border border-white/10 text-white placeholder-white/50 focus:ring-2 focus:ring-[#C1A67B] focus:bg-white/10 transition-all rounded-xl font-bold text-[#0B3A60]"
+                className="w-full p-2.5 bg-white/5 border border-white/10 text-white placeholder-white/50 focus:ring-2 focus:ring-[#C1A67B] focus:bg-white/10 transition-all rounded-xl font-bold text-white"
               />
             </div>
 
@@ -326,7 +326,7 @@ export const CapaView: React.FC<CapaViewProps> = ({
             <button
               type="button"
               onClick={() => setShow5WhysForm(!show5WhysForm)}
-              className="flex items-center justify-center sm:justify-start gap-2 px-4 py-2.5 bg-white/10 hover:bg-white/20 text-[#0B3A60] text-xs font-black rounded-xl transition-all w-full sm:w-auto border border-white/10 shadow-sm cursor-pointer"
+              className="flex items-center justify-center sm:justify-start gap-2 px-4 py-2.5 bg-white/10 hover:bg-white/20 text-white text-xs font-black rounded-xl transition-all w-full sm:w-auto border border-white/10 shadow-sm cursor-pointer"
             >
               <Plus className={`w-4 h-4 transition-transform ${show5WhysForm ? 'rotate-45' : ''}`} />
               <span>{show5WhysForm ? 'إخفاء تحليل 5 Whys' : 'إضافة تحليل 5 Whys يدوياً (اختياري)'}</span>
@@ -405,7 +405,7 @@ export const CapaView: React.FC<CapaViewProps> = ({
       )}
 
       {/* Filter and Search Bar */}
-      <div className="bg-white/10 backdrop-blur-xl p-4 rounded-2xl border border-white/20 shadow-\[0_8px_32px_0_rgba(0,0,0,0.37)\] space-y-3">
+      <div className="bg-white/10 backdrop-blur-xl p-4 rounded-2xl border border-white/20 shadow-[0_8px_32px_0_rgba(0,0,0,0.37)] space-y-3">
         <div className="flex flex-col md:flex-row items-center justify-between gap-3">
           {/* Search Box */}
           <div className="relative w-full md:w-96">
@@ -415,7 +415,7 @@ export const CapaView: React.FC<CapaViewProps> = ({
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
               placeholder="بحث برقم CAPA، المكون، العيب، أو المهندس..."
-              className="w-full pr-9 pl-4 py-2 bg-white/5 text-white border border-white/10 rounded-xl text-xs font-semibold focus:outline-none focus:ring-2 focus:ring-[#0B3A60]"
+              className="w-full pr-9 pl-4 py-2 bg-white/5 text-white border border-white/10 rounded-xl text-xs font-semibold focus:outline-none focus:ring-2 focus:ring-[#0B3A60] placeholder-white/50"
             />
           </div>
 
@@ -511,14 +511,14 @@ export const CapaView: React.FC<CapaViewProps> = ({
 
               {/* Subject and Description */}
               <div>
-                <h3 className="font-extrabold text-[#0B3A60] text-base leading-snug">{capa.subject}</h3>
+                <h3 className="font-extrabold text-white text-base leading-snug">{capa.subject}</h3>
                 <p className="text-xs text-slate-300 mt-1.5 leading-relaxed bg-white/5 text-white p-3 rounded-xl border border-white/10">
                   <b>وصف عدم المطابقة NCR:</b> {capa.ncrDescription}
                 </p>
               </div>
 
               {/* Product and Responsibilities */}
-              <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-3 text-xs font-semibold text-slate-300 bg-sky-50/50 p-3.5 rounded-xl border border-sky-100">
+              <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-3 text-xs font-semibold text-sky-900 bg-sky-50/50 p-3.5 rounded-xl border border-sky-100">
                 <div><b>القسم المعني:</b> {capa.targetDepartment}</div>
                 <div><b>المسؤول التنفيذي:</b> {capa.responsiblePerson}</div>
                 <div><b>التاريخ المستهدف:</b> <span className="text-red-600 font-bold">{capa.targetDate}</span></div>
@@ -529,12 +529,12 @@ export const CapaView: React.FC<CapaViewProps> = ({
               <div className="grid grid-cols-1 md:grid-cols-2 gap-3 text-xs">
                 <div className="bg-emerald-50/70 p-3 rounded-xl border border-emerald-200/60">
                   <span className="font-bold text-emerald-900 block mb-1">الإجراء التصحيحي الفوري:</span>
-                  <p className="text-slate-300">{capa.immediateAction}</p>
+                  <p className="text-emerald-900">{capa.immediateAction}</p>
                 </div>
 
                 <div className="bg-amber-50/70 p-3 rounded-xl border border-amber-200/60">
                   <span className="font-bold text-amber-900 block mb-1">السبب الجذر (Root Cause):</span>
-                  <p className="text-slate-300">{capa.rootCause}</p>
+                  <p className="text-amber-900">{capa.rootCause}</p>
                 </div>
               </div>
 
@@ -543,10 +543,10 @@ export const CapaView: React.FC<CapaViewProps> = ({
                 <div className="pt-2 border-t border-white/10">
                   <button
                     onClick={() => setExpandedWhysId(isWhysExpanded ? null : capa.id)}
-                    className="flex items-center justify-between w-full p-2.5 bg-white/10 hover:bg-white/20/80 rounded-xl text-xs font-extrabold text-[#0B3A60] transition-all cursor-pointer"
+                    className="flex items-center justify-between w-full p-2.5 bg-white/10 hover:bg-white/20/80 rounded-xl text-xs font-extrabold text-white transition-all cursor-pointer"
                   >
                     <span className="flex items-center gap-2">
-                      <HelpCircle className="w-4 h-4 text-[#C4A052]" />
+                      <HelpCircle className="w-4 h-4 text-amber-400" />
                       <span>{isWhysExpanded ? 'إخفاء مخطط الـ 5 Whys' : 'عرض تحليل الأسباب الجذرية (5 Whys Tree)'}</span>
                     </span>
                     {isWhysExpanded ? <ChevronUp className="w-4 h-4" /> : <ChevronDown className="w-4 h-4" />}
@@ -564,7 +564,7 @@ export const CapaView: React.FC<CapaViewProps> = ({
         })}
 
         {filteredRequests.length === 0 && (
-          <div className="bg-white/10 backdrop-blur-xl p-12 text-center rounded-2xl border border-white/20 shadow-\[0_8px_32px_0_rgba(0,0,0,0.37)\] space-y-3">
+          <div className="bg-white/10 backdrop-blur-xl p-12 text-center rounded-2xl border border-white/20 shadow-[0_8px_32px_0_rgba(0,0,0,0.37)] space-y-3">
             <AlertCircle className="w-10 h-10 text-slate-300 mx-auto" />
             <h4 className="font-bold text-slate-300 text-sm">لا توجد طلبات عدم مطابقة تطابق البحث</h4>
             <p className="text-xs text-slate-400">جرب تغيير أسلوب البحث أو إزالة بعض التصفية.</p>

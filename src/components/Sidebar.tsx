@@ -147,7 +147,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
 
           {/* Navigation Links */}
           <nav className="p-3 space-y-1.5 max-h-[calc(100vh-200px)] overflow-y-auto custom-scrollbar">
-            <div className="px-3 py-1.5 text-[11px] font-extrabold uppercase text-[#C4A052] tracking-wider">
+            <div className="px-3 py-1.5 text-[11px] font-extrabold uppercase text-amber-400 tracking-wider">
               وحدات النظام المنفصلة
             </div>
 

@@ -1,2 +1,18 @@
 @import "tailwindcss";
-body { overflow-x: hidden; }
+
+@theme {
+  --color-brand-navy: #0B3A60;
+  --color-brand-navy-dark: #1B4F72;
+  --color-brand-gold: #C1A67B;
+  --color-brand-gold-alt1: #C4A052;
+  --color-brand-gold-alt2: #C0A46F;
+  --color-brand-orange: #E67E22;
+  --color-brand-green: #27AE60;
+  --color-brand-red: #E74C3C;
+  --color-brand-blue: #2874A6;
+  --font-sans: 'Cairo', system-ui, sans-serif;
+}
+
+body {
+  overflow-x: hidden;
+}

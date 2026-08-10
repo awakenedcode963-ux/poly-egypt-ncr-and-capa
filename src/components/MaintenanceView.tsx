@@ -64,7 +64,7 @@ export const MaintenanceView: React.FC<MaintenanceViewProps> = ({
       {/* Header */}
       <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 bg-white/10 backdrop-blur-xl p-5 rounded-2xl border border-white/10 shadow-xs">
         <div>
-          <h2 className="text-lg font-black text-[#1B4F72] flex items-center gap-2">
+          <h2 className="text-lg font-black text-white flex items-center gap-2">
             <span>الوحدة 4: إدارة الصيانة الوقائية والأعطال وحياة الماكينات</span>
             <span className="text-xs bg-purple-100 text-purple-800 px-2.5 py-0.5 rounded-full font-extrabold">
               Maintenance OS
@@ -106,7 +106,7 @@ export const MaintenanceView: React.FC<MaintenanceViewProps> = ({
       {activeSubTab === 'breakdowns' && (
         <div className="space-y-4">
           <div className="flex justify-between items-center">
-            <h3 className="font-extrabold text-[#1B4F72] text-sm">سجل بلاغات الأعطال والتوقفات الفنية</h3>
+            <h3 className="font-extrabold text-white text-sm">سجل بلاغات الأعطال والتوقفات الفنية</h3>
             <button
               onClick={() => setShowForm(!showForm)}
               className="px-4 py-2 bg-[#E74C3C] hover:bg-red-700 text-white font-extrabold text-xs rounded-xl shadow-xs transition-all cursor-pointer"
@@ -125,7 +125,7 @@ export const MaintenanceView: React.FC<MaintenanceViewProps> = ({
                     type="date"
                     value={form.date}
                     onChange={(e) => setForm({ ...form, date: e.target.value })}
-                    className="w-full p-2.5 bg-white/5 border border-white/20 rounded-xl"
+                    className="w-full p-2.5 bg-white/5 border border-white/20 rounded-xl text-white placeholder-white/50"
                     required
                   />
                 </div>
@@ -135,7 +135,7 @@ export const MaintenanceView: React.FC<MaintenanceViewProps> = ({
                   <select
                     value={form.machineCode}
                     onChange={(e) => setForm({ ...form, machineCode: e.target.value })}
-                    className="w-full p-2.5 bg-white/5 border border-white/20 rounded-xl font-bold"
+                    className="w-full p-2.5 bg-white/5 border border-white/20 rounded-xl font-bold text-white placeholder-white/50"
                   >
                     {[...masterData.extrusionMachines, ...masterData.injectionMachines].map(m => (
                       <option key={m.id} value={m.code}>ماكينة رقم {m.code} ({m.type === 'extrusion' ? 'بثق' : 'حقن'})</option>
@@ -150,7 +150,7 @@ export const MaintenanceView: React.FC<MaintenanceViewProps> = ({
                     value={form.description}
                     onChange={(e) => setForm({ ...form, description: e.target.value })}
                     placeholder="مثال: توقف الهيدروليك أو انكسار النوزل..."
-                    className="w-full p-2.5 bg-white/5 border border-white/20 rounded-xl"
+                    className="w-full p-2.5 bg-white/5 border border-white/20 rounded-xl text-white placeholder-white/50"
                     required
                   />
                 </div>
@@ -162,7 +162,7 @@ export const MaintenanceView: React.FC<MaintenanceViewProps> = ({
                     value={form.rootCause}
                     onChange={(e) => setForm({ ...form, rootCause: e.target.value })}
                     placeholder="سبب العطل من الفحص..."
-                    className="w-full p-2.5 bg-white/5 border border-white/20 rounded-xl"
+                    className="w-full p-2.5 bg-white/5 border border-white/20 rounded-xl text-white placeholder-white/50"
                     required
                   />
                 </div>
@@ -174,7 +174,7 @@ export const MaintenanceView: React.FC<MaintenanceViewProps> = ({
                     step="0.5"
                     value={form.downtimeHours}
                     onChange={(e) => setForm({ ...form, downtimeHours: Number(e.target.value) })}
-                    className="w-full p-2.5 bg-white/5 border border-white/20 rounded-xl font-bold text-red-600"
+                    className="w-full p-2.5 bg-white/5 border border-white/20 rounded-xl font-bold text-red-600 text-white placeholder-white/50"
                     required
                   />
                 </div>
@@ -186,7 +186,7 @@ export const MaintenanceView: React.FC<MaintenanceViewProps> = ({
                     value={form.partsReplaced}
                     onChange={(e) => setForm({ ...form, partsReplaced: e.target.value })}
                     placeholder="أو اكتب: لا يوجد"
-                    className="w-full p-2.5 bg-white/5 border border-white/20 rounded-xl"
+                    className="w-full p-2.5 bg-white/5 border border-white/20 rounded-xl text-white placeholder-white/50"
                   />
                 </div>
 
@@ -196,7 +196,7 @@ export const MaintenanceView: React.FC<MaintenanceViewProps> = ({
                     type="number"
                     value={form.costEGP}
                     onChange={(e) => setForm({ ...form, costEGP: Number(e.target.value) })}
-                    className="w-full p-2.5 bg-white/5 border border-white/20 rounded-xl font-bold"
+                    className="w-full p-2.5 bg-white/5 border border-white/20 rounded-xl font-bold text-white placeholder-white/50"
                   />
                 </div>
 
@@ -205,7 +205,7 @@ export const MaintenanceView: React.FC<MaintenanceViewProps> = ({
                   <select
                     value={form.repairStatus}
                     onChange={(e) => setForm({ ...form, repairStatus: e.target.value as any })}
-                    className="w-full p-2.5 bg-white/5 border border-white/20 rounded-xl font-bold"
+                    className="w-full p-2.5 bg-white/5 border border-white/20 rounded-xl font-bold text-white placeholder-white/50"
                   >
                     <option value="مكتمل (Fixed)">مكتمل وتم التشغيل</option>
                     <option value="قيد الإصلاح (In Progress)">قيد الإصلاح</option>
@@ -240,7 +240,7 @@ export const MaintenanceView: React.FC<MaintenanceViewProps> = ({
               <tbody className="divide-y divide-slate-100 font-medium">
                 {breakdownLogs.map((b) => (
                   <tr key={b.id} className="hover:bg-white/5">
-                    <td className="p-3.5 font-extrabold text-[#1B4F72]">
+                    <td className="p-3.5 font-extrabold text-white">
                       ماكينة {b.machineCode}
                       <span className="block text-[10px] text-slate-400">{b.id}</span>
                     </td>
@@ -277,7 +277,7 @@ export const MaintenanceView: React.FC<MaintenanceViewProps> = ({
       {/* Sub-tab 2: Preventive Maintenance */}
       {activeSubTab === 'preventive' && (
         <div className="bg-white/10 backdrop-blur-xl rounded-2xl border border-white/10 shadow-xs overflow-hidden p-5 space-y-4">
-          <h3 className="font-extrabold text-[#1B4F72] text-sm">خطط وسجلات الصيانة الوقائية (Preventive Maintenance)</h3>
+          <h3 className="font-extrabold text-white text-sm">خطط وسجلات الصيانة الوقائية (Preventive Maintenance)</h3>
           <table className="w-full text-right text-xs">
             <thead className="bg-[#1B4F72] text-white font-bold">
               <tr>
@@ -292,7 +292,7 @@ export const MaintenanceView: React.FC<MaintenanceViewProps> = ({
             <tbody className="divide-y divide-slate-100 font-medium">
               {preventiveLogs.map((p) => (
                 <tr key={p.id} className="hover:bg-white/5">
-                  <td className="p-3.5 font-bold text-[#1B4F72]">ماكينة {p.machineCode}</td>
+                  <td className="p-3.5 font-bold text-white">ماكينة {p.machineCode}</td>
                   <td className="p-3.5 font-bold text-purple-700">{p.maintType}</td>
                   <td className="p-3.5">{p.description}</td>
                   <td className="p-3.5">{p.technicianName}</td>
@@ -316,12 +316,12 @@ export const MaintenanceView: React.FC<MaintenanceViewProps> = ({
       {/* Sub-tab 3: Machine Life Analysis */}
       {activeSubTab === 'life' && (
         <div className="bg-white/10 backdrop-blur-xl rounded-2xl border border-white/10 shadow-xs p-5 space-y-4">
-          <h3 className="font-extrabold text-[#1B4F72] text-sm">تقييم العمر الافتراضي والهلاك للماكينات</h3>
+          <h3 className="font-extrabold text-white text-sm">تقييم العمر الافتراضي والهلاك للماكينات</h3>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             {machineLifeList.map((m) => (
               <div key={m.machineCode} className="p-4 bg-white/5 rounded-2xl border border-white/10 space-y-3">
                 <div className="flex items-center justify-between border-b border-white/10 pb-2">
-                  <span className="font-black text-[#1B4F72] text-sm">{m.machineName}</span>
+                  <span className="font-black text-white text-sm">{m.machineName}</span>
                   <span className={`px-2 py-0.5 text-[10px] font-black rounded-full ${
                     m.currentStatus === 'ممتازة' ? 'bg-emerald-100 text-emerald-800' :
                     m.currentStatus === 'تحتاج صيانة' ? 'bg-amber-100 text-amber-800' :

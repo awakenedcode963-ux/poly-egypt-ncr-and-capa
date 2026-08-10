@@ -157,7 +157,7 @@ export const MasterDataView: React.FC<MasterDataViewProps> = ({
         <button
           onClick={() => setSubTab('pipes')}
           className={`flex items-center gap-2 px-4 py-2 rounded-lg text-xs font-bold transition-all whitespace-nowrap cursor-pointer ${
-            subTab === 'pipes' ? 'bg-slate-900 text-white shadow' : 'bg-white text-slate-300 hover:bg-white/10 border border-white/10'
+            subTab === 'pipes' ? 'bg-slate-900 text-white shadow' : 'bg-white/5 text-slate-300 hover:bg-white/10 border border-white/10'
           }`}
         >
           <Factory className="w-4 h-4 text-amber-400" />
@@ -167,7 +167,7 @@ export const MasterDataView: React.FC<MasterDataViewProps> = ({
         <button
           onClick={() => setSubTab('fittings')}
           className={`flex items-center gap-2 px-4 py-2 rounded-lg text-xs font-bold transition-all whitespace-nowrap cursor-pointer ${
-            subTab === 'fittings' ? 'bg-slate-900 text-white shadow' : 'bg-white text-slate-300 hover:bg-white/10 border border-white/10'
+            subTab === 'fittings' ? 'bg-slate-900 text-white shadow' : 'bg-white/5 text-slate-300 hover:bg-white/10 border border-white/10'
           }`}
         >
           <Layers className="w-4 h-4 text-amber-400" />
@@ -177,7 +177,7 @@ export const MasterDataView: React.FC<MasterDataViewProps> = ({
         <button
           onClick={() => setSubTab('pipe_defects')}
           className={`flex items-center gap-2 px-4 py-2 rounded-lg text-xs font-bold transition-all whitespace-nowrap cursor-pointer ${
-            subTab === 'pipe_defects' ? 'bg-slate-900 text-white shadow' : 'bg-white text-slate-300 hover:bg-white/10 border border-white/10'
+            subTab === 'pipe_defects' ? 'bg-slate-900 text-white shadow' : 'bg-white/5 text-slate-300 hover:bg-white/10 border border-white/10'
           }`}
         >
           <span>عيوب الأنابيب ({masterData.pipeDefects.length})</span>
@@ -186,7 +186,7 @@ export const MasterDataView: React.FC<MasterDataViewProps> = ({
         <button
           onClick={() => setSubTab('fitting_defects')}
           className={`flex items-center gap-2 px-4 py-2 rounded-lg text-xs font-bold transition-all whitespace-nowrap cursor-pointer ${
-            subTab === 'fitting_defects' ? 'bg-slate-900 text-white shadow' : 'bg-white text-slate-300 hover:bg-white/10 border border-white/10'
+            subTab === 'fitting_defects' ? 'bg-slate-900 text-white shadow' : 'bg-white/5 text-slate-300 hover:bg-white/10 border border-white/10'
           }`}
         >
           <span>عيوب الوصلات ({masterData.fittingDefects.length})</span>
@@ -195,7 +195,7 @@ export const MasterDataView: React.FC<MasterDataViewProps> = ({
         <button
           onClick={() => setSubTab('inspectors')}
           className={`flex items-center gap-2 px-4 py-2 rounded-lg text-xs font-bold transition-all whitespace-nowrap cursor-pointer ${
-            subTab === 'inspectors' ? 'bg-slate-900 text-white shadow' : 'bg-white text-slate-300 hover:bg-white/10 border border-white/10'
+            subTab === 'inspectors' ? 'bg-slate-900 text-white shadow' : 'bg-white/5 text-slate-300 hover:bg-white/10 border border-white/10'
           }`}
         >
           <Users className="w-4 h-4 text-amber-400" />
@@ -205,7 +205,7 @@ export const MasterDataView: React.FC<MasterDataViewProps> = ({
         <button
           onClick={() => setSubTab('machines')}
           className={`flex items-center gap-2 px-4 py-2 rounded-lg text-xs font-bold transition-all whitespace-nowrap cursor-pointer ${
-            subTab === 'machines' ? 'bg-slate-900 text-white shadow' : 'bg-white text-slate-300 hover:bg-white/10 border border-white/10'
+            subTab === 'machines' ? 'bg-slate-900 text-white shadow' : 'bg-white/5 text-slate-300 hover:bg-white/10 border border-white/10'
           }`}
         >
           <Wrench className="w-4 h-4 text-amber-400" />
@@ -221,7 +221,7 @@ export const MasterDataView: React.FC<MasterDataViewProps> = ({
           placeholder="بحث بالاسم أو الكود..."
           value={search}
           onChange={(e) => setSearch(e.target.value)}
-          className="w-full pl-4 pr-10 py-2.5 bg-white border border-white/10 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-amber-500/20"
+          className="w-full pl-4 pr-10 py-2.5 bg-white/5 text-white placeholder-white/50 border border-white/10 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-amber-500/20"
         />
       </div>
 
@@ -362,7 +362,7 @@ export const MasterDataView: React.FC<MasterDataViewProps> = ({
                     placeholder="مثلاً: 16050 أو 1121"
                     value={newItemCode}
                     onChange={(e) => setNewItemCode(e.target.value)}
-                    className="w-full px-3 py-2 border rounded-lg text-sm focus:ring-2 focus:ring-amber-500/20"
+                    className="w-full px-3 py-2 border rounded-lg text-sm focus:ring-2 focus:ring-amber-500/20 text-white placeholder-white/50 bg-white/5"
                   />
                 </div>
               )}
@@ -375,7 +375,7 @@ export const MasterDataView: React.FC<MasterDataViewProps> = ({
                   placeholder="مثلاً: Pipe 160mm PN20"
                   value={newItemName}
                   onChange={(e) => setNewItemName(e.target.value)}
-                  className="w-full px-3 py-2 border rounded-lg text-sm focus:ring-2 focus:ring-amber-500/20"
+                  className="w-full px-3 py-2 border rounded-lg text-sm focus:ring-2 focus:ring-amber-500/20 text-white placeholder-white/50 bg-white/5"
                 />
               </div>
 
@@ -385,7 +385,7 @@ export const MasterDataView: React.FC<MasterDataViewProps> = ({
                   <select
                     value={newItemMaterial}
                     onChange={(e) => setNewItemMaterial(e.target.value)}
-                    className="w-full px-3 py-2 border rounded-lg text-sm bg-white/5"
+                    className="w-full px-3 py-2 border rounded-lg text-sm bg-white/5 text-white placeholder-white/50"
                   >
                     <option value="PPR">PPR</option>
                     <option value="UPVC">UPVC</option>
@@ -399,7 +399,7 @@ export const MasterDataView: React.FC<MasterDataViewProps> = ({
                   <select
                     value={newItemType}
                     onChange={(e) => setNewItemType(e.target.value as any)}
-                    className="w-full px-3 py-2 border rounded-lg text-sm bg-white/5"
+                    className="w-full px-3 py-2 border rounded-lg text-sm bg-white/5 text-white placeholder-white/50"
                   >
                     <option value="extrusion">ماكينة سحب (Extrusion)</option>
                     <option value="injection">ماكينة حقن (Injection)</option>

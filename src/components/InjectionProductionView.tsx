@@ -77,7 +77,7 @@ export const InjectionProductionView: React.FC<InjectionProductionViewProps> = (
       {/* Header */}
       <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 bg-white/10 backdrop-blur-xl p-5 rounded-2xl border border-white/10 shadow-xs">
         <div>
-          <h2 className="text-lg font-black text-[#1B4F72] flex items-center gap-2">
+          <h2 className="text-lg font-black text-white flex items-center gap-2">
             <span>الوحدة 3: مراقبة إنتاج ومعدلات حقن الوصلات (Injection)</span>
             <span className="text-xs bg-orange-100 text-[#E67E22] px-2.5 py-0.5 rounded-full font-extrabold">
               25 عمود تحليلي
@@ -99,8 +99,8 @@ export const InjectionProductionView: React.FC<InjectionProductionViewProps> = (
       {showForm && (
         <form onSubmit={handleSubmit} className="bg-white/10 backdrop-blur-xl p-6 rounded-2xl border-2 border-[#E67E22] shadow-lg space-y-6">
           <div className="border-b border-white/10 pb-3 flex items-center justify-between">
-            <h3 className="font-extrabold text-[#1B4F72] text-sm flex items-center gap-2">
-              <Flame className="w-5 h-5 text-[#E67E22]" />
+            <h3 className="font-extrabold text-white text-sm flex items-center gap-2">
+              <Flame className="w-5 h-5 text-orange-400" />
               <span>تسجيل متابعة وردية إنتاج ماكينة الحقن</span>
             </h3>
           </div>
@@ -112,7 +112,7 @@ export const InjectionProductionView: React.FC<InjectionProductionViewProps> = (
                 type="date"
                 value={form.date}
                 onChange={(e) => setForm({ ...form, date: e.target.value })}
-                className="w-full p-2.5 bg-white/5 border border-white/20 rounded-xl font-bold"
+                className="w-full p-2.5 bg-white/5 border border-white/20 rounded-xl font-bold text-white placeholder-white/50"
                 required
               />
             </div>
@@ -122,7 +122,7 @@ export const InjectionProductionView: React.FC<InjectionProductionViewProps> = (
               <select
                 value={form.shift}
                 onChange={(e) => setForm({ ...form, shift: e.target.value })}
-                className="w-full p-2.5 bg-white/5 border border-white/20 rounded-xl font-bold"
+                className="w-full p-2.5 bg-white/5 border border-white/20 rounded-xl font-bold text-white placeholder-white/50"
               >
                 {masterData.shifts.map(s => <option key={s.code} value={s.name}>{s.name}</option>)}
               </select>
@@ -133,7 +133,7 @@ export const InjectionProductionView: React.FC<InjectionProductionViewProps> = (
               <select
                 value={form.machineCode}
                 onChange={(e) => setForm({ ...form, machineCode: e.target.value })}
-                className="w-full p-2.5 bg-white/5 border border-white/20 rounded-xl font-bold"
+                className="w-full p-2.5 bg-white/5 border border-white/20 rounded-xl font-bold text-white placeholder-white/50"
               >
                 {masterData.injectionMachines.map(m => (
                   <option key={m.id} value={m.code}>ماكينة رقم {m.code}</option>
@@ -146,7 +146,7 @@ export const InjectionProductionView: React.FC<InjectionProductionViewProps> = (
               <select
                 value={form.operatorName}
                 onChange={(e) => setForm({ ...form, operatorName: e.target.value })}
-                className="w-full p-2.5 bg-white/5 border border-white/20 rounded-xl font-bold"
+                className="w-full p-2.5 bg-white/5 border border-white/20 rounded-xl font-bold text-white placeholder-white/50"
               >
                 {masterData.operators.map(op => <option key={op} value={op}>{op}</option>)}
               </select>
@@ -158,7 +158,7 @@ export const InjectionProductionView: React.FC<InjectionProductionViewProps> = (
                 type="number"
                 value={form.cycleTime}
                 onChange={(e) => setForm({ ...form, cycleTime: Number(e.target.value) })}
-                className="w-full p-2.5 bg-white/5 border border-white/20 rounded-xl font-bold"
+                className="w-full p-2.5 bg-white/5 border border-white/20 rounded-xl font-bold text-white placeholder-white/50"
                 required
               />
             </div>
@@ -169,7 +169,7 @@ export const InjectionProductionView: React.FC<InjectionProductionViewProps> = (
                 type="number"
                 value={form.goodQty}
                 onChange={(e) => setForm({ ...form, goodQty: Number(e.target.value) })}
-                className="w-full p-2.5 bg-white/5 border border-white/20 rounded-xl font-bold text-emerald-700"
+                className="w-full p-2.5 bg-white/5 border border-white/20 rounded-xl font-bold text-emerald-700 text-white placeholder-white/50"
                 required
               />
             </div>
@@ -180,7 +180,7 @@ export const InjectionProductionView: React.FC<InjectionProductionViewProps> = (
                 type="number"
                 value={form.rejectQty}
                 onChange={(e) => setForm({ ...form, rejectQty: Number(e.target.value) })}
-                className="w-full p-2.5 bg-white/5 border border-white/20 rounded-xl font-bold text-red-600"
+                className="w-full p-2.5 bg-white/5 border border-white/20 rounded-xl font-bold text-red-600 text-white placeholder-white/50"
                 required
               />
             </div>
@@ -191,7 +191,7 @@ export const InjectionProductionView: React.FC<InjectionProductionViewProps> = (
                 type="number"
                 value={form.materialUsedKg}
                 onChange={(e) => setForm({ ...form, materialUsedKg: Number(e.target.value) })}
-                className="w-full p-2.5 bg-white/5 border border-white/20 rounded-xl font-bold"
+                className="w-full p-2.5 bg-white/5 border border-white/20 rounded-xl font-bold text-white placeholder-white/50"
                 required
               />
             </div>
@@ -203,7 +203,7 @@ export const InjectionProductionView: React.FC<InjectionProductionViewProps> = (
                 step="0.1"
                 value={form.downtimeHours}
                 onChange={(e) => setForm({ ...form, downtimeHours: Number(e.target.value) })}
-                className="w-full p-2.5 bg-white/5 border border-white/20 rounded-xl font-bold text-amber-700"
+                className="w-full p-2.5 bg-white/5 border border-white/20 rounded-xl font-bold text-amber-700 text-white placeholder-white/50"
                 required
               />
             </div>
@@ -214,13 +214,13 @@ export const InjectionProductionView: React.FC<InjectionProductionViewProps> = (
                 type="text"
                 value={form.downtimeReason}
                 onChange={(e) => setForm({ ...form, downtimeReason: e.target.value })}
-                className="w-full p-2.5 bg-white/5 border border-white/20 rounded-xl font-medium"
+                className="w-full p-2.5 bg-white/5 border border-white/20 rounded-xl font-medium text-white placeholder-white/50"
               />
             </div>
 
             <div className="bg-white/5 p-3 rounded-xl border border-white/10 flex flex-col justify-center text-center">
               <span className="text-[10px] text-slate-400 font-bold">كفاءة التشغيل OEE</span>
-              <span className="text-lg font-black text-[#E67E22]">{efficiencyPct}%</span>
+              <span className="text-lg font-black text-orange-400">{efficiencyPct}%</span>
             </div>
           </div>
 
@@ -261,7 +261,7 @@ export const InjectionProductionView: React.FC<InjectionProductionViewProps> = (
             <tbody className="divide-y divide-slate-100 font-medium">
               {injectionLogs.map((log) => (
                 <tr key={log.id} className="hover:bg-white/5 transition-colors">
-                  <td className="p-3.5 font-extrabold text-[#E67E22]">
+                  <td className="p-3.5 font-extrabold text-orange-400">
                     ماكينة {log.machineCode}
                     <span className="block text-[10px] text-slate-400">{log.id}</span>
                   </td>

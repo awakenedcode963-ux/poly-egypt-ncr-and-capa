@@ -85,8 +85,8 @@ export const CapaQrCenterView: React.FC<CapaQrCenterViewProps> = ({ capaRequests
         {/* Left Column: Selector / Controls */}
         <div className="bg-white/10 backdrop-blur-xl p-6 rounded-2xl border border-white/10 shadow-xs space-y-5">
           <div className="border-b border-white/10 pb-3 flex items-center gap-2">
-            <Tag className="w-5 h-5 text-[#0B3A60]" />
-            <h3 className="font-extrabold text-sm text-[#0B3A60]">اختر طلب عدم المطابقة للطباعة</h3>
+            <Tag className="w-5 h-5 text-white" />
+            <h3 className="font-extrabold text-sm text-white">اختر طلب عدم المطابقة للطباعة</h3>
           </div>
 
           <div className="space-y-3 text-xs">
@@ -94,7 +94,7 @@ export const CapaQrCenterView: React.FC<CapaQrCenterViewProps> = ({ capaRequests
             <select
               value={selectedCapaId}
               onChange={(e) => setSelectedCapaId(e.target.value)}
-              className="w-full p-3 bg-white/5 border border-white/20 rounded-xl font-bold text-white"
+              className="w-full p-3 bg-white/5 border border-white/20 rounded-xl font-bold text-white placeholder-white/50"
             >
               {capaRequests.map((c) => (
                 <option key={c.id} value={c.id}>
@@ -105,7 +105,7 @@ export const CapaQrCenterView: React.FC<CapaQrCenterViewProps> = ({ capaRequests
           </div>
 
           <div className="border-t border-white/10 pt-4 space-y-3 text-xs">
-            <span className="font-extrabold text-[#0B3A60] block">أو إنشاء ملصق حجز جودة سريع (Custom Tag):</span>
+            <span className="font-extrabold text-white block">أو إنشاء ملصق حجز جودة سريع (Custom Tag):</span>
             
             <div>
               <label className="block text-slate-300 mb-1 font-semibold">رقم اللوط / التشغيلة:</label>
@@ -113,7 +113,7 @@ export const CapaQrCenterView: React.FC<CapaQrCenterViewProps> = ({ capaRequests
                 type="text"
                 value={customLot}
                 onChange={(e) => setCustomLot(e.target.value)}
-                className="w-full p-2 bg-white/5 border border-white/10 rounded-lg font-bold text-white"
+                className="w-full p-2 bg-white/5 border border-white/10 rounded-lg font-bold text-white placeholder-white/50"
               />
             </div>
 
@@ -123,7 +123,7 @@ export const CapaQrCenterView: React.FC<CapaQrCenterViewProps> = ({ capaRequests
                 type="text"
                 value={customProduct}
                 onChange={(e) => setCustomProduct(e.target.value)}
-                className="w-full p-2 bg-white/5 border border-white/10 rounded-lg font-bold text-white"
+                className="w-full p-2 bg-white/5 border border-white/10 rounded-lg font-bold text-white placeholder-white/50"
               />
             </div>
 
@@ -133,7 +133,7 @@ export const CapaQrCenterView: React.FC<CapaQrCenterViewProps> = ({ capaRequests
                 value={customReason}
                 onChange={(e) => setCustomReason(e.target.value)}
                 rows={2}
-                className="w-full p-2 bg-white/5 border border-white/10 rounded-lg font-bold text-white"
+                className="w-full p-2 bg-white/5 border border-white/10 rounded-lg font-bold text-white placeholder-white/50"
               />
             </div>
           </div>
@@ -143,7 +143,7 @@ export const CapaQrCenterView: React.FC<CapaQrCenterViewProps> = ({ capaRequests
               onClick={handlePrint}
               className="w-full flex items-center justify-center gap-2 p-3 bg-[#0B3A60] hover:bg-sky-900 text-white font-black text-xs rounded-xl shadow-md cursor-pointer transition-all"
             >
-              <Printer className="w-4 h-4 text-[#C4A052]" />
+              <Printer className="w-4 h-4 text-amber-400" />
               <span>طباعة بطاقة الحجز المعتمدة (Print Tag)</span>
             </button>
           </div>
@@ -151,7 +151,7 @@ export const CapaQrCenterView: React.FC<CapaQrCenterViewProps> = ({ capaRequests
 
         {/* Right Column: Printable Badge Preview */}
         <div className="lg:col-span-2 bg-white/10 p-6 rounded-2xl border border-white/10 flex flex-col items-center justify-center">
-          <div id="printable-ncr-tag" className="bg-white w-full max-w-md p-6 rounded-2xl border-4 border-[#0B3A60] shadow-2xl space-y-5 font-sans dir-rtl">
+          <div id="printable-ncr-tag" className="bg-white text-slate-900 w-full max-w-md p-6 rounded-2xl border-4 border-[#0B3A60] shadow-2xl space-y-5 font-sans dir-rtl">
             {/* Header with Polo Egypt */}
             <div className="border-b-2 border-slate-200 pb-3 flex flex-col items-center text-center">
               <PoloEgyptLogo variant="horizontal" size="md" />
@@ -185,7 +185,7 @@ export const CapaQrCenterView: React.FC<CapaQrCenterViewProps> = ({ capaRequests
                 </div>
                 <div><b>الموضوع:</b> {selectedCapa.subject}</div>
                 <div><b>المنتج:</b> {selectedCapa.productName || 'غير محدد'}</div>
-                <div><b>رقم التشغيلة:</b> <b className="text-\[#0B3A60\]">{selectedCapa.lotNumber || 'N/A'}</b></div>
+                <div><b>رقم التشغيلة:</b> <b className="text-[#0B3A60]">{selectedCapa.lotNumber || 'N/A'}</b></div>
                 <div><b>الإدارة المعنية:</b> {selectedCapa.targetDepartment}</div>
                 <div><b>المسؤول المتابِع:</b> {selectedCapa.responsiblePerson}</div>
               </div>

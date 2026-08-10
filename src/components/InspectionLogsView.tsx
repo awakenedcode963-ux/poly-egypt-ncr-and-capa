@@ -103,7 +103,7 @@ export const InspectionLogsView: React.FC<InspectionLogsViewProps> = ({
             placeholder="بحث باسم المنتج، الكود، المفتش، رقم الماكينة، أو العيب..."
             value={search}
             onChange={(e) => setSearch(e.target.value)}
-            className="w-full pl-4 pr-10 py-2.5 rounded-lg border border-white/10 text-sm focus:outline-none focus:ring-2 focus:ring-amber-500/20"
+            className="w-full pl-4 pr-10 py-2.5 rounded-lg border border-white/10 text-sm focus:outline-none focus:ring-2 focus:ring-amber-500/20 text-white placeholder-white/50 bg-white/5"
           />
         </div>
 
@@ -111,7 +111,7 @@ export const InspectionLogsView: React.FC<InspectionLogsViewProps> = ({
           <select
             value={filterCategory}
             onChange={(e) => setFilterCategory(e.target.value)}
-            className="px-3 py-2 rounded-lg border border-white/10 text-xs font-medium bg-white/5"
+            className="px-3 py-2 rounded-lg border border-white/10 text-xs font-medium bg-white/5 text-white placeholder-white/50"
           >
             <option value="all">كافة الأقسام</option>
             <option value="pipe">الأنابيب فقط</option>
@@ -121,7 +121,7 @@ export const InspectionLogsView: React.FC<InspectionLogsViewProps> = ({
           <select
             value={filterStatus}
             onChange={(e) => setFilterStatus(e.target.value)}
-            className="px-3 py-2 rounded-lg border border-white/10 text-xs font-medium bg-white/5"
+            className="px-3 py-2 rounded-lg border border-white/10 text-xs font-medium bg-white/5 text-white placeholder-white/50"
           >
             <option value="all">كافة الحالات</option>
             <option value="pass">مقبول (Pass)</option>

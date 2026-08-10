@@ -134,7 +134,7 @@ export const CapaDashboardView: React.FC<CapaDashboardViewProps> = ({
         <div className="bg-white/10 backdrop-blur-xl p-5 rounded-2xl border border-white/10 shadow-xs flex items-center justify-between">
           <div className="space-y-1">
             <span className="text-xs font-bold text-slate-400">إجمالي طلبات NCR / CAPA</span>
-            <div className="text-2xl font-black text-[#0B3A60]">{totalCount} طلب</div>
+            <div className="text-2xl font-black text-white">{totalCount} طلب</div>
             <span className="text-[11px] text-slate-400 font-semibold">{criticalCount} بلاغ بدرجة حرجة</span>
           </div>
           <div className="p-3 bg-sky-50 text-[#0B3A60] rounded-2xl border border-sky-100">
@@ -146,7 +146,7 @@ export const CapaDashboardView: React.FC<CapaDashboardViewProps> = ({
         <div className="bg-white/10 backdrop-blur-xl p-5 rounded-2xl border border-white/10 shadow-xs flex items-center justify-between">
           <div className="space-y-1">
             <span className="text-xs font-bold text-slate-400">قيد التحليل والتنفيذ</span>
-            <div className="text-2xl font-black text-[#E67E22]">{openCount + inProgressCount} طلب</div>
+            <div className="text-2xl font-black text-orange-400">{openCount + inProgressCount} طلب</div>
             <span className="text-[11px] text-amber-600 font-bold">{openCount} مفتوح / {inProgressCount} قيد المتابعة</span>
           </div>
           <div className="p-3 bg-amber-50 text-[#E67E22] rounded-2xl border border-amber-100">
@@ -170,7 +170,7 @@ export const CapaDashboardView: React.FC<CapaDashboardViewProps> = ({
         <div className="bg-white/10 backdrop-blur-xl p-5 rounded-2xl border border-white/10 shadow-xs flex items-center justify-between">
           <div className="space-y-1">
             <span className="text-xs font-bold text-slate-400">فاعلية الإجراء الوقائي</span>
-            <div className="text-2xl font-black text-[#C4A052]">{effectivenessRate}%</div>
+            <div className="text-2xl font-black text-amber-400">{effectivenessRate}%</div>
             <span className="text-[11px] text-slate-400 font-semibold">استناداً إلى تقييمات ISO</span>
           </div>
           <div className="p-3 bg-amber-50 text-[#C4A052] rounded-2xl border border-amber-100">
@@ -185,8 +185,8 @@ export const CapaDashboardView: React.FC<CapaDashboardViewProps> = ({
         <div className="bg-white/10 backdrop-blur-xl p-6 rounded-2xl border border-white/10 shadow-xs space-y-4">
           <div className="flex items-center justify-between border-b border-white/10 pb-3">
             <div className="flex items-center gap-2">
-              <BarChart3 className="w-5 h-5 text-[#0B3A60]" />
-              <h3 className="font-extrabold text-sm text-[#0B3A60]">توزيع عدم المطابقة حسب الأقسام</h3>
+              <BarChart3 className="w-5 h-5 text-white" />
+              <h3 className="font-extrabold text-sm text-white">توزيع عدم المطابقة حسب الأقسام</h3>
             </div>
             <span className="text-xs text-slate-400 font-bold">بولو إيجيبت</span>
           </div>
@@ -194,8 +194,8 @@ export const CapaDashboardView: React.FC<CapaDashboardViewProps> = ({
           <div className="h-64 w-full">
             <ResponsiveContainer width="100%" height="100%">
               <BarChart data={deptData} margin={{ top: 10, right: 10, left: 10, bottom: 20 }}>
-                <XAxis dataKey="name" tick={{ fontSize: 11, fontWeight: 'bold' }} />
-                <YAxis allowDecimals={false} tick={{ fontSize: 11 }} />
+                <XAxis dataKey="name" tick={{ fontSize: 11, fontWeight: 'bold', fill: '#E2E8F0' }} />
+                <YAxis allowDecimals={false} tick={{ fontSize: 11, fill: '#E2E8F0' }} />
                 <Tooltip 
                   contentStyle={{ backgroundColor: '#0B3A60', color: '#fff', borderRadius: '12px', fontSize: '12px' }}
                 />
@@ -214,7 +214,7 @@ export const CapaDashboardView: React.FC<CapaDashboardViewProps> = ({
           <div className="flex items-center justify-between border-b border-white/10 pb-3">
             <div className="flex items-center gap-2">
               <PieIcon className="w-5 h-5 text-[#E74C3C]" />
-              <h3 className="font-extrabold text-sm text-[#0B3A60]">تصنيف الطلبات حسب درجة الأولوية</h3>
+              <h3 className="font-extrabold text-sm text-white">تصنيف الطلبات حسب درجة الأولوية</h3>
             </div>
             <span className="text-xs text-slate-400 font-bold">حرج / عالي / متوسط</span>
           </div>
@@ -238,7 +238,7 @@ export const CapaDashboardView: React.FC<CapaDashboardViewProps> = ({
                 <Tooltip 
                   contentStyle={{ backgroundColor: '#0B3A60', color: '#fff', borderRadius: '12px', fontSize: '12px' }}
                 />
-                <Legend wrapperStyle={{ fontSize: '11px', fontWeight: 'bold' }} />
+                <Legend wrapperStyle={{ fontSize: '11px', fontWeight: 'bold', color: '#E2E8F0' }} />
               </PieChart>
             </ResponsiveContainer>
           </div>
@@ -249,12 +249,12 @@ export const CapaDashboardView: React.FC<CapaDashboardViewProps> = ({
       <div className="bg-white/10 backdrop-blur-xl p-6 rounded-2xl border border-white/10 shadow-xs space-y-4">
         <div className="flex items-center justify-between border-b border-white/10 pb-3">
           <div className="flex items-center gap-2">
-            <Activity className="w-5 h-5 text-[#0B3A60]" />
-            <h3 className="font-extrabold text-sm text-[#0B3A60]">آخر طلبات عدم المطابقة المفتوحة</h3>
+            <Activity className="w-5 h-5 text-white" />
+            <h3 className="font-extrabold text-sm text-white">آخر طلبات عدم المطابقة المفتوحة</h3>
           </div>
           <button
             onClick={onNavigateToRecords}
-            className="text-xs font-bold text-[#0B3A60] hover:text-sky-800 underline"
+            className="text-xs font-bold text-sky-200 hover:text-white underline"
           >
             عرض الكل ➔
           </button>
@@ -276,12 +276,12 @@ export const CapaDashboardView: React.FC<CapaDashboardViewProps> = ({
             <tbody className="divide-y divide-slate-100 font-semibold">
               {capaRequests.slice(0, 5).map((capa) => (
                 <tr key={capa.id} className="hover:bg-white/5/80">
-                  <td className="p-3 font-black text-[#0B3A60]">{capa.capaNo}</td>
+                  <td className="p-3 font-black text-white">{capa.capaNo}</td>
                   <td className="p-3 text-slate-400">{capa.date}</td>
                   <td className="p-3 text-white font-bold max-w-xs truncate">{capa.subject}</td>
                   <td className="p-3 text-slate-200">{capa.targetDepartment}</td>
                   <td className="p-3">
-                    <span className={`px-2 py-0.5 rounded-full text-[10px] font-black ${
+                    <span className={`whitespace-nowrap px-2 py-0.5 rounded-full text-[10px] font-black ${
                       capa.priority.includes('حرج') ? 'bg-red-100 text-red-800' : 'bg-amber-100 text-amber-800'
                     }`}>
                       {capa.priority}
@@ -289,7 +289,7 @@ export const CapaDashboardView: React.FC<CapaDashboardViewProps> = ({
                   </td>
                   <td className="p-3 text-slate-300 max-w-xs truncate">{capa.rootCause}</td>
                   <td className="p-3">
-                    <span className={`px-2.5 py-0.5 rounded-full text-[10px] font-bold ${
+                    <span className={`whitespace-nowrap px-2.5 py-0.5 rounded-full text-[10px] font-bold ${
                       capa.status.includes('Done') || capa.status.includes('مغلق')
                         ? 'bg-emerald-100 text-emerald-800'
                         : 'bg-amber-100 text-amber-800'

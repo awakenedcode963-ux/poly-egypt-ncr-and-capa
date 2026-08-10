@@ -12,8 +12,8 @@ import {
 } from 'lucide-react';
 
 export const WorkerReportPage: React.FC = () => {
-  const [step, setStep] = useState<'scan' | 'form' | 'review' | 'success'>('scan');
-  const [scannedLine, setScannedLine] = useState<string>('');
+  const [step, setStep] = useState<'form' | 'review' | 'success'>('form');
+  const [machineLocation, setMachineLocation] = useState<string>('');
   const [machineFromUrl, setMachineFromUrl] = useState<string>('');
 
   const getInitialShift = () => {
@@ -55,17 +55,11 @@ export const WorkerReportPage: React.FC = () => {
     const machineCode = searchParams.get('machine');
     if (machineCode) {
       const foundMachine = sampleMachines.find(m => m.code === machineCode);
-      const machineName = foundMachine ? foundMachine.name : 'ماكينة غير محددة';
-      setScannedLine(`${machineCode} - ${machineName}`);
+      const machineName = foundMachine ? foundMachine.name : '';
+      setMachineLocation(machineName ? `${machineCode} - ${machineName}` : machineCode);
       setMachineFromUrl(machineCode);
-      setStep('form');
     }
   }, []);
-
-  const handleSimulateScan = (machineCode: string, machineName: string) => {
-    setScannedLine(`${machineCode} - ${machineName}`);
-    setStep('form');
-  };
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
@@ -95,16 +89,16 @@ export const WorkerReportPage: React.FC = () => {
     const newId = `NCR-2026-${Math.floor(Math.random() * 899 + 100)}`;
     setSubmittedCapaNo(newId);
 
-    const targetDept = scannedLine.includes('PPR') ? 'قسم البثق PPR'
-                     : scannedLine.includes('UPVC') ? 'قسم البثق UPVC'
-                     : scannedLine.includes('حقن') ? 'قسم الحقن'
-                     : scannedLine.includes('خلط') ? 'قسم الخلطات'
+    const targetDept = machineLocation.includes('PPR') ? 'قسم البثق PPR'
+                     : machineLocation.includes('UPVC') ? 'قسم البثق UPVC'
+                     : machineLocation.includes('حقن') ? 'قسم الحقن'
+                     : machineLocation.includes('خلط') ? 'قسم الخلطات'
                      : 'إدارة الجودة والإنتاج';
 
     const months = ['يناير', 'فبراير', 'مارس', 'أبريل', 'مايو', 'يونيو', 'يوليو', 'أغسطس', 'سبتمبر', 'أكتوبر', 'نوفمبر', 'ديسمبر'];
     const currentMonthName = months[new Date().getMonth()];
 
-    const machineCodeVal = scannedLine.split(' - ')[0] || scannedLine;
+    const machineCodeVal = machineLocation.split(' - ')[0] || machineLocation || 'غير محدد';
 
     const newCapa: CAPARequest = {
       id: `capa-${Date.now()}`,
@@ -113,7 +107,7 @@ export const WorkerReportPage: React.FC = () => {
       month: currentMonthName,
       source: 'فحص جودة (QC)',
       targetDepartment: targetDept,
-      subject: `بلاغ عيب ميداني: ${defectType.split('(')[0].trim()} - ${scannedLine}`,
+      subject: `بلاغ عيب ميداني: ${defectType.split('(')[0].trim()} - ${machineLocation || 'موقع غير محدد'}`,
       ncrDescription: `تم تسجيل البلاغ بواسطة: ${operatorName} (${shift}). ملاحظات: ${notes || 'لا توجد ملاحظات إضافية'}.`,
       immediateAction: immediateAction,
       correctiveAction: correctiveAction,
@@ -176,9 +170,9 @@ export const WorkerReportPage: React.FC = () => {
   };
 
   const handleReset = () => {
-    setStep(machineFromUrl ? 'form' : 'scan');
+    setStep('form');
     if (!machineFromUrl) {
-      setScannedLine('');
+      setMachineLocation('');
     }
     setOperatorName('');
     setProductName('');
@@ -195,14 +189,14 @@ export const WorkerReportPage: React.FC = () => {
     setShift(getInitialShift());
   };
 
-  const targetDeptLabel = scannedLine.includes('PPR') ? 'قسم البثق PPR'
-                     : scannedLine.includes('UPVC') ? 'قسم البثق UPVC'
-                     : scannedLine.includes('حقن') ? 'قسم الحقن'
-                     : scannedLine.includes('خلط') ? 'قسم الخلطات'
+  const targetDeptLabel = machineLocation.includes('PPR') ? 'قسم البثق PPR'
+                     : machineLocation.includes('UPVC') ? 'قسم البثق UPVC'
+                     : machineLocation.includes('حقن') ? 'قسم الحقن'
+                     : machineLocation.includes('خلط') ? 'قسم الخلطات'
                      : 'إدارة الجودة والإنتاج';
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-\[#0B3A60\] via-\[#0f2e4a\] to-\[#1a365d\] font-sans text-white pb-10" dir="rtl">
+    <div className="min-h-screen bg-gradient-to-br from-[#0B3A60] via-[#0f2e4a] to-[#1a365d] font-sans text-white pb-10" dir="rtl">
       {/* Global Header */}
       <div className="bg-gradient-to-r from-[#0B3A60] via-[#113E6B] to-[#C0A46F] shadow-md w-full py-8 px-4 sticky top-0 z-10 flex flex-col items-center justify-center">
         <PoloEgyptLogo size="lg" className="mb-6" lightMode={true} />
@@ -213,60 +207,28 @@ export const WorkerReportPage: React.FC = () => {
       <div className="max-w-3xl mx-auto p-4 mt-4">
         <div className="bg-white/10 backdrop-blur-xl rounded-2xl shadow-xl overflow-hidden border border-white/10">
           
-          {/* STEP 1: SCAN OR SELECT MACHINE */}
-          {step === 'scan' && (
-            <div className="p-6">
-              <div className="text-center mb-6">
-                <div className="w-20 h-20 bg-blue-50 text-blue-600 rounded-2xl flex items-center justify-center mx-auto mb-4 border border-blue-100 shadow-sm shadow-blue-100">
-                  <QrCode className="w-10 h-10" />
-                </div>
-                <h3 className="font-black text-xl text-[#0B3A60] mb-2">تحديد موقع البلاغ (الماكينة)</h3>
-                <p className="text-sm font-bold text-slate-300">
-                  للبدء، يرجى تحديد خط الإنتاج أو الماكينة التي سيتم تسجيل البلاغ عليها.
-                </p>
-              </div>
-
-              <div className="space-y-4">
-                <button className="w-full bg-[#0B3A60] hover:bg-sky-900 text-white font-black p-4 rounded-xl flex items-center justify-center gap-3 shadow-md transition-all active:scale-95">
-                  <Camera className="w-6 h-6" />
-                  <span>مسح كود QR للماكينة (قريباً)</span>
-                </button>
-                
-                <div className="relative py-4 flex items-center">
-                  <div className="flex-grow border-t border-white/10"></div>
-                  <span className="shrink-0 px-4 text-slate-400 text-sm font-bold">أو اختر من القائمة يدوياً</span>
-                  <div className="flex-grow border-t border-white/10"></div>
-                </div>
-
-                <div className="space-y-2 max-h-64 overflow-y-auto pr-1 custom-scrollbar">
-                  {sampleMachines.map(machine => (
-                    <button
-                      key={machine.code}
-                      onClick={() => handleSimulateScan(machine.code, machine.name)}
-                      className="w-full flex items-center gap-3 p-4 bg-white/5 hover:bg-white/10 border border-white/10 rounded-xl text-right transition-colors active:bg-slate-200"
-                    >
-                      <Factory className="w-6 h-6 text-slate-400" />
-                      <div>
-                        <div className="font-black text-[#0B3A60]">{machine.name}</div>
-                        <div className="text-xs font-bold text-slate-400 mt-1">{machine.code} • {machine.dept}</div>
-                      </div>
-                    </button>
-                  ))}
-                </div>
-              </div>
-            </div>
-          )}
-
           {/* STEP 2: FILL THE FORM */}
           {step === 'form' && (
             <form onSubmit={proceedToReview} className="p-4 sm:p-6 space-y-6">
               
-              <div className="bg-sky-50 border border-sky-100 rounded-xl p-4 flex items-start gap-3">
-                <Factory className="w-6 h-6 text-sky-600 shrink-0 mt-0.5" />
-                <div>
-                  <div className="text-xs font-bold text-sky-600 mb-1">الموقع المحدد (تلقائياً)</div>
-                  <div className="font-black text-sky-900 leading-tight">{scannedLine}</div>
-                </div>
+              <div className="bg-sky-50 border border-sky-100 rounded-xl p-4">
+                <label className="block text-slate-700 font-extrabold mb-2 text-sm flex items-center gap-2">
+                  <Factory className="w-5 h-5 text-sky-600" />
+                  الماكينة / الموقع (اختياري):
+                </label>
+                <input
+                  type="text"
+                  value={machineLocation}
+                  onChange={(e) => setMachineLocation(e.target.value)}
+                  placeholder="أدخل اسم الماكينة، الخط، أو الموقع..."
+                  list="machine-options"
+                  className="w-full p-3.5 bg-white border border-sky-200 rounded-xl font-bold focus:ring-2 focus:ring-[#0B3A60] focus:border-[#0B3A60] outline-none transition-all text-slate-900 placeholder-slate-400"
+                />
+                <datalist id="machine-options">
+                  {sampleMachines.map(m => (
+                    <option key={m.code} value={`${m.code} - ${m.name}`} />
+                  ))}
+                </datalist>
               </div>
 
               {/* Operator Name & Shift */}
@@ -279,7 +241,7 @@ export const WorkerReportPage: React.FC = () => {
                     value={operatorName}
                     onChange={(e) => setOperatorName(e.target.value)}
                     placeholder="اسم الفني أو المشرف"
-                    className="w-full p-3.5 bg-white/5 border border-white/20 rounded-xl font-bold focus:ring-2 focus:ring-[#0B3A60] focus:border-[#0B3A60] outline-none transition-all"
+                    className="w-full p-3.5 bg-white/5 border border-white/20 rounded-xl font-bold focus:ring-2 focus:ring-[#0B3A60] focus:border-[#0B3A60] outline-none transition-all text-white placeholder-white/50"
                   />
                 </div>
                 <div>
@@ -287,7 +249,7 @@ export const WorkerReportPage: React.FC = () => {
                   <select
                     value={shift}
                     onChange={(e) => setShift(e.target.value)}
-                    className="w-full p-3.5 bg-white/5 border border-white/20 rounded-xl font-bold focus:ring-2 focus:ring-[#0B3A60] focus:border-[#0B3A60] outline-none transition-all"
+                    className="w-full p-3.5 bg-white/5 border border-white/20 rounded-xl font-bold focus:ring-2 focus:ring-[#0B3A60] focus:border-[#0B3A60] outline-none transition-all text-white placeholder-white/50"
                   >
                     <option value="الوردية الأولى (صباحية)">الوردية الأولى (صباحية)</option>
                     <option value="الوردية الثانية (مسائية)">الوردية الثانية (مسائية)</option>
@@ -306,7 +268,7 @@ export const WorkerReportPage: React.FC = () => {
                     value={productName}
                     onChange={(e) => setProductName(e.target.value)}
                     placeholder="مثال: وصلة PPR 32mm"
-                    className="w-full p-3.5 bg-white/5 border border-white/20 rounded-xl font-bold focus:ring-2 focus:ring-[#0B3A60] focus:border-[#0B3A60] outline-none transition-all"
+                    className="w-full p-3.5 bg-white/5 border border-white/20 rounded-xl font-bold focus:ring-2 focus:ring-[#0B3A60] focus:border-[#0B3A60] outline-none transition-all text-white placeholder-white/50"
                   />
                 </div>
                 <div>
@@ -317,7 +279,7 @@ export const WorkerReportPage: React.FC = () => {
                     value={lotNumber}
                     onChange={(e) => setLotNumber(e.target.value)}
                     placeholder="مثال: LOT-123"
-                    className="w-full p-3.5 bg-white/5 border border-white/20 rounded-xl font-bold text-[#0B3A60] focus:ring-2 focus:ring-[#0B3A60] focus:border-[#0B3A60] outline-none transition-all"
+                    className="w-full p-3.5 bg-white/5 border border-white/20 rounded-xl font-bold text-white focus:ring-2 focus:ring-[#0B3A60] focus:border-[#0B3A60] outline-none transition-all text-white placeholder-white/50"
                   />
                 </div>
               </div>
@@ -329,7 +291,7 @@ export const WorkerReportPage: React.FC = () => {
                   required
                   value={defectType}
                   onChange={(e) => setDefectType(e.target.value)}
-                  className="w-full p-3.5 bg-white/5 border border-white/20 rounded-xl font-black text-red-700 focus:ring-2 focus:ring-[#0B3A60] focus:border-[#0B3A60] outline-none transition-all overflow-hidden text-ellipsis whitespace-normal"
+                  className="w-full p-3.5 bg-white/5 border border-white/20 rounded-xl font-black text-red-700 focus:ring-2 focus:ring-[#0B3A60] focus:border-[#0B3A60] outline-none transition-all overflow-hidden text-ellipsis whitespace-normal text-white placeholder-white/50"
                 >
                   <option value="" disabled>-- اختر نوع العيب --</option>
                   <option value="فقاعات هوائية ومسامية داخلية">فقاعات هوائية ومسامية داخلية (Air Bubbles)</option>
@@ -349,7 +311,7 @@ export const WorkerReportPage: React.FC = () => {
                     required
                     value={severity}
                     onChange={(e) => setSeverity(e.target.value)}
-                    className="w-full p-3.5 bg-white/5 border border-white/20 rounded-xl font-bold focus:ring-2 focus:ring-[#0B3A60] focus:border-[#0B3A60] outline-none transition-all"
+                    className="w-full p-3.5 bg-white/5 border border-white/20 rounded-xl font-bold focus:ring-2 focus:ring-[#0B3A60] focus:border-[#0B3A60] outline-none transition-all text-white placeholder-white/50"
                   >
                     <option value="" disabled>-- حدد الأولوية --</option>
                     <option value="حرج (Critical)">حرج (Critical) - إيقاف كلي للإنتاج</option>
@@ -365,7 +327,7 @@ export const WorkerReportPage: React.FC = () => {
                     onChange={(e) => setImmediateAction(e.target.value)}
                     placeholder="مثال: إيقاف الماكينة وحجز اللوط"
                     rows={2}
-                    className="w-full p-3.5 bg-white/5 border border-white/20 rounded-xl font-bold focus:ring-2 focus:ring-[#0B3A60] focus:border-[#0B3A60] outline-none transition-all break-words"
+                    className="w-full p-3.5 bg-white/5 border border-white/20 rounded-xl font-bold focus:ring-2 focus:ring-[#0B3A60] focus:border-[#0B3A60] outline-none transition-all break-words text-white placeholder-white/50"
                   />
                 </div>
               </div>
@@ -384,7 +346,7 @@ export const WorkerReportPage: React.FC = () => {
                       onChange={(e) => setCorrectiveAction(e.target.value)}
                       placeholder="كيف يمكن إصلاح العيب الحالي؟ (اختياري)"
                       rows={2}
-                      className="w-full p-3 bg-white border border-amber-300 rounded-xl font-medium focus:ring-2 focus:ring-amber-500 outline-none transition-all break-words text-sm"
+                      className="w-full p-3 bg-white border border-amber-300 rounded-xl font-medium text-slate-900 placeholder-slate-400 focus:ring-2 focus:ring-amber-500 outline-none transition-all break-words text-sm"
                     />
                   </div>
                   <div>
@@ -394,7 +356,7 @@ export const WorkerReportPage: React.FC = () => {
                       onChange={(e) => setPreventiveAction(e.target.value)}
                       placeholder="كيف نمنع تكرار هذا العيب؟ (اختياري)"
                       rows={2}
-                      className="w-full p-3 bg-white border border-amber-300 rounded-xl font-medium focus:ring-2 focus:ring-amber-500 outline-none transition-all break-words text-sm"
+                      className="w-full p-3 bg-white border border-amber-300 rounded-xl font-medium text-slate-900 placeholder-slate-400 focus:ring-2 focus:ring-amber-500 outline-none transition-all break-words text-sm"
                     />
                   </div>
                 </div>
@@ -411,7 +373,7 @@ export const WorkerReportPage: React.FC = () => {
                     type="file" 
                     accept="image/*" 
                     capture="environment"
-                    className="hidden"
+                    className="hidden text-white placeholder-white/50 bg-white/5"
                     ref={fileInputRef}
                     onChange={handleFileChange}
                   />
@@ -437,7 +399,7 @@ export const WorkerReportPage: React.FC = () => {
                   onChange={(e) => setNotes(e.target.value)}
                   rows={2}
                   placeholder="أدخل أي ملاحظات فنية حول حالة الماكينة..."
-                  className="w-full p-3.5 bg-white/5 border border-white/20 rounded-xl font-medium focus:ring-2 focus:ring-[#0B3A60] focus:border-[#0B3A60] outline-none transition-all resize-none break-words"
+                  className="w-full p-3.5 bg-white/5 border border-white/20 rounded-xl font-medium focus:ring-2 focus:ring-[#0B3A60] focus:border-[#0B3A60] outline-none transition-all resize-none break-words text-white placeholder-white/50"
                 />
               </div>
 
@@ -459,15 +421,6 @@ export const WorkerReportPage: React.FC = () => {
                 >
                   مراجعة البيانات قبل الإرسال
                 </button>
-                {!machineFromUrl && (
-                  <button
-                    type="button"
-                    onClick={() => setStep('scan')}
-                    className="w-full sm:w-auto px-6 py-4 bg-white/10 hover:bg-white/20 text-slate-200 font-bold rounded-xl cursor-pointer active:bg-slate-300 transition-colors"
-                  >
-                    تغيير الماكينة
-                  </button>
-                )}
               </div>
             </form>
           )}
@@ -475,12 +428,12 @@ export const WorkerReportPage: React.FC = () => {
           {/* STEP 3: REVIEW BEFORE SUBMIT */}
           {step === 'review' && (
             <div className="p-6 space-y-6">
-              <h2 className="font-black text-xl text-[#0B3A60] border-b border-white/10 pb-3">مراجعة البلاغ الميداني</h2>
+              <h2 className="font-black text-xl text-white border-b border-white/10 pb-3">مراجعة البلاغ الميداني</h2>
               
               <div className="bg-white/5 rounded-xl border border-white/10 p-4 text-sm space-y-3">
                 <div className="grid grid-cols-2 gap-2 border-b border-white/10 pb-2">
                   <span className="text-slate-400 font-bold">الماكينة:</span>
-                  <span className="font-black text-white">{scannedLine}</span>
+                  <span className="font-black text-white">{machineLocation || 'غير محدد'}</span>
                 </div>
                 <div className="grid grid-cols-2 gap-2 border-b border-white/10 pb-2">
                   <span className="text-slate-400 font-bold">مقدم البلاغ:</span>
@@ -556,15 +509,15 @@ export const WorkerReportPage: React.FC = () => {
               </div>
               
               <div className="space-y-2">
-                <h2 className="font-black text-2xl text-[#0B3A60]">تم تسجيل البلاغ بنجاح!</h2>
+                <h2 className="font-black text-2xl text-white">تم تسجيل البلاغ بنجاح!</h2>
                 <p className="text-slate-300 font-bold text-lg">
                   رقم طلب المطابقة: <span className="text-red-600 font-black px-2 py-1 bg-red-50 rounded-lg">{submittedCapaNo}</span>
                 </p>
               </div>
 
               <div className="bg-white/5 p-5 rounded-2xl border border-white/10 text-right space-y-3">
-                <div className="font-extrabold text-[#0B3A60] text-lg border-b border-white/10 pb-2">تفاصيل البلاغ المسجل:</div>
-                <div className="text-sm sm:text-base"><b className="text-slate-200">الماكينة:</b> {scannedLine}</div>
+                <div className="font-extrabold text-white text-lg border-b border-white/10 pb-2">تفاصيل البلاغ المسجل:</div>
+                <div className="text-sm sm:text-base"><b className="text-slate-200">الماكينة:</b> {machineLocation || 'غير محدد'}</div>
                 <div className="text-sm sm:text-base"><b className="text-slate-200">التوجيه:</b> تم التوجيه إلى: {targetDeptLabel}</div>
                 <div className="text-sm sm:text-base"><b className="text-slate-200">الحالة:</b> <span className="text-amber-700 font-bold">مفتوح (Open) - جديد</span></div>
               </div>

@@ -163,7 +163,7 @@ export const ErrorAuditView: React.FC<ErrorAuditViewProps> = ({
             placeholder="بحث في وصف الخطأ، اسم المنتج، أو الكود..."
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            className="w-full pl-4 pr-10 py-2 rounded-lg border border-white/10 text-sm focus:outline-none focus:ring-2 focus:ring-amber-500/20 focus:border-amber-500"
+            className="w-full pl-4 pr-10 py-2 rounded-lg border border-white/10 text-sm focus:outline-none focus:ring-2 focus:ring-amber-500/20 focus:border-amber-500 text-white placeholder-white/50 bg-white/5"
           />
         </div>
 
@@ -176,7 +176,7 @@ export const ErrorAuditView: React.FC<ErrorAuditViewProps> = ({
           <select
             value={selectedSeverity}
             onChange={(e) => setSelectedSeverity(e.target.value)}
-            className="px-3 py-1.5 rounded-lg border border-white/10 text-xs font-medium focus:outline-none focus:ring-2 focus:ring-amber-500/20 bg-white/5"
+            className="px-3 py-1.5 rounded-lg border border-white/10 text-xs font-medium focus:outline-none focus:ring-2 focus:ring-amber-500/20 bg-white/5 text-white placeholder-white/50"
           >
             <option value="all">كافة المستويات ({issues.length})</option>
             <option value="critical">حرجة فقط ({criticalCount})</option>
@@ -187,7 +187,7 @@ export const ErrorAuditView: React.FC<ErrorAuditViewProps> = ({
           <select
             value={selectedSection}
             onChange={(e) => setSelectedSection(e.target.value)}
-            className="px-3 py-1.5 rounded-lg border border-white/10 text-xs font-medium focus:outline-none focus:ring-2 focus:ring-amber-500/20 bg-white/5"
+            className="px-3 py-1.5 rounded-lg border border-white/10 text-xs font-medium focus:outline-none focus:ring-2 focus:ring-amber-500/20 bg-white/5 text-white placeholder-white/50"
           >
             <option value="all">كافة الأقسام</option>
             <option value="pipes">الأنابيب (Pipes)</option>

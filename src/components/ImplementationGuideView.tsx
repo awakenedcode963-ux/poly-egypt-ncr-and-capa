@@ -201,7 +201,7 @@ function getOrCreateSheet(ss, sheetName) {
               <Code className="w-6 h-6" />
             </div>
             <div>
-              <h3 className="font-extrabold text-[#1B4F72] text-sm">الطريقة الأولى: السكربت الأوتوماتيكي (Google Apps Script)</h3>
+              <h3 className="font-extrabold text-white text-sm">الطريقة الأولى: السكربت الأوتوماتيكي (Google Apps Script)</h3>
               <p className="text-xs text-slate-400">إنشاء وتنسيق الـ 5 شيتات تلقائياً بكود واحد</p>
             </div>
           </div>
@@ -232,7 +232,7 @@ function getOrCreateSheet(ss, sheetName) {
               <Play className="w-6 h-6" />
             </div>
             <div>
-              <h3 className="font-extrabold text-[#1B4F72] text-sm">الطريقة الثانية: تطبيق AppSheet للهاتف (No-Code)</h3>
+              <h3 className="font-extrabold text-white text-sm">الطريقة الثانية: تطبيق AppSheet للهاتف (No-Code)</h3>
               <p className="text-xs text-slate-400">تحويل الشيت الموحد لتطبيق موبايل احترافي في 3 دقائق</p>
             </div>
           </div>
@@ -271,7 +271,7 @@ function getOrCreateSheet(ss, sheetName) {
 
       {/* IMPORTRANGE Consolidated Formula Box */}
       <div className="bg-white/10 backdrop-blur-xl rounded-2xl border border-white/10 p-6 shadow-sm space-y-4">
-        <h3 className="font-extrabold text-[#1B4F72] text-sm">دليل معادلة IMPORTRANGE لدمج شيتات متعددة في شيت رئيسي واحد</h3>
+        <h3 className="font-extrabold text-white text-sm">دليل معادلة IMPORTRANGE لدمج شيتات متعددة في شيت رئيسي واحد</h3>
         <p className="text-xs text-slate-300">إذا كان لديك عدة ملفات منفصلة وترغب في تجميعها ديناميكياً داخل شيت رئيسي:</p>
 
         <div className="bg-slate-900 text-amber-300 p-4 rounded-xl font-mono text-xs flex items-center justify-between">

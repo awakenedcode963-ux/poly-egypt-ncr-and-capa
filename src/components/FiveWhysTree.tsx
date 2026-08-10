@@ -31,7 +31,8 @@ export const FiveWhysTree: React.FC<FiveWhysTreeProps> = ({
       key: 'why1' as keyof FiveWhysAnalysis,
       value: fiveWhys.why1,
       bgColor: 'bg-red-50 border-red-200',
-      badgeColor: 'bg-red-600 text-white'
+      badgeColor: 'bg-red-600 text-white',
+      titleColor: 'text-red-900'
     },
     {
       num: 2,
@@ -40,7 +41,8 @@ export const FiveWhysTree: React.FC<FiveWhysTreeProps> = ({
       key: 'why2' as keyof FiveWhysAnalysis,
       value: fiveWhys.why2,
       bgColor: 'bg-orange-50 border-orange-200',
-      badgeColor: 'bg-orange-600 text-white'
+      badgeColor: 'bg-orange-600 text-white',
+      titleColor: 'text-orange-900'
     },
     {
       num: 3,
@@ -49,7 +51,8 @@ export const FiveWhysTree: React.FC<FiveWhysTreeProps> = ({
       key: 'why3' as keyof FiveWhysAnalysis,
       value: fiveWhys.why3,
       bgColor: 'bg-amber-50 border-amber-200',
-      badgeColor: 'bg-amber-600 text-white'
+      badgeColor: 'bg-amber-600 text-white',
+      titleColor: 'text-amber-900'
     },
     {
       num: 4,
@@ -58,7 +61,8 @@ export const FiveWhysTree: React.FC<FiveWhysTreeProps> = ({
       key: 'why4' as keyof FiveWhysAnalysis,
       value: fiveWhys.why4,
       bgColor: 'bg-sky-50 border-sky-200',
-      badgeColor: 'bg-[#2874A6] text-white'
+      badgeColor: 'bg-[#2874A6] text-white',
+      titleColor: 'text-sky-900'
     },
     {
       num: 5,
@@ -67,7 +71,8 @@ export const FiveWhysTree: React.FC<FiveWhysTreeProps> = ({
       key: 'why5' as keyof FiveWhysAnalysis,
       value: fiveWhys.why5,
       bgColor: 'bg-emerald-50 border-emerald-300 ring-2 ring-emerald-500/20',
-      badgeColor: 'bg-emerald-700 text-white'
+      badgeColor: 'bg-emerald-700 text-white',
+      titleColor: 'text-emerald-900'
     }
   ];
 
@@ -121,7 +126,7 @@ export const FiveWhysTree: React.FC<FiveWhysTreeProps> = ({
                   <span className={`px-2.5 py-0.5 rounded-full text-xs font-black ${step.badgeColor}`}>
                     المستوى {step.num}
                   </span>
-                  <span className="font-extrabold text-xs text-white">{step.title}</span>
+                  <span className={`font-extrabold text-xs ${step.titleColor}`}>{step.title}</span>
                 </div>
                 {step.num === 5 && (
                   <span className="text-[11px] bg-emerald-200 text-emerald-900 px-2.5 py-0.5 rounded-md font-black flex items-center gap-1">
@@ -131,7 +136,7 @@ export const FiveWhysTree: React.FC<FiveWhysTreeProps> = ({
                 )}
               </div>
 
-              <p className="text-[11px] text-slate-400 font-medium">{step.desc}</p>
+              <p className="text-[11px] text-slate-600 font-medium">{step.desc}</p>
 
               {isEditable ? (
                 <textarea
@@ -139,14 +144,14 @@ export const FiveWhysTree: React.FC<FiveWhysTreeProps> = ({
                   onChange={(e) => handleTextChange(step.key, e.target.value)}
                   placeholder={`اكتب الإجابة على السؤال ${step.num}...`}
                   rows={2}
-                  className="w-full p-2.5 bg-white border border-white/20 rounded-lg text-xs font-bold text-white focus:ring-2 focus:ring-[#1B4F72] focus:outline-none"
+                  className="w-full p-2.5 bg-white/60 border border-black/10 rounded-lg text-xs font-bold text-slate-900 placeholder-slate-500 focus:ring-2 focus:ring-[#1B4F72] focus:outline-none"
                 />
               ) : (
-                <div className="bg-white/5 backdrop-blur-md p-3 rounded-lg border border-white/10 text-xs font-bold text-white leading-relaxed">
+                <div className="bg-white/70 backdrop-blur-md p-3 rounded-lg border border-black/5 text-xs font-bold text-slate-800 leading-relaxed">
                   {step.value ? (
                     step.value
                   ) : (
-                    <span className="text-slate-400 italic">لم يتم إدخال تفاصيل المستوى {step.num}</span>
+                    <span className="text-slate-500 italic">لم يتم إدخال تفاصيل المستوى {step.num}</span>
                   )}
                 </div>
               )}
