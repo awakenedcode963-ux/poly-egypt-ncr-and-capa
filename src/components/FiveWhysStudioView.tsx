@@ -35,11 +35,11 @@ export const FiveWhysStudioView: React.FC<FiveWhysStudioViewProps> = ({
 
   const [currentWhys, setCurrentWhys] = useState<FiveWhysAnalysis>(
     selectedCapa?.fiveWhys || {
-      why1: 'وجود عيب أو انحراف في المنتج أثناء اختبار الفحص.',
-      why2: 'عدم انتظام معلمات التشغيل على خط البثق/الحقن.',
-      why3: 'انخفاض كفاءة جزء فني بالمعدة أو التبريد.',
-      why4: 'تأخر تنفيذ الصيانة الوقائية للفلاتر والحساسات.',
-      why5: 'الحاجة لتحديث خطة الصيانة الوقائية والـ SOP للوردية.'
+      why1: '',
+      why2: '',
+      why3: '',
+      why4: '',
+      why5: ''
     }
   );
 
@@ -118,7 +118,7 @@ export const FiveWhysStudioView: React.FC<FiveWhysStudioViewProps> = ({
         <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-4 border-b border-white/10 pb-4">
           <PoloEgyptLogo variant="horizontal" size="md" lightMode={true} />
           
-          <span className="bg-[#C4A052] text-white font-black text-xs px-3.5 py-1.5 rounded-full">
+          <span className="bg-[#C0A46F] text-white font-black text-xs px-3.5 py-1.5 rounded-full">
             أداة تحليل الأسباب الجذرية (5 Whys Root Cause Studio)
           </span>
         </div>

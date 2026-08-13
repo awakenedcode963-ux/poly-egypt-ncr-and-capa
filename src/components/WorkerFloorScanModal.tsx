@@ -31,12 +31,12 @@ export const WorkerFloorScanModal: React.FC<WorkerFloorScanModalProps> = ({
 
   // Form state
   const [operatorName, setOperatorName] = useState('');
-  const [shift, setShift] = useState('الوردية الأولى (صباحية)');
-  const [productName, setProductName] = useState('أنبوبة PPR قطر 25mm');
+  const [shift, setShift] = useState('');
+  const [productName, setProductName] = useState('');
   const [lotNumber, setLotNumber] = useState(`LOT-PPR-${new Date().getMonth() + 1}-0${Math.floor(Math.random() * 89 + 10)}`);
-  const [defectType, setDefectType] = useState('فقاعات هوائية ومسامية داخلية');
-  const [severity, setSeverity] = useState('عالي (High)');
-  const [immediateAction, setImmediateAction] = useState('إيقاف الخط فوراً وضع ملصق Quality Hold وحجز اللوط');
+  const [defectType, setDefectType] = useState('');
+  const [severity, setSeverity] = useState('');
+  const [immediateAction, setImmediateAction] = useState('');
   const [notes, setNotes] = useState('');
   const [submittedCapaNo, setSubmittedCapaNo] = useState('');
 

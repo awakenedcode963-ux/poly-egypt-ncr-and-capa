@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Lock, ArrowLeft, ShieldCheck } from 'lucide-react';
+import { Lock, ArrowLeft, ShieldCheck, AlertTriangle } from 'lucide-react';
 
 interface PinGateProps {
   onSuccess: () => void;
@@ -9,12 +9,28 @@ export const PinGate: React.FC<PinGateProps> = ({ onSuccess }) => {
   const [pin, setPin] = useState('');
   const [error, setError] = useState(false);
 
+  const expectedPin = import.meta.env.VITE_APP_PIN;
+
+  if (!expectedPin) {
+    return (
+      <div className="min-h-screen bg-gradient-to-br from-[#0B3A60] via-[#0f2e4a] to-[#1a365d] flex flex-col items-center justify-center font-sans text-white" dir="rtl">
+        <div className="w-full max-w-sm px-6">
+          <div className="bg-red-500/10 backdrop-blur-xl rounded-3xl p-8 border border-red-500/20 shadow-2xl flex flex-col items-center text-center">
+            <div className="w-16 h-16 bg-red-500/20 rounded-full flex items-center justify-center mb-6 shadow-inner border border-red-500/30">
+              <AlertTriangle className="w-8 h-8 text-red-400" />
+            </div>
+            <h2 className="text-xl font-black mb-2 text-white">خطأ في الإعدادات</h2>
+            <p className="text-red-200 text-sm font-semibold">
+              لم يتم العثور على رمز المرور (VITE_APP_PIN) في متغيرات البيئة. يرجى إعداد متغيرات البيئة بشكل صحيح للوصول للنظام.
+            </p>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    
-    // NOTE: Fallback to '1234' temporarily if env variable is missing. This must be changed!
-    const expectedPin = import.meta.env.VITE_APP_PIN || '1234';
-    
     if (pin === expectedPin) {
       setError(false);
       onSuccess();
@@ -62,7 +78,7 @@ export const PinGate: React.FC<PinGateProps> = ({ onSuccess }) => {
             <button
               type="submit"
               disabled={pin.length < 4}
-              className="w-full bg-amber-500 hover:bg-amber-400 disabled:opacity-50 disabled:hover:bg-amber-500 text-slate-900 font-black text-sm py-4 rounded-xl flex items-center justify-center gap-2 transition-all"
+              className="w-full bg-[#C0A46F] hover:bg-[#a68c5b] disabled:opacity-50 disabled:hover:bg-[#C0A46F] text-slate-900 font-black text-sm py-4 rounded-xl flex items-center justify-center gap-2 transition-all shadow-md"
             >
               دخول
               <ArrowLeft className="w-4 h-4" />

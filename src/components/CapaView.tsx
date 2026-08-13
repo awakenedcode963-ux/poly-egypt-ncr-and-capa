@@ -52,15 +52,15 @@ export const CapaView: React.FC<CapaViewProps> = ({
   const [form, setForm] = useState({
     date: new Date().toISOString().split('T')[0],
     month: 'أغسطس',
-    requesterName: masterData.inspectors[0]?.name || 'م. سامح حسن (توكيد الجودة)',
+    requesterName: '',
     targetDepartment: masterData.departments[0] || 'قسم البثق والأنابيب',
     source: 'فحص جودة (QC)' as CAPARequest['source'],
     priority: 'عالي (High)' as CAPARequest['priority'],
     subject: '',
     ncrDescription: '',
-    productName: 'أنبوب PPR 32mm PN20',
-    machineCode: '101',
-    lotNumber: `LOT-${Date.now().toString().slice(-5)}`,
+    productName: '',
+    machineCode: '',
+    lotNumber: '',
     rootCause: '',
     fiveWhys: {
       why1: '',
@@ -71,7 +71,7 @@ export const CapaView: React.FC<CapaViewProps> = ({
     } as FiveWhysAnalysis,
     immediateAction: '',
     preventiveAction: '',
-    responsiblePerson: masterData.supervisors[0] || 'م. محمود سامي',
+    responsiblePerson: '',
     targetDate: new Date(Date.now() + 7 * 24 * 3600 * 1000).toISOString().split('T')[0],
     notes: ''
   });
@@ -163,14 +163,14 @@ export const CapaView: React.FC<CapaViewProps> = ({
     <div className="space-y-6 dir-rtl font-sans pb-8 bg-transparent">
       {/* Release Phase 1 Header Banner with Polo Egypt Branding */}
       <div className="bg-white/5 backdrop-blur-3xl border-b border-white/20 text-white pt-8 pb-12 px-6 sm:px-10 lg:px-12 rounded-b-3xl shadow-[0_8px_32px_0_rgba(0,0,0,0.37)] relative overflow-hidden flex flex-col items-center text-center space-y-6 -mt-6 z-20">
-        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[500px] bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-[#C1A67B]/20 via-transparent to-transparent pointer-events-none"></div>
+        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[500px] bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-[#C0A46F]/20 via-transparent to-transparent pointer-events-none"></div>
         <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white drop-shadow-md relative z-10">
           نظام تسجيل حالات عدم المطابقة (NCR)، الـ CAPA، وتحليل الـ 5 Whys
         </h2>
         <p className="text-slate-300 max-w-3xl leading-relaxed text-sm sm:text-base relative z-10">
           المنظومة الرقمية المعتمدة لشركة <b>بولو إيجيبت للتجارة والصناعة ش.م.م</b> لتتبع عدم المطابقة، إدارة الإجراءات التصحيحية والوقائية، وتحليل المسببات الجذرية بطريقة 5 Whys طبقاً لمواصفة ISO 9001.
         </p>
-        <button onClick={() => setShowForm(!showForm)} className="relative z-10 mt-4 px-8 py-4 bg-gradient-to-r from-[#C1A67B] to-yellow-600 text-white font-bold rounded-xl hover:scale-[1.02] transition-transform shadow-[0_4px_20px_rgba(193,166,123,0.4),inset_0_1px_1px_rgba(255,255,255,0.5)] text-base sm:text-lg flex items-center gap-3 cursor-pointer">
+        <button onClick={() => setShowForm(!showForm)} className="relative z-10 mt-4 px-8 py-4 bg-gradient-to-r from-[#C0A46F] to-yellow-600 text-white font-bold rounded-xl hover:scale-[1.02] transition-transform shadow-[0_4px_20px_rgba(193,166,123,0.4),inset_0_1px_1px_rgba(255,255,255,0.5)] text-base sm:text-lg flex items-center gap-3 cursor-pointer">
           <Plus className="w-5 h-5 sm:w-6 sm:h-6" />
           <span>{showForm ? "إلغاء النموذج" : "إصدار طلب CAPA / NCR جديد"}</span>
         </button>
@@ -199,7 +199,7 @@ export const CapaView: React.FC<CapaViewProps> = ({
                 type="date"
                 value={form.date}
                 onChange={(e) => setForm({ ...form, date: e.target.value })}
-                className="w-full p-2.5 bg-white/5 border border-white/10 text-white placeholder-white/50 focus:ring-2 focus:ring-[#C1A67B] focus:bg-white/10 transition-all rounded-xl"
+                className="w-full p-2.5 bg-white/5 border border-white/10 text-white placeholder-white/50 focus:ring-2 focus:ring-[#C0A46F] focus:bg-white/10 transition-all rounded-xl"
                 required
               />
             </div>
@@ -210,7 +210,7 @@ export const CapaView: React.FC<CapaViewProps> = ({
                 type="text"
                 value={form.requesterName}
                 onChange={(e) => setForm({ ...form, requesterName: e.target.value })}
-                className="w-full p-2.5 bg-white/5 border border-white/10 text-white placeholder-white/50 focus:ring-2 focus:ring-[#C1A67B] focus:bg-white/10 transition-all rounded-xl font-bold"
+                className="w-full p-2.5 bg-white/5 border border-white/10 text-white placeholder-white/50 focus:ring-2 focus:ring-[#C0A46F] focus:bg-white/10 transition-all rounded-xl font-bold"
                 required
               />
             </div>
@@ -220,7 +220,7 @@ export const CapaView: React.FC<CapaViewProps> = ({
               <select
                 value={form.targetDepartment}
                 onChange={(e) => setForm({ ...form, targetDepartment: e.target.value })}
-                className="w-full p-2.5 bg-white/5 border border-white/10 text-white placeholder-white/50 focus:ring-2 focus:ring-[#C1A67B] focus:bg-white/10 transition-all rounded-xl font-bold"
+                className="w-full p-2.5 bg-white/5 border border-white/10 text-white placeholder-white/50 focus:ring-2 focus:ring-[#C0A46F] focus:bg-white/10 transition-all rounded-xl font-bold"
               >
                 {masterData.departments.map(d => <option key={d} value={d}>{d}</option>)}
               </select>
@@ -231,7 +231,7 @@ export const CapaView: React.FC<CapaViewProps> = ({
               <select
                 value={form.source}
                 onChange={(e) => setForm({ ...form, source: e.target.value as any })}
-                className="w-full p-2.5 bg-white/5 border border-white/10 text-white placeholder-white/50 focus:ring-2 focus:ring-[#C1A67B] focus:bg-white/10 transition-all rounded-xl font-bold"
+                className="w-full p-2.5 bg-white/5 border border-white/10 text-white placeholder-white/50 focus:ring-2 focus:ring-[#C0A46F] focus:bg-white/10 transition-all rounded-xl font-bold"
               >
                 <option value="فحص جودة (QC)">فحص جودة (QC)</option>
                 <option value="شكوى عميل (Customer)">شكوى عميل (Customer)</option>
@@ -245,7 +245,7 @@ export const CapaView: React.FC<CapaViewProps> = ({
               <select
                 value={form.priority}
                 onChange={(e) => setForm({ ...form, priority: e.target.value as any })}
-                className="w-full p-2.5 bg-white/5 border border-white/10 text-white placeholder-white/50 focus:ring-2 focus:ring-[#C1A67B] focus:bg-white/10 transition-all rounded-xl font-bold text-red-600"
+                className="w-full p-2.5 bg-white/5 border border-white/10 text-white placeholder-white/50 focus:ring-2 focus:ring-[#C0A46F] focus:bg-white/10 transition-all rounded-xl font-bold text-red-600"
               >
                 <option value="حرج (Critical)">حرج (Critical)</option>
                 <option value="عالي (High)">عالي (High)</option>
@@ -261,7 +261,7 @@ export const CapaView: React.FC<CapaViewProps> = ({
                 value={form.productName}
                 onChange={(e) => setForm({ ...form, productName: e.target.value })}
                 placeholder="مثال: كوع PPR 20mm أو أنبوب UPVC 110mm"
-                className="w-full p-2.5 bg-white/5 border border-white/10 text-white placeholder-white/50 focus:ring-2 focus:ring-[#C1A67B] focus:bg-white/10 transition-all rounded-xl font-bold"
+                className="w-full p-2.5 bg-white/5 border border-white/10 text-white placeholder-white/50 focus:ring-2 focus:ring-[#C0A46F] focus:bg-white/10 transition-all rounded-xl font-bold"
               />
             </div>
 
@@ -271,7 +271,7 @@ export const CapaView: React.FC<CapaViewProps> = ({
                 type="text"
                 value={form.machineCode}
                 onChange={(e) => setForm({ ...form, machineCode: e.target.value })}
-                className="w-full p-2.5 bg-white/5 border border-white/10 text-white placeholder-white/50 focus:ring-2 focus:ring-[#C1A67B] focus:bg-white/10 transition-all rounded-xl font-bold"
+                className="w-full p-2.5 bg-white/5 border border-white/10 text-white placeholder-white/50 focus:ring-2 focus:ring-[#C0A46F] focus:bg-white/10 transition-all rounded-xl font-bold"
               />
             </div>
 
@@ -281,7 +281,7 @@ export const CapaView: React.FC<CapaViewProps> = ({
                 type="text"
                 value={form.lotNumber}
                 onChange={(e) => setForm({ ...form, lotNumber: e.target.value })}
-                className="w-full p-2.5 bg-white/5 border border-white/10 text-white placeholder-white/50 focus:ring-2 focus:ring-[#C1A67B] focus:bg-white/10 transition-all rounded-xl font-bold text-white"
+                className="w-full p-2.5 bg-white/5 border border-white/10 text-white placeholder-white/50 focus:ring-2 focus:ring-[#C0A46F] focus:bg-white/10 transition-all rounded-xl font-bold text-white"
               />
             </div>
 
@@ -291,7 +291,7 @@ export const CapaView: React.FC<CapaViewProps> = ({
                 type="date"
                 value={form.targetDate}
                 onChange={(e) => setForm({ ...form, targetDate: e.target.value })}
-                className="w-full p-2.5 bg-white/5 border border-white/10 text-white placeholder-white/50 focus:ring-2 focus:ring-[#C1A67B] focus:bg-white/10 transition-all rounded-xl font-bold text-red-600"
+                className="w-full p-2.5 bg-white/5 border border-white/10 text-white placeholder-white/50 focus:ring-2 focus:ring-[#C0A46F] focus:bg-white/10 transition-all rounded-xl font-bold text-red-600"
                 required
               />
             </div>
@@ -303,7 +303,7 @@ export const CapaView: React.FC<CapaViewProps> = ({
                 value={form.subject}
                 onChange={(e) => setForm({ ...form, subject: e.target.value })}
                 placeholder="مثال: وجود فقاعات هواء داخلية تؤدي لكسر الكوع PPR 20mm عند اختبار الضغط"
-                className="w-full p-2.5 bg-white/5 border border-white/10 text-white placeholder-white/50 focus:ring-2 focus:ring-[#C1A67B] focus:bg-white/10 transition-all rounded-xl font-bold text-white"
+                className="w-full p-2.5 bg-white/5 border border-white/10 text-white placeholder-white/50 focus:ring-2 focus:ring-[#C0A46F] focus:bg-white/10 transition-all rounded-xl font-bold text-white"
                 required
               />
             </div>
@@ -315,7 +315,7 @@ export const CapaView: React.FC<CapaViewProps> = ({
                 onChange={(e) => setForm({ ...form, ncrDescription: e.target.value })}
                 rows={2}
                 placeholder="اكتب التفاصيل الرقمية للرفض وعينة الفحص..."
-                className="w-full p-2.5 bg-white/5 border border-white/10 text-white placeholder-white/50 focus:ring-2 focus:ring-[#C1A67B] focus:bg-white/10 transition-all rounded-xl font-medium"
+                className="w-full p-2.5 bg-white/5 border border-white/10 text-white placeholder-white/50 focus:ring-2 focus:ring-[#C0A46F] focus:bg-white/10 transition-all rounded-xl font-medium"
                 required
               />
             </div>
@@ -351,7 +351,7 @@ export const CapaView: React.FC<CapaViewProps> = ({
                 onChange={(e) => setForm({ ...form, immediateAction: e.target.value })}
                 rows={2}
                 placeholder="الإجراء الواجب تنفيذه فوراً للسيطرة على الشحنة والمصنع..."
-                className="w-full p-2.5 bg-white/5 border border-white/10 text-white placeholder-white/50 focus:ring-2 focus:ring-[#C1A67B] focus:bg-white/10 transition-all rounded-xl font-medium"
+                className="w-full p-2.5 bg-white/5 border border-white/10 text-white placeholder-white/50 focus:ring-2 focus:ring-[#C0A46F] focus:bg-white/10 transition-all rounded-xl font-medium"
                 required
               />
             </div>
@@ -363,7 +363,7 @@ export const CapaView: React.FC<CapaViewProps> = ({
                 onChange={(e) => setForm({ ...form, preventiveAction: e.target.value })}
                 rows={2}
                 placeholder="الإجراء لمنع تكرار المسبب على المدى البعيد..."
-                className="w-full p-2.5 bg-white/5 border border-white/10 text-white placeholder-white/50 focus:ring-2 focus:ring-[#C1A67B] focus:bg-white/10 transition-all rounded-xl font-medium"
+                className="w-full p-2.5 bg-white/5 border border-white/10 text-white placeholder-white/50 focus:ring-2 focus:ring-[#C0A46F] focus:bg-white/10 transition-all rounded-xl font-medium"
               />
             </div>
           </div>
@@ -492,7 +492,7 @@ export const CapaView: React.FC<CapaViewProps> = ({
                       setSelectedCapaForQr(capa);
                       setIsQrModalOpen(true);
                     }}
-                    className="flex items-center gap-1.5 px-3 py-1.5 bg-white/10 hover:bg-[#C4A052] hover:text-white text-slate-300 text-xs font-bold rounded-xl transition-all cursor-pointer border border-white/10"
+                    className="flex items-center gap-1.5 px-3 py-1.5 bg-white/10 hover:bg-[#C0A46F] hover:text-white text-slate-300 text-xs font-bold rounded-xl transition-all cursor-pointer border border-white/10"
                     title="طباعة بطاقة QR"
                   >
                     <QrCode className="w-4 h-4" />

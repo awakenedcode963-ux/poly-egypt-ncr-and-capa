@@ -166,7 +166,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
                     w-full flex items-center justify-between px-3.5 py-3 rounded-xl text-xs font-bold
                     transition-all duration-200 cursor-pointer text-right group
                     ${isActive 
-                      ? 'bg-white/20 text-white border-r-4 border-[#C1A67B] shadow-[0_4px_12px_rgba(0,0,0,0.1)] pr-3 backdrop-blur-md' 
+                      ? 'bg-white/20 text-white border-r-4 border-[#C0A46F] shadow-[0_4px_12px_rgba(0,0,0,0.1)] pr-3 backdrop-blur-md' 
                       : 'text-slate-200 hover:bg-white/10 hover:text-white'
                     }
                   `}
@@ -181,7 +181,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
 
                   {item.badge && (
                     <span className={`text-[9px] px-2 py-0.5 rounded-md font-extrabold shrink-0 ${
-                      item.id === 'capa-records' ? 'bg-[#E74C3C] text-white animate-pulse' : 'bg-[#C4A052] text-white'
+                      item.id === 'capa-records' ? 'bg-[#E74C3C] text-white animate-pulse' : 'bg-[#C0A46F] text-white'
                     }`}>
                       {item.badge}
                     </span>

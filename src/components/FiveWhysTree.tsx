@@ -108,7 +108,7 @@ export const FiveWhysTree: React.FC<FiveWhysTreeProps> = ({
             type="button"
             onClick={onAiAutoSuggest}
             disabled={isAiGenerating}
-            className="flex items-center gap-2 px-3.5 py-2 bg-[#C4A052] hover:bg-amber-600 text-white text-xs font-black rounded-lg transition-all shadow-md cursor-pointer disabled:opacity-50 shrink-0"
+            className="flex items-center gap-2 px-3.5 py-2 bg-[#C0A46F] hover:bg-amber-600 text-white text-xs font-black rounded-lg transition-all shadow-md cursor-pointer disabled:opacity-50 shrink-0"
           >
             <Sparkles className={`w-4 h-4 ${isAiGenerating ? 'animate-spin' : ''}`} />
             <span>{isAiGenerating ? 'جاري التحليل بالذكاء الاصطناعي...' : 'اقتراح 5 Whys بالذكاء الاصطناعي'}</span>

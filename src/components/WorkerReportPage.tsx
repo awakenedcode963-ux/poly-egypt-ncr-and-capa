@@ -34,13 +34,11 @@ export const WorkerReportPage: React.FC = () => {
   const [correctiveAction, setCorrectiveAction] = useState('');
   const [preventiveAction, setPreventiveAction] = useState('');
   const [notes, setNotes] = useState('');
-  const [attachmentBase64, setAttachmentBase64] = useState('');
 
   const [submittedCapaNo, setSubmittedCapaNo] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [errorMsg, setErrorMsg] = useState('');
 
-  const fileInputRef = useRef<HTMLInputElement>(null);
 
   const sampleMachines = [
     { code: 'EXT-PPR-01', name: 'خط بثق أنابيب PPR رقم 1', dept: 'قسم البثق PPR' },
@@ -60,17 +58,6 @@ export const WorkerReportPage: React.FC = () => {
       setMachineFromUrl(machineCode);
     }
   }, []);
-
-  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0];
-    if (file) {
-      const reader = new FileReader();
-      reader.onloadend = () => {
-        setAttachmentBase64(reader.result as string);
-      };
-      reader.readAsDataURL(file);
-    }
-  };
 
   const proceedToReview = (e: React.FormEvent) => {
     e.preventDefault();
@@ -121,7 +108,6 @@ export const WorkerReportPage: React.FC = () => {
       productName: productName,
       machineCode: machineCodeVal,
       lotNumber: lotNumber,
-      attachmentBase64: attachmentBase64, attachmentUrl: attachmentBase64 ? 'صورة مرفقة' : '', // Fallback indicator if apps script doesn't handle base64
       fiveWhys: {
         why1: `حدوث عيب (${defectType.split('(')[0].trim()}) بمنتج ${productName} باللوط ${lotNumber}.`,
         why2: 'جاري فحص معايير التشغيل بالخط مع فني الوردية.',
@@ -183,7 +169,6 @@ export const WorkerReportPage: React.FC = () => {
     setCorrectiveAction('');
     setPreventiveAction('');
     setNotes('');
-    setAttachmentBase64('');
     setSubmittedCapaNo('');
     setErrorMsg('');
     setShift(getInitialShift());
@@ -362,35 +347,6 @@ export const WorkerReportPage: React.FC = () => {
                 </div>
               </div>
 
-              {/* Photo Attachment */}
-              <div>
-                <label className="block text-slate-200 font-extrabold mb-2 text-sm">إرفاق صورة للعيب (اختياري):</label>
-                <div 
-                  onClick={() => fileInputRef.current?.click()}
-                  className="w-full p-4 bg-white/5 border-2 border-dashed border-white/20 hover:border-[#0B3A60] rounded-xl flex flex-col items-center justify-center gap-2 cursor-pointer transition-colors"
-                >
-                  <input 
-                    type="file" 
-                    accept="image/*" 
-                    capture="environment"
-                    className="hidden text-white placeholder-white/50 bg-white/5"
-                    ref={fileInputRef}
-                    onChange={handleFileChange}
-                  />
-                  {attachmentBase64 ? (
-                    <div className="text-emerald-600 font-bold flex items-center gap-2">
-                      <CheckCircle2 className="w-5 h-5" />
-                      <span>تم إرفاق الصورة بنجاح</span>
-                    </div>
-                  ) : (
-                    <>
-                      <ImageIcon className="w-8 h-8 text-slate-400" />
-                      <span className="text-slate-300 font-bold text-sm text-center">التقط صورة بالكاميرا أو اختر ملف</span>
-                    </>
-                  )}
-                </div>
-              </div>
-
               {/* Notes */}
               <div>
                 <label className="block text-slate-200 font-extrabold mb-2 text-sm">ملاحظات إضافية (اختياري):</label>
@@ -455,12 +411,6 @@ export const WorkerReportPage: React.FC = () => {
                   <span className="text-slate-400 font-bold">الإجراء الفوري:</span>
                   <span className="font-black text-white">{immediateAction}</span>
                 </div>
-                {attachmentBase64 && (
-                  <div className="grid grid-cols-2 gap-2 pt-2 border-t border-white/10">
-                    <span className="text-slate-400 font-bold">المرفقات:</span>
-                    <span className="font-black text-emerald-600">تم إرفاق صورة</span>
-                  </div>
-                )}
               </div>
 
               {errorMsg && (

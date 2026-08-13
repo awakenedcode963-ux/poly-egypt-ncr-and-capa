@@ -84,7 +84,7 @@ export const CapaDashboardView: React.FC<CapaDashboardViewProps> = ({
     }));
 
   const PRIORITY_COLORS = ['#E74C3C', '#E67E22', '#F1C40F', '#3498DB'];
-  const DEPT_COLORS = ['#0B3A60', '#C4A052', '#27AE60', '#8E44AD', '#2980B9'];
+  const DEPT_COLORS = ['#0B3A60', '#C0A46F', '#27AE60', '#8E44AD', '#2980B9'];
 
   return (
     <div className="p-4 sm:p-6 lg:p-8 space-y-6 dir-rtl font-sans">
@@ -94,7 +94,7 @@ export const CapaDashboardView: React.FC<CapaDashboardViewProps> = ({
           <PoloEgyptLogo variant="horizontal" size="md" lightMode={true} />
           
           <div className="flex items-center gap-2">
-            <span className="bg-[#C4A052] text-white font-black text-xs px-3.5 py-1.5 rounded-full shadow-sm flex items-center gap-1.5">
+            <span className="bg-[#C0A46F] text-white font-black text-xs px-3.5 py-1.5 rounded-full shadow-sm flex items-center gap-1.5">
               <ShieldCheck className="w-4 h-4" />
               <span>نظام منفصل معتمد ISO 9001</span>
             </span>
@@ -120,7 +120,7 @@ export const CapaDashboardView: React.FC<CapaDashboardViewProps> = ({
             </button>
             <button
               onClick={onNavigateToWhys}
-              className="px-4 py-2.5 bg-[#C4A052] hover:bg-amber-600 text-white font-black text-xs rounded-xl transition-all shadow-md cursor-pointer"
+              className="px-4 py-2.5 bg-[#C0A46F] hover:bg-amber-600 text-white font-black text-xs rounded-xl transition-all shadow-md cursor-pointer"
             >
               استوديو 5 Whys
             </button>
@@ -173,7 +173,7 @@ export const CapaDashboardView: React.FC<CapaDashboardViewProps> = ({
             <div className="text-2xl font-black text-amber-400">{effectivenessRate}%</div>
             <span className="text-[11px] text-slate-400 font-semibold">استناداً إلى تقييمات ISO</span>
           </div>
-          <div className="p-3 bg-amber-50 text-[#C4A052] rounded-2xl border border-amber-100">
+          <div className="p-3 bg-amber-50 text-[#C0A46F] rounded-2xl border border-amber-100">
             <TrendingUp className="w-6 h-6" />
           </div>
         </div>

@@ -75,7 +75,7 @@ export const CapaQrModal: React.FC<CapaQrModalProps> = ({
           </div>
 
           {/* QR Code Container */}
-          <div className="bg-white/10 backdrop-blur-xl p-5 rounded-2xl border-2 border-[#C4A052] shadow-md flex flex-col items-center justify-center text-center space-y-3">
+          <div className="bg-white/10 backdrop-blur-xl p-5 rounded-2xl border-2 border-[#C0A46F] shadow-md flex flex-col items-center justify-center text-center space-y-3">
             <div className="p-3 bg-white border border-white/10 rounded-xl shadow-inner">
               <QRCodeSVG
                 value={qrData}

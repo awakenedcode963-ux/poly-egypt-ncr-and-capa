@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Menu, Download, QrCode, PlusCircle, ShieldCheck, Smartphone, AlertTriangle } from 'lucide-react';
 import { CapaQrModal } from './CapaQrModal';
+import { PoloEgyptLogo } from './PoloEgyptLogo';
 import { WorkerFloorScanModal } from './WorkerFloorScanModal';
 import { CAPARequest } from '../types';
 
@@ -60,7 +61,7 @@ export const Header: React.FC<HeaderProps> = ({
     <>
       <header className="bg-[#0B3A60] sticky top-0 z-30 shadow-none dir-rtl font-sans text-white relative overflow-hidden">
         {/* Glow */}
-        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[500px] bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-[#C1A67B]/20 via-transparent to-transparent pointer-events-none"></div>
+        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[500px] bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-[#C0A46F]/20 via-transparent to-transparent pointer-events-none"></div>
         
         {/* Navbar (Glassmorphism) */}
         <div className="relative bg-white/5 backdrop-blur-md border-b border-white/10">
@@ -77,7 +78,7 @@ export const Header: React.FC<HeaderProps> = ({
               </button>
               
               <div className="bg-white/10 backdrop-blur-xl p-1.5 rounded-xl shadow-lg border border-white/20 shrink-0">
-                <img src="/assets/polo-egypt-logo.png" alt="Polo Egypt" className="h-10 sm:h-12 w-auto object-contain" onError={(e) => { e.currentTarget.style.display = 'none'; }} />
+                <PoloEgyptLogo size="md" lightMode={true} className="h-10 sm:h-12 w-auto" />
               </div>
               
               <div className="hidden sm:block">

@@ -24,9 +24,9 @@ export const CapaQrCenterView: React.FC<CapaQrCenterViewProps> = ({ capaRequests
   const [copied, setCopied] = useState(false);
 
   // Custom QR tag form state if generating on the fly
-  const [customLot, setCustomLot] = useState('LOT-PPR-2026-99');
-  const [customProduct, setCustomProduct] = useState('كوع PPR 20mm (إعادة فحص)');
-  const [customReason, setCustomReason] = useState('حجز مؤقت لحين ظهور نتيجة اختبار الضغط المائي');
+  const [customLot, setCustomLot] = useState('');
+  const [customProduct, setCustomProduct] = useState('');
+  const [customReason, setCustomReason] = useState('');
 
   const selectedCapa = capaRequests.find(c => c.id === selectedCapaId);
 
@@ -65,7 +65,7 @@ export const CapaQrCenterView: React.FC<CapaQrCenterViewProps> = ({ capaRequests
           <PoloEgyptLogo variant="horizontal" size="md" lightMode={true} />
           
           <div className="flex items-center gap-2">
-            <span className="bg-[#C4A052] text-white font-black text-xs px-3.5 py-1.5 rounded-full">
+            <span className="bg-[#C0A46F] text-white font-black text-xs px-3.5 py-1.5 rounded-full">
               بطاقات فحص الموبايل والـ Hold Tags
             </span>
           </div>
@@ -162,7 +162,7 @@ export const CapaQrCenterView: React.FC<CapaQrCenterViewProps> = ({ capaRequests
 
             {/* QR Code Container */}
             <div className="flex flex-col items-center justify-center space-y-2 py-2">
-              <div className="p-3 bg-white border-2 border-[#C4A052] rounded-xl shadow-inner">
+              <div className="p-3 bg-white border-2 border-[#C0A46F] rounded-xl shadow-inner">
                 <QRCodeSVG
                   value={qrPayload}
                   size={190}
